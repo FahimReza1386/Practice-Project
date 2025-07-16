@@ -20,12 +20,9 @@
 <style>
     @font-face {
         font-family: "Vazir";
-        src: url(../staticfiles/font/vazir-font-v16.1.0/Vazir.ttf),
-        url(../staticfiles/font/vazir-font-v16.1.0/Vazir.eot),
-        url(../staticfiles/font/vazir-font-v16.1.0/Vazir.woff),
-        url(../staticfiles/font/vazir-font-v16.1.0/Vazir.woff2);
+        src: url(../staticfiles/font/vazir-font-v16.1.0/Vazir.eot);
     }
-    h1,h2,h3,h4,h5,h6,p,a{
+    h1,h2,h3,h4,h5,h6,p,a,label,button{
         font-family: "Vazir", sans-serif !important;
     }
 </style>
@@ -48,6 +45,9 @@
         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-center">
             <li class="nav-item {% if request.resolver_match.view_name == 'website:home' %} active {% endif %}"><a class="nav-link" href="{% url 'website:home' %}" >خانه</a></li> 
+            {% if request.user.is_authenticated is not True %}
+            <li class="nav-item {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}"><a class="nav-link" href="{% url 'accounts:login' %}" >ورود</a></li> 
+            {% endif %}
             <li class="nav-item"><a class="nav-link" href="archive.html">بایگانی</a></li> 
             <li class="nav-item"><a class="nav-link" href="category.html">دسته بندی ها</a>
             <li class="nav-item submenu dropdown">

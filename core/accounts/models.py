@@ -16,16 +16,22 @@ class UserType(models.IntegerChoices):
 
 class UserManager(BaseUserManager):
 
+
     def create_user(self, phone_number, password, **extra_fields):
         if not phone_number:
             raise ValueError(_("The Phone_number must be set."))
+
+        # random_letter = chr(random.choice([random.randint(97, 122), random.randint(65, 90)]))
+        # random_number = random.randint(0, 1000000)
+        # otp_code = f"{random_number}{random_letter}"
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
         user.save()
         return user
+            
 
     def create_superuser(self, phone_number, password, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_staff", True)   
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
         extra_fields.setdefault("is_verified", True)
@@ -38,7 +44,7 @@ class UserManager(BaseUserManager):
             raise ValueError(_("is_superuser must have is True"))
 
         return self.create_user(phone_number, password, **extra_fields)
-
+        
 class User(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField(unique=True, blank=False)
     first_name = models.CharField(max_length=100)
@@ -57,7 +63,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.first_name}-{self.phone_number}"
     
-
 class Gender(models.IntegerChoices):
     male= 1,("male")
     female= 2,("female")
