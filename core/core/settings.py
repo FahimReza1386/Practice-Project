@@ -38,12 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # app Installed
     "website",
     "accounts",
     "phonenumber_field",
     "shop",
+
+    # Pakage Installed
     "ckeditor",
+    "mptt",
 ]
 
 MIDDLEWARE = [
