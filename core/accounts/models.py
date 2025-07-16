@@ -21,9 +21,6 @@ class UserManager(BaseUserManager):
         if not phone_number:
             raise ValueError(_("The Phone_number must be set."))
 
-        # random_letter = chr(random.choice([random.randint(97, 122), random.randint(65, 90)]))
-        # random_number = random.randint(0, 1000000)
-        # otp_code = f"{random_number}{random_letter}"
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
         user.save()
@@ -48,10 +45,10 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField(unique=True, blank=False)
     first_name = models.CharField(max_length=100)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
-    is_verified = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
     type = models.IntegerField(choices=UserType.choices, default=UserType.customer.value)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

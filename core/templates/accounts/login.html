@@ -35,7 +35,7 @@
    
         <div class="form-group" style="float: right;">
           <label for="c_create_account" class="text-black" data-bs-toggle="collapse" href="#create_an_account"
-            role="button" aria-expanded="false" aria-controls="create_an_account" dir="rtl">حسابی ندارید ؟ <a href="#" style="font-weight: bold;color: blue;">ایجاد حساب</a></label>
+            role="button" aria-expanded="false" aria-controls="create_an_account" dir="rtl">حسابی ندارید ؟ <a href="{% url 'accounts:register' %}" style="font-weight: bold;color: blue;">ایجاد حساب</a></label>
         </div>
         <button form="login_form" class="btn btn-primary mt-4" type="submit" style="float: left;">ورود</button>
 
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-
+  
 {% endblock %}
 
 

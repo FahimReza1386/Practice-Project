@@ -1,3 +1,5 @@
+from django import forms
+from accounts.models import User
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -8,3 +10,7 @@ class LoginForm(auth_forms.AuthenticationForm):
         if not user.is_verified:
             raise ValidationError(_("حساب کاربری فعال نیست .."))
     
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=["phone_number", "password"]
