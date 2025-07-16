@@ -22,12 +22,12 @@ class BlogModel(models.Model):
     image= models.ImageField(upload_to="blogs/")
     price= models.DecimalField(default=0, decimal_places=0, max_digits=10)
     discount_percent= models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=0)
-
+    category= models.ForeignKey("CategoryModel", on_delete=models.PROTECT,null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title-self.pk}"
+        return f"{self.title}{self.pk}"
 
 class BlogImageModel(models.Model):
     blog = models.ForeignKey(BlogModel, on_delete=models.CASCADE)
