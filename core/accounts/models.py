@@ -13,6 +13,15 @@ class UserType(models.IntegerChoices):
     admin = 2,("Admin")
     superuser = 3,("SuperUser")
 
+class UserSubscriptionModel(models.IntegerChoices):
+    no_subscription=1,("No_Subscription")
+    day_1= 2,("Day"),
+    week_1= 3,("week"),
+    month_1= 4,("month_1"),
+    month_3= 5,("month_3"),
+    month_6= 6,("month_6"),
+    month_12= 7,("month_12"),
+
 
 class UserManager(BaseUserManager):
 
@@ -50,8 +59,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     type = models.IntegerField(choices=UserType.choices, default=UserType.customer.value)
+    subscription= models.IntegerField(choices=UserSubscriptionModel.choices, default=UserSubscriptionModel.no_subscription.value)
+    subscription_exp=models.DateTimeField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
 
     USERNAME_FIELD= "phone_number"
     REQUIRED_FIELDS =[]
