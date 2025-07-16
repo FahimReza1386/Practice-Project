@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "accounts",
     "phonenumber_field",
     "shop",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 AUTH_USER_MODEL = 'accounts.User'
+
+# CKEditor Settings
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js' 
+CKEDITOR_CONFIGS = {
+    'default':
+        {
+            'toolbar': 'full',
+            'width': 'auto',
+            'extraPlugins': ','.join([
+                'codesnippet',
+            ]),
+        },
+}
