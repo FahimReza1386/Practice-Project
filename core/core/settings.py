@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "accounts",
     "phonenumber_field",
     "shop",
+    "review",
 
     # Pakage Installed
     "ckeditor",
