@@ -4,7 +4,50 @@
 
 
 {% block title %}خانه{% endblock %}
-{% block extra_css %}{% endblock %}
+{% block extra_css %}
+<style>
+  .category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 0;
+    list-style: none;
+  }
+
+  .category-buttons li {
+    flex: 1 1 200px;
+    max-width: 250px;
+  }
+
+  .category-buttons a {
+    display: block;
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .category-buttons a:hover {
+    background-color: #495057;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .category-buttons li {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+{% endblock %}
+
 
 {% block content %}
 
@@ -33,6 +76,23 @@
 
       </div>
     </section>
+
+    <section>
+      <div class="container">
+        <div class="row">
+            <h1 dir="rtl" class="text-center">دسته بندی ها :</h1>
+          
+          <ul class="category-buttons">
+            {% for cat in categories %}
+              <li>
+                <a href="{% url 'shop:blog-category' pk=cat.pk %}">{{ cat.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+    
   </main>
 
 

@@ -82,3 +82,12 @@ class AddWishListView(LoginRequiredMixin, CreateView):
             WishListModel.objects.create(user=user, blog=blog_obj)
             action = "added"
         return JsonResponse({"status": "success", "action": action})
+
+class CategoriesView(ListView):
+    template_name="shop/categories.html"
+    model=BlogModel
+    paginate_by=9
+
+    def get_queryset(self):
+        queryset = self.model.objects.filter(category=self.kwargs["pk"])
+        return queryset

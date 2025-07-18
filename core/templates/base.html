@@ -50,7 +50,6 @@
             <li class="nav-item {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}"><a class="nav-link" href="{% url 'accounts:login' %}" >ورود</a></li> 
             {% endif %}
             <li class="nav-item {% if request.resolver_match.view_name == 'shop:blog-grid' or request.resolver_match.view_name == 'shop:blog-detail' %} active {% endif %}"><a class="nav-link" href="{% url 'shop:blog-grid' %}">محصولات</a></li> 
-            <li class="nav-item"><a class="nav-link" href="category.html">دسته بندی ها</a>
       
             <li class="nav-item {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}"><a class="nav-link" href="{% url 'website:contact' %}">ارتباط با ما</a></li>
             <li class="nav-item mr-5"><a class="nav-link" href="category.html">اشتراک ها</a>

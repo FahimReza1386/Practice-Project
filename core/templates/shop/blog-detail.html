@@ -543,7 +543,7 @@
                 <div class="tab-pane active" id="description">
                     <div class="description-content">
                         <h4>دسته بندی‌های محصول:</h4>
-                        <p>{{ object.category }}</p>
+                        <a href="{% url 'shop:blog-category' pk=object.category.pk %}">{{ object.category }}</a>
                         
                         
                         <h4>جزئیات محصول:</h4>
