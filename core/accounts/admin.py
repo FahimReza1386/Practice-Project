@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Profile
+from .models import User, Profile, UserSubscriptionModel
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
@@ -12,7 +12,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         ('Authenticaton', {
             "fields" : (
-                "phone_number", "password"
+                "phone_number", "password", "first_name"
             ),
         }),
         ("Permission", {
@@ -30,11 +30,16 @@ class CustomUserAdmin(UserAdmin):
                 "last_login",    
             ),
         }),
+        ("Subscription Info", {
+            "fields" : (
+                "subscription",     
+            ),
+        }),
     )
     add_fieldsets = (
         (None, {
             "classes" : ("wide",),
-            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type")
+            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type", "subscription", "subscription_exp")
         }),
     )
 
@@ -44,6 +49,11 @@ class CustomProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "first_name", "last_name", "phone_number")
     searching_fields= ("user", "phone_number", "first_name", "last_name")
 
+class CustomSubsCriptionAdmin(admin.ModelAdmin):
+    model=UserSubscriptionModel
+    list_display = ("user", "subs_type", "start_date", "end_date")
+
 
 admin.site.register(Profile, CustomProfileAdmin)
+admin.site.register(UserSubscriptionModel, CustomSubsCriptionAdmin)
 admin.site.register(User, CustomUserAdmin)

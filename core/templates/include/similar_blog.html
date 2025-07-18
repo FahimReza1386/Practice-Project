@@ -1,0 +1,54 @@
+{% load static %}
+{% load humanize %}
+{% for blog in similar_blog %}
+
+        {% if blog.type == 1 %}
+   <!-- محصولات مرتبط -->
+        <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px">
+            <h2 class="section-title">محصولات مرتبط</h2>
+
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <img src="{{blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img">
+                    <div class="product-card-body text-center">
+                        <a class="product-card-title" href="{% url 'shop:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
+                        {% if blog.is_discounted %}
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
+                        {% else %} 
+                           <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
+                        {% endif %}
+                        <a href="{% url 'shop:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+        <div class="related-products" style="margin-bottom: 20rem;">
+            <h2 class="section-title">محصولات مرتبط</h2>
+
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <img src="{{ blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img">
+                    <div class="product-card-body text-center">
+                        <a class="product-card-title" href="{% url 'shop:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
+                        {% if blog.is_discounted %}
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
+                        {% else %} 
+                           <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
+                        {% endif %}
+                        <a href="{% url 'shop:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+    {% endfor %}

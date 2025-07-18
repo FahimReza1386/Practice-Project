@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.utils import timezone
+from datetime import timedelta
 # Create your models here.
 
 
@@ -13,7 +15,7 @@ class UserType(models.IntegerChoices):
     admin = 2,("Admin")
     superuser = 3,("SuperUser")
 
-class UserSubscriptionModel(models.IntegerChoices):
+class UserSubscriptionTypeModel(models.IntegerChoices):
     no_subscription=1,("No_Subscription")
     day_1= 2,("Day"),
     week_1= 3,("week"),
@@ -21,6 +23,27 @@ class UserSubscriptionModel(models.IntegerChoices):
     month_3= 5,("month_3"),
     month_6= 6,("month_6"),
     month_12= 7,("month_12"),
+
+class UserSubscriptionModel(models.Model):
+    user =models.ForeignKey("User", on_delete=models.CASCADE)
+    subs_type= models.IntegerField(choices=UserSubscriptionTypeModel.choices, default=UserSubscriptionTypeModel.no_subscription.value)
+    start_date= models.DateTimeField(auto_now_add=True)
+    end_date= models.DateTimeField()
+    is_active= models.BooleanField(default=False)
+
+    
+    def is_valid(self):
+        return self.is_active and self.end_date > timezone.now()
+    
+    def get_remaining_days(self):
+        if self.is_valid():
+            rammining_date= self.end_date - timezone.now()
+            return rammining_date.days
+        return timedelta(0)
+
+
+    def __str__(self):
+        return f"{self.user.first_name}-{self.is_active}"
 
 
 class UserManager(BaseUserManager):
@@ -59,8 +82,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     type = models.IntegerField(choices=UserType.choices, default=UserType.customer.value)
-    subscription= models.IntegerField(choices=UserSubscriptionModel.choices, default=UserSubscriptionModel.no_subscription.value)
-    subscription_exp=models.DateTimeField(null=True)
+    subscription= models.IntegerField(choices=UserSubscriptionTypeModel.choices, default=UserSubscriptionTypeModel.no_subscription.value)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
