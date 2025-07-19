@@ -1,0 +1,290 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+
+
+{% block header %}
+{% endblock header %}
+
+{% block extra_css %}
+<style>
+    /* استایل کلی فرم */
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      margin-bottom: 25px;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      background-color: #fff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 20px 25px;
+    }
+    
+    .card-header-title {
+      font-weight: 700;
+      color: #2c3e50;
+      font-size: 1.25rem;
+      margin: 0;
+      position: relative;
+    }
+    
+    .card-header-title:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -10px;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #4361ee, #3f37c9);
+      border-radius: 3px;
+    }
+    
+    .card-body {
+      padding: 30px;
+    }
+    
+    /* استایل فرم تغییر رمز عبور */
+    .form-label {
+      font-weight: 600;
+      color: #34495e;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .form-control {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-shadow: none;
+    }
+    
+    .form-control:focus {
+      border-color: #4361ee;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+    }
+    
+    .form-control.text-center {
+      text-align: center;
+    }
+    
+    .small {
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+    
+    /* استایل لیست الزامات رمز عبور */
+    ul.small {
+      list-style-type: none;
+      padding-right: 0;
+      margin-top: 15px;
+    }
+    
+    ul.small li {
+      position: relative;
+      padding-right: 25px;
+      margin-bottom: 8px;
+    }
+    
+    ul.small li:before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      color: #4cc9f0;
+      font-weight: bold;
+    }
+    
+    /* استایل دکمه */
+    .btn-primary {
+      background: linear-gradient(135deg, #4361ee, #3f37c9);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+    }
+    
+    /* استایل حساب‌های متصل */
+    .list-group-item {
+      padding: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px !important;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .list-group-item:hover {
+      background-color: #f8f9ff;
+      border-color: rgba(67, 97, 238, 0.2);
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .avatar img {
+      max-width: 80%;
+      max-height: 80%;
+    }
+    
+    /* استایل سوئیچ */
+    .form-switch .form-check-input {
+      width: 48px;
+      height: 24px;
+      background-color: #e9ecef;
+      border: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+      cursor: pointer;
+    }
+    
+    .form-switch .form-check-input:checked {
+      background-color: #4361ee;
+      background-position: right center;
+    }
+    
+    /* انیمیشن‌ها */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    /* واکنش‌گرایی */
+    @media (max-width: 768px) {
+      .row.mb-4 {
+        flex-direction: column;
+      }
+      
+      .col-sm-3, .col-sm-9 {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .col-sm-3 {
+        margin-bottom: 10px;
+        text-align: right;
+      }
+      
+      .card-body {
+        padding: 20px;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="col-lg-12">
+    <div class="d-grid gap-3 gap-lg-5">
+
+
+      <!-- Card -->
+      <div class="card">
+        <div class="card-header border-bottom">
+          <h5 class="card-header-title">رمزعبور</h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+          <!-- Form -->
+          <form action="." method="post">
+              {% csrf_token %}
+            <!-- Form -->
+            <div class="row mb-4">
+              <label for="currentPasswordLabel" class="col-sm-3 col-form-label form-label">رمز عبور فعلی</label>
+
+              <div class="col-sm-9">
+                <input type="password" class="form-control text-center" name="old_password" id="currentPasswordLabel"
+                  placeholder="پسورد فعلی را وارد کنید." aria-label="Enter current password">
+              </div>
+            </div>
+            <!-- End Form -->
+
+            <!-- Form -->
+            <div class="row mb-4">
+              <label for="newPassword" class="col-sm-3 col-form-label form-label">رمز عبور جدید</label>
+
+              <div class="col-sm-9">
+                <input type="password" class="form-control text-center" name="new_password1" id="newPassword"
+                  placeholder="پسورد جدید خود را وارد کنید." aria-label="Enter new password">
+              </div>
+            </div>
+            <!-- End Form -->
+
+            <!-- Form -->
+            <div class="row mb-4">
+              <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label form-label">رمز عبور جدید را
+                تایید کنید</label>
+
+              <div class="col-sm-9">
+                <div class="mb-3">
+                  <input type="password" class="form-control text-center" name="new_password2"
+                    id="confirmNewPasswordLabel" placeholder="پسورد جدید را دوباره وارد کنید."
+                    aria-label="Confirm your new password">
+                </div>
+
+                <h5>الزامات رمز عبور:</h5>
+
+                <p class="card-text small">اطمینان حاصل کنید که این الزامات برآورده شده است:</p>
+
+                <ul class="small">
+                  <li>حداقل 8 کاراکتر - هر چه بیشتر باشد، بهتر است</li>
+                  <li>حداقل یک نویسه کوچک</li>
+                  <li>حداقل یک کاراکتر بزرگ</li>
+                  <li>حداقل یک عدد، نماد یا نویسه فضای خالی</li>
+                </ul>
+              </div>
+            </div>
+            <!-- End Form -->
+
+            <div class="d-flex justify-content-end gap-3">
+              <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            </div>
+          </form>
+          <!-- End Form -->
+        </div>
+        <!-- End Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+{% block extra_js %}
+{% endblock %}
