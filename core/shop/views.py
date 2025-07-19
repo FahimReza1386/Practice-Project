@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.core.exceptions import FieldError
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import UserSubscriptionModel, UserSubscriptionTypeModel
+from review.models import ReviewModel, ReviewStatusModel
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -51,6 +52,7 @@ class BlogDetailView(DetailView):
         if self.request.user.subscription != UserSubscriptionTypeModel.no_subscription.value:
             subscription = UserSubscriptionModel.objects.get(user=self.request.user)
             context["ramming_days"] = subscription.get_remaining_days()
+        context["reviews"]= ReviewModel.objects.filter(status=ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"]).order_by("-created_date")
         return context
     
     def dispatch(self, request, *args, **kwargs):

@@ -108,7 +108,10 @@ class Profile(models.Model):
     image= models.ImageField(upload_to="profile/", default="profile/user1.jpg")
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-
+   
+    def get_fullname(self):
+        return f"{self.first_name} {self.last_name}"
+    
 
 
 @receiver(post_save, sender=User)

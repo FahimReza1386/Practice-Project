@@ -534,7 +534,7 @@
             <div class="tab-header">
                 <div class="tab-btn active" data-tab="description">توضیحات محصول</div>
                 <div class="tab-btn" data-tab="specs">مشخصات فنی</div>
-                <div class="tab-btn" data-tab="reviews">نظرات (47)</div>
+                <div class="tab-btn" data-tab="reviews">نظرات ({{ reviews.count }})</div>
                 <div class="tab-btn" data-tab="qa">پرسش و پاسخ</div>
             </div>
             
@@ -568,59 +568,41 @@
                 <!-- تب نظرات -->
                 <div class="tab-pane" id="reviews">
                     <div class="reviews-section">
+                        {% for review in reviews %}
                         <div class="review">
                             <div class="review-header">
-                                <span class="review-author">علی محمدی</span>
-                                <span class="review-date">۱۴۰۲/۰۵/۱۵</span>
+                                <span class="review-author">{{ review.user.user_profile.get_fullname }}</span>
+                                <span class="review-date">{{ review.created_date }}</span>
+                                <form action="{% url 'review:review-delete' pk=review.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-icon">  <i class="bi bi-trash" style="font-size: 20px;color: red;"></i>
+                                    </button>
+                                    
+                                </form>
                             </div>
-                            <div class="review-rating">★★★★★</div>
+                        <div class="review-rating">{% for _ in ""|center:review.rate %}★{% endfor %}
+                            </div>
                             <p class="review-text">
-                                محصول بسیار با کیفیتی بود. رنگ زیبایی دارد و کاملاً با توضیحات ارائه شده مطابقت داشت. پیشنهاد می‌کنم.
+                                {{ review.description|safe }}
                             </p>
                         </div>
-                        
-                        <div class="review">
-                            <div class="review-header">
-                                <span class="review-author">فاطمه احمدی</span>
-                                <span class="review-date">۱۴۰۲/۰۴/۲۸</span>
-                            </div>
-                            <div class="review-rating">★★★★☆</div>
-                            <p class="review-text">
-                                کیفیت خوبی دارد اما بسته‌بندی می‌توانست بهتر باشد. در کل از خریدم راضی هستم.
-                            </p>
-                        </div>
-                        
-                        <div class="review">
-                            <div class="review-header">
-                                <span class="review-author">رضا کریمی</span>
-                                <span class="review-date">۱۴۰۲/۰۴/۱۰</span>
-                            </div>
-                            <div class="review-rating">★★★★★</div>
-                            <p class="review-text">
-                                عالی بود! دقیقاً همان چیزی بود که انتظار داشتم. ارسال سریع و بسته‌بندی عالی.
-                            </p>
-                        </div>
+                        {% endfor %}
                         
                         <button class="btn btn-secondary" style="margin-top: 20px;">
-                            مشاهده همه نظرات (47)
+                            مشاهده همه نظرات ({{ reviews.count }})
                         </button>
                     </div>
                     
                     <!-- فرم نظر دهی -->
                     <div class="review-form">
                         <h3>ثبت نظر جدید</h3>
-                        <form id="reviewForm">
+                        <form id="reviewForm" action="{% url 'review:review-create' %}" method="post">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label for="name" class="form-label">نام شما *</label>
-                                <input type="text" id="name" class="form-control" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email" class="form-label">ایمیل</label>
-                                <input type="email" id="email" class="form-control">
-                            </div>
-                            
-                            <div class="form-group">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control is-valid" id="validationValidInput1" name="blog"
+                                     value="{{ object.id }}" hidden>
+                                  </div>
                                 <label class="form-label">امتیاز شما *</label>
                                 <div class="stars-rating">
                                     <span class="star" data-rating="5">★</span>
@@ -629,12 +611,12 @@
                                     <span class="star" data-rating="2">★</span>
                                     <span class="star" data-rating="1">★</span>
                                 </div>
-                                <input type="hidden" id="rating" name="rating" value="0">
+                                <input type="hidden" id="rating" name="rate" value="0">
                             </div>
                             
                             <div class="form-group">
                                 <label for="review" class="form-label">نظر شما *</label>
-                                <textarea id="review" class="form-control form-textarea" required></textarea>
+                                <textarea id="review" class="form-control form-textarea" name="description" required></textarea>
                             </div>
                             
                             <button type="submit" class="btn btn-primary">ثبت نظر</button>
@@ -718,50 +700,7 @@
     
     const reviewForm = document.getElementById('reviewForm');
     
-    reviewForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const rating = document.getElementById('rating').value;
-        const reviewText = document.getElementById('review').value;
-        
-        if (rating === '0') {
-            alert('لطفاً به محصول امتیاز دهید');
-            return;
-        }
-                
-        const reviewsSection = document.querySelector('#reviews .reviews-section');
-        const newReview = document.createElement('div');
-        newReview.className = 'review';
-        
-        const now = new Date();
-        const dateString = now.toLocaleDateString('fa-IR');
-        
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-            starsHtml += i <= rating ? '★' : '☆';
-        }
-        
-        newReview.innerHTML = `
-            <div class="review-header">
-                <span class="review-author">${name}</span>
-                <span class="review-date">${dateString}</span>
-            </div>
-            <div class="review-rating">${starsHtml}</div>
-            <p class="review-text">${reviewText}</p>
-        `;
-        
-        reviewsSection.insertBefore(newReview, reviewsSection.firstChild);
-        
-        // ریست فرم
-        reviewForm.reset();
-        stars.forEach(star => star.classList.remove('active'));
-        ratingInput.value = '0';
-        
-        alert('نظر شما با موفقیت ثبت شد. سپاس!');
-    });
-    
+
     // تغییر تب‌ها
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
@@ -778,4 +717,5 @@
         });
     });
 </script>
+<!-- -->
 {% endblock %}
