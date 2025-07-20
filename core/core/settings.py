@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # Pakage Installed
     "ckeditor",
     "mptt",
+    "jalali_date",
 ]
 
 MIDDLEWARE = [

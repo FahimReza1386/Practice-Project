@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin
 from accounts.models import Profile, UserSubscriptionModel, UserSubscriptionTypeModel
+from jalali_date import datetime2jalali
 from .forms import ProfileEditForm
 
 
@@ -16,6 +17,8 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
         if self.request.user.subscription != UserSubscriptionTypeModel.no_subscription.value:
             subscription = UserSubscriptionModel.objects.get(user=self.request.user)
             context["ramming_days"] = subscription.get_remaining_days()
+            jalali_join = datetime2jalali(self.request.user.created_date).strftime('%y/%m/%d')
+            context["joined"]=jalali_join
         return context
 
 

@@ -12,20 +12,19 @@
   <title>داشبورد ادمین</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
-
+  <link rel="shortcut icon" href="{% static 'img/Fevicon.png' %}" />
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- CSS Implementing Plugins -->
-  <link rel="stylesheet" href="{% static 'css/vendor.min.css' %}"/>
-  <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/font/bootstrap-icons.css' %}"/>
-
-  <!-- CSS Front Template -->
-  <link rel="stylesheet" href="{% static 'css/theme.min.css' %}"/>
-
    <!-- CSS Front Toastify -->
-   <link rel="stylesheet" href="{% static 'vendor/toastify/toastify.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'toastify/toastify.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
    <style>
     /* استایل کلی سایدبار */
     .navbar-vertical {
@@ -622,7 +621,7 @@
           </div>
           <!-- End Col -->
   
-          <div class="col-lg-9" style="margin-right: 5rem;">
+          <div class="col-lg-9">
             {% block content %}{% endblock %}
           </div>
           <!-- End Col -->

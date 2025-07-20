@@ -572,7 +572,7 @@
                         <div class="review">
                             <div class="review-header">
                                 <span class="review-author">{{ review.user.user_profile.get_fullname }}</span>
-                                <span class="review-date">{{ review.created_date }}</span>
+                                <span class="review-date">ثبت نظر : {% show_jalali_date review_id=review.id %}</span>
                                 <form action="{% url 'review:review-delete' pk=review.pk %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-icon">  <i class="bi bi-trash" style="font-size: 20px;color: red;"></i>
@@ -592,7 +592,6 @@
                             مشاهده همه نظرات ({{ reviews.count }})
                         </button>
                     </div>
-                    
                     <!-- فرم نظر دهی -->
                     <div class="review-form">
                         <h3>ثبت نظر جدید</h3>

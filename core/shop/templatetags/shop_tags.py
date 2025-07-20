@@ -1,5 +1,7 @@
 from django import template
 from shop.models import BlogModel, BlogTypeModel, BlogStatusTypeModel, WishListModel
+from review.models import ReviewModel
+from jalali_date import datetime2jalali
 
 
 register = template.Library()
@@ -27,3 +29,9 @@ def is_in_wishlist(context, blog_id):
         is_wishlist= False
     
     return is_wishlist
+
+@register.simple_tag()
+def show_jalali_date(review_id):
+    review_obj=ReviewModel.objects.get(id=review_id)
+    review_date=datetime2jalali(review_obj.created_date).strftime('%y/%m/%d')
+    return review_date
