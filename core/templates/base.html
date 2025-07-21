@@ -52,7 +52,7 @@
             <li class="nav-item {% if request.resolver_match.view_name == 'shop:blog-grid' or request.resolver_match.view_name == 'shop:blog-detail' %} active {% endif %}"><a class="nav-link" href="{% url 'shop:blog-grid' %}">محصولات</a></li> 
       
             <li class="nav-item {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}"><a class="nav-link" href="{% url 'website:contact' %}">ارتباط با ما</a></li>
-            <li class="nav-item mr-5"><a class="nav-link" href="category.html">اشتراک ها</a>
+            <li class="nav-item mr-5 {% if request.resolver_match.view_name == 'website:subscriptions' %} active {% endif %}"><a class="nav-link" href="{% url 'website:subscriptions' %}">اشتراک ها</a>
                 <li style="margin: 15px 2rem"><a href="{% url 'dashboard:home' %}"><i class="bi bi-person" style="font-size: 25px;color: black !important;text-decoration: none;;"></i></a>
                 </li>
 

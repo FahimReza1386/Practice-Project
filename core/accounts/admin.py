@@ -53,7 +53,6 @@ class CustomSubsCriptionAdmin(admin.ModelAdmin):
     model=UserSubscriptionModel
     list_display = ("user", "subs_type", "start_date", "end_date")
 
-
 admin.site.register(Profile, CustomProfileAdmin)
 admin.site.register(UserSubscriptionModel, CustomSubsCriptionAdmin)
 admin.site.register(User, CustomUserAdmin)

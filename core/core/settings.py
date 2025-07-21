@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "shop",
     "review",
     "dashboard",
+    "payment",
 
     # Pakage Installed
     "ckeditor",
@@ -168,3 +169,5 @@ CKEDITOR_CONFIGS = {
             ]),
         },
 }
+
+
