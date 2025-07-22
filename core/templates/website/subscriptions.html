@@ -11,15 +11,33 @@
     <div class="container">
         <h1 class="m-5 text-right" dir="rtl">اشتراک های مجموعه فهیم وب :</h1>
 
-        <div class="owl-carousel owl-theme blog-slider">
+        <div class="owl-carousel owl-theme blog-slider" >
+                <div class="products-grid">
+                    
+                    <div class="product-card-body text-center" >
+                            <form action="{% url 'payment:request-payment' %}" method="post">
+                                {% csrf_token %}
+                            <a class="product-card-title" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">10 روزه</a>
+                            <br>
+                            <input type="number" style="border: none;" name="amount" value="110000" id="" readonly>
+                            <input type="text" style="border: none;" name="subs_type" value="2"  hidden>
+                            <button class="btn" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            </form>
+                        </div>
+                </div>
                 <div class="products-grid">
                     
                     <div class="product-card">
-                        <div class="product-card-body text-center">
-                            <a class="product-card-title" href="{% url 'shop:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">۳۰ روزه</a>
-                                <!-- <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">3,900,000 تومان</div> -->
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">3,900,000 تومان</div>
-                            <a href="{% url 'website:AcceptedRequestBuy' pk=1 %}" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                      <div class="product-card-body text-center">
+                            <form action="{% url 'payment:request-payment' %}" method="post">
+                                {% csrf_token %}
+                            <a class="product-card-title" ref="{% url 'shop:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">15 روزه</a>
+                            <br>
+                            <input type="text" style="border: none;" name="amount" value="130000" id="">
+                            <input type="text" style="border: none;" name="subs_type" value="3"  hidden>
+
+                            <button class="btn" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -27,10 +45,15 @@
                     
                     <div class="product-card">
                         <div class="product-card-body text-center">
-                            <a class="product-card-title" href="{% url 'shop:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">60 روزه</a>
-                                <!-- <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">7,500,000 تومان</div> -->
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">7,500,000 تومان</div>
-                            <a href="{% url 'website:AcceptedRequestBuy' pk=2 %}" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            <form action="{% url 'payment:request-payment' %}" method="post">
+                                {% csrf_token %}
+                            <a class="product-card-title" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">30 روزه</a>
+                            <br>
+                            <input type="text" style="border: none;" name="amount" value="330000" id="">
+                            <input type="text" style="border: none;" name="subs_type" value="4"  hidden>
+
+                            <button class="btn" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -38,9 +61,15 @@
                     
                     <div class="product-card">
                         <div class="product-card-body text-center">
-                            <a class="product-card-title" href="{% url 'shop:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">90 روزه</a>
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">11,000,000 تومان</div>
-                            <a href="{% url 'website:AcceptedRequestBuy' pk=3 %}" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            <form action="{% url 'payment:request-payment' %}" method="post">
+                                {% csrf_token %}
+                            <a class="product-card-title" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">60 روزه</a>
+                            <br>
+                            <input type="text" style="border: none;" name="amount" value="660000" id="">
+                            <input type="text" style="border: none;" name="subs_type" value="5"  hidden>
+
+                            <button class="btn" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -52,4 +81,4 @@
 {% endblock %}
 
 
-{% block extra_js%}{% endblock %}
+{% block extra_js%}{% endblock %}h

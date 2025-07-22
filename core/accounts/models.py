@@ -17,18 +17,16 @@ class UserType(models.IntegerChoices):
 
 class UserSubscriptionTypeModel(models.IntegerChoices):
     no_subscription=1,("No_Subscription")
-    day_1= 2,("Day"),
-    week_1= 3,("week"),
-    month_1= 4,("month_1"),
-    month_3= 5,("month_3"),
-    month_6= 6,("month_6"),
-    month_12= 7,("month_12"),
+    days_10= 2,("days_10"),
+    days_15= 3,("days_15"),
+    days_30= 4,("days_30"),
+    days_60= 5,("days_60"),
 
 class UserSubscriptionModel(models.Model):
     user =models.ForeignKey("User", on_delete=models.CASCADE)
     subs_type= models.IntegerField(choices=UserSubscriptionTypeModel.choices, default=UserSubscriptionTypeModel.no_subscription.value)
     start_date= models.DateTimeField(auto_now_add=True)
-    end_date= models.DateTimeField()
+    end_date= models.DateTimeField(null=True, blank=True)
     is_active= models.BooleanField(default=False)
 
     
@@ -41,6 +39,17 @@ class UserSubscriptionModel(models.Model):
             return rammining_date.days
         return timedelta(0)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            if self.subs_type == UserSubscriptionTypeModel.days_10.value:
+                self.end_date = timezone.now() + timedelta(days=10)
+            elif self.subs_type == UserSubscriptionTypeModel.days_15.value:
+                self.end_date = timezone.now() + timedelta(days=15)
+            elif self.subs_type == UserSubscriptionTypeModel.days_30.value:
+                self.end_date = timezone.now() + timedelta(days=30)
+            elif self.subs_type == UserSubscriptionTypeModel.days_60.value:
+                self.end_date = timezone.now() + timedelta(days=60)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user.first_name}-{self.is_active}"
