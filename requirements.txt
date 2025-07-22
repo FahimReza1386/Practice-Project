@@ -9,6 +9,7 @@ django-mptt==0.17.0
 django-phonenumber-field==8.1.0
 Faker==37.4.2
 idna==3.10
+idpay==0.0.1
 jalali_core==1.0.0
 jdatetime==5.2.0
 phonenumbers==9.0.9
