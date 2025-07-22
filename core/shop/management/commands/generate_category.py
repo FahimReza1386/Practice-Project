@@ -1,6 +1,6 @@
 from faker import Faker
 from django.core.management.base import BaseCommand
-from ...models import CategoryModel
+from ...models import BlogCategoryModel
 from django.contrib.auth import get_user_model
 
 User= get_user_model()
@@ -10,9 +10,9 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         faker = Faker(locale="fa_IR")
-        category= CategoryModel.objects.all()
+        category= BlogCategoryModel.objects.all()
         for _ in range(10):
             name=faker.word()
-            CategoryModel.objects.get_or_create(name=name)
+            BlogCategoryModel.objects.get_or_create(name=name)
 
         self.stdout.write(self.style.SUCCESS("Successfully generated 10 fake Categories..."))

@@ -50,10 +50,14 @@ class BlogDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context["extra_img"] = BlogImageModel.objects.filter(blog=self.kwargs["pk"])
-        if self.request.user.subscription != UserSubscriptionTypeModel.no_subscription.value:
-            subscription = UserSubscriptionModel.objects.get(user=self.request.user)
-            context["ramming_days"] = subscription.get_remaining_days()
-        context["reviews"]= ReviewModel.objects.filter(status=ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"]).order_by("-created_date")
+        if self.request.user.is_authenticated:
+            user_subscription= UserSubscriptionModel.objects.filter(user=self.request.user).exists()
+            if user_subscription is True:
+                subscription = UserSubscriptionModel.objects.get(user=self.request.user)
+                context["ramming_days"] = subscription.get_remaining_days()
+            else:
+                context["ramming_days"] = "بدون اشتراک"
+            context["reviews"]= ReviewModel.objects.filter(status=ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"]).order_by("-created_date")
         return context
     
     def dispatch(self, request, *args, **kwargs):
