@@ -62,10 +62,10 @@
 .ti-signal:before {
 	content: "\e60c";
 }
-.ti-shopping-cart:before {
+.ti-blogping-cart:before {
 	content: "\e60d";
 }
-.ti-shopping-cart-full:before {
+.ti-blogping-cart-full:before {
 	content: "\e60e";
 }
 .ti-settings:before {

@@ -1,7 +1,9 @@
+# Django Imports
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
+# Third Party
 from .models import User, Profile, UserSubscriptionModel
-# Register your models here.
 
 class CustomUserAdmin(UserAdmin):
     model=User

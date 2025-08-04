@@ -42,15 +42,16 @@ INSTALLED_APPS = [
     # app Installed
     "website",
     "accounts",
-    "phonenumber_field",
-    "shop",
+    "blog",
     "review",
     "dashboard",
     "payment",
+    "utils",
 
-    # Pakage Installed
+    # Pakage Installed  
     "ckeditor",
     "mptt",
+    "phonenumber_field",
     "jalali_date",
 ]
 

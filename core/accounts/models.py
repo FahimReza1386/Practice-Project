@@ -1,12 +1,17 @@
+# Django Imports
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
 from datetime import timedelta
-# Create your models here.
+
+# Third Party 
+
+from utils.models import AbstractBaseDateModel
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -22,12 +27,25 @@ class UserSubscriptionTypeModel(models.IntegerChoices):
     days_30= 4,("days_30"),
     days_60= 5,("days_60"),
 
-class UserSubscriptionModel(models.Model):
-    user =models.ForeignKey("User", on_delete=models.CASCADE)
-    subs_type= models.IntegerField(choices=UserSubscriptionTypeModel.choices, default=UserSubscriptionTypeModel.no_subscription.value)
-    start_date= models.DateTimeField(auto_now_add=True)
-    end_date= models.DateTimeField(null=True, blank=True)
-    is_active= models.BooleanField(default=False)
+class UserSubscriptionModel(AbstractBaseDateModel):
+    user =models.ForeignKey(
+        "User", 
+        on_delete=models.CASCADE
+    )
+    subs_type= models.IntegerField(
+        choices=UserSubscriptionTypeModel.choices, 
+        default=UserSubscriptionTypeModel.no_subscription.value
+    )
+    start_date= models.DateTimeField(
+        auto_now_add=True
+    )
+    end_date= models.DateTimeField(
+        null=True, 
+        blank=True
+    )
+    is_active= models.BooleanField(
+        default=False
+    )
 
     
     def is_valid(self):
@@ -84,17 +102,43 @@ class UserManager(BaseUserManager):
         return self.create_user(phone_number, password, **extra_fields)
         
 class User(AbstractBaseUser, PermissionsMixin):
-    phone_number = PhoneNumberField(unique=True, blank=False)
-    first_name = models.CharField(max_length=100)
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
-    is_verified = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
-    type = models.IntegerField(choices=UserType.choices, default=UserType.customer.value)
-    subscription= models.IntegerField(choices=UserSubscriptionTypeModel.choices, default=UserSubscriptionTypeModel.no_subscription.value)
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-
+    phone_number = PhoneNumberField(
+        unique=True, 
+        blank=False,
+        verbose_name=_("شماره تلفن")
+    )
+    first_name = models.CharField(
+        max_length=100,
+        verbose_name=_("نام")
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
+    is_superuser = models.BooleanField(
+        default=False
+    )
+    is_verified = models.BooleanField(
+        default=True
+    )
+    is_staff = models.BooleanField(
+        default=True
+    )
+    type = models.IntegerField(
+        choices=UserType.choices, 
+        default=UserType.customer.value,
+        verbose_name=_("نوع")
+    )
+    subscription= models.IntegerField(
+        choices=UserSubscriptionTypeModel.choices, 
+        default=UserSubscriptionTypeModel.no_subscription.value,
+        verbose_name=_("اشتراک")
+    )
+    created_date = models.DateTimeField(
+        auto_now_add=True
+    )
+    updated_date = models.DateTimeField(
+        auto_now=True
+    )
 
     USERNAME_FIELD= "phone_number"
     REQUIRED_FIELDS =[]
@@ -103,21 +147,43 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.first_name}-{self.phone_number}"
     
-class Gender(models.IntegerChoices):
-    male= 1,("male")
-    female= 2,("female")
-    other= 3,("other")
 
-class Profile(models.Model):
-    user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="user_profile")
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    phone_number=PhoneNumberField(unique=True)
-    gender = models.IntegerField(choices=Gender.choices, default=Gender.other.value)
-    image= models.ImageField(upload_to="profile/", default="profile/user1.jpg")
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-   
+
+class Profile(AbstractBaseDateModel):
+    class Gender(models.IntegerChoices):
+        male= 1,("male")
+        female= 2,("female")
+        other= 3,("other")
+
+    user = models.OneToOneField(
+        "User", 
+        on_delete=models.CASCADE, 
+        related_name="user_profile",
+        verbose_name=_("کاربر")
+    )
+    first_name = models.CharField(
+        max_length=100,
+        verbose_name=_("نام")
+    )
+    last_name = models.CharField(
+        max_length=100,
+        verbose_name=_("نام خانوادگی")
+    )
+    phone_number=PhoneNumberField(
+        unique=True,
+        verbose_name=_("شماره تلفن")
+    )
+    gender = models.IntegerField(
+        choices=Gender.choices, 
+        default=Gender.other.value,
+        verbose_name=_("جنسیت")
+    )
+    image= models.ImageField(
+        upload_to="profile/", 
+        default="profile/user1.jpg",
+        verbose_name=_("تصویر")
+    )
+
     def get_fullname(self):
         return f"{self.first_name} {self.last_name}"
     
@@ -126,5 +192,9 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, pk=instance.pk, phone_number=instance.phone_number)
+        Profile.objects.create(
+            user=instance, 
+            pk=instance.pk, 
+            phone_number=instance.phone_number
+        )
 

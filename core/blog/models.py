@@ -1,0 +1,104 @@
+# Django Imports
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth import get_user_model
+from decimal import Decimal 
+from django.utils.translation import gettext_lazy as _
+
+# Third Party
+from utils.models import AbstractBaseDateModel
+from mptt.models import MPTTModel, TreeForeignKey
+from ckeditor_uploader.fields import RichTextUploadingField
+
+User=get_user_model()
+
+class BlogModel(AbstractBaseDateModel):
+
+    class BlogStatusTypeModel(models.IntegerChoices):
+        publish= 1, _("نمایش")
+        draft= 2, _("عدم نمایش")
+    
+    class BlogTypeModel(models.IntegerChoices):
+        premium= 1, _("ویژه")
+        normal= 2, _("عادی")
+
+    title= models.CharField(
+        max_length=200,
+        verbose_name=_("نام")
+    )
+    description=RichTextUploadingField()
+    type= models.IntegerField(
+        choices=BlogTypeModel.choices,
+        default=BlogTypeModel.normal.value
+    )
+    status= models.IntegerField(
+        choices=BlogStatusTypeModel.choices, 
+        default=BlogStatusTypeModel.publish.value,
+        verbose_name=_("وضعیت")
+    )
+    image= models.ImageField(
+        upload_to="blogs/", 
+        default="blogs/image.jpg",
+        verbose_name=_("تصویر")
+    )
+    category= models.ForeignKey(
+        "BlogCategoryModel",
+        on_delete=models.PROTECT,
+        null=True,
+        verbose_name=_("دسته بندی")
+    )
+
+    def __str__(self):
+        return f"{self.title}{self.pk}"
+
+class BlogImageModel(AbstractBaseDateModel):
+    blog = models.ForeignKey(
+        BlogModel, 
+        on_delete=models.CASCADE,
+        verbose_name=_("بلاگ")
+    )
+    file= models.ImageField(
+        upload_to="blogs/extra_img/",
+        verbose_name=_("تصویر")
+    )
+
+
+    def __str__(self):
+        return f"{self.blog.title}"
+    
+
+class BlogCategoryModel(MPTTModel):
+    name= models.CharField(
+        max_length=100,
+    )
+    parent= TreeForeignKey(
+        "self", 
+        on_delete=models.CASCADE, 
+        null=True, blank=True, 
+        related_name="children"
+    )
+
+    class MPTTMeta:
+        order_insertion_by= ["name"]
+
+    def __str__(self):
+        return f"{self.pk}-{self.name}"
+    
+
+class WishListModel(AbstractBaseDateModel):
+    blog=models.ForeignKey(
+        BlogModel, 
+        on_delete=models.CASCADE,
+        verbose_name=_("بلاگ")
+    )
+    user=models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE,
+        verbose_name= _("کاربر")
+    )
+
+    class Meta:
+        unique_together = ('user', 'blog')
+
+    def __str__(self):
+        return f"{self.blog.title}-{self.pk}"

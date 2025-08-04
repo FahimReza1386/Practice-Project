@@ -1,9 +1,11 @@
+# Django Imports
 from django.contrib import admin
-from .models import ReviewModel, ReviewStatusModel
-# Register your models here.
+
+# Third Paty
+from .models import ReviewModel
 
 @admin.register(ReviewModel)
 class ReviewModelAdmin(admin.ModelAdmin):
     list_display = ("user__first_name", "blog__title", "pk", "status")
-    list_filter= ("status",)
+    list_filter= ("status", "rate")
     search_fields= ("user__first_name", "blog__title")

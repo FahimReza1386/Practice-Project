@@ -129,7 +129,7 @@
 					"id": 86,
 					"prevSize": 32,
 					"code": 58893,
-					"name": "shopping-cart",
+					"name": "blogping-cart",
 					"tempChar": "",
 					"ligatures": ""
 				},
@@ -138,7 +138,7 @@
 					"id": 85,
 					"prevSize": 32,
 					"code": 58894,
-					"name": "shopping-cart-full",
+					"name": "blogping-cart-full",
 					"tempChar": "",
 					"ligatures": ""
 				},
@@ -1052,7 +1052,7 @@
 					],
 					"grid": 0,
 					"tags": [
-						"shopping-cart"
+						"blogping-cart"
 					]
 				},
 				{
@@ -1062,7 +1062,7 @@
 					],
 					"grid": 0,
 					"tags": [
-						"shopping-cart-full"
+						"blogping-cart-full"
 					]
 				},
 				{

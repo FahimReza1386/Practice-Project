@@ -1,0 +1,22 @@
+{% load mptt_tags %}
+
+<section class="category-section">
+  <div class="container">
+    <h1 class="category">دسته‌بندی‌ها:</h1>
+    <nav class="cat-navbar">
+      {% recursetree genres %}
+      <div class="cat-nav-item">
+        <a href="{% url 'blog:blog-category' pk=node.id %}" class="cat-nav-link">
+          {{ node.name }}
+        </a>
+
+        {% if not node.is_leaf_node %}
+        <div class="dropdown">
+          {{ children }}
+        </div>
+        {% endif %}
+      </div>
+      {% endrecursetree %}
+    </nav>
+  </div>
+</section>

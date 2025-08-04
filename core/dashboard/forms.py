@@ -1,4 +1,9 @@
+# Django Imports
+
 from django import forms
+
+# Third Party
+
 from accounts.models import Profile
 
 class ProfileEditForm(forms.ModelForm):

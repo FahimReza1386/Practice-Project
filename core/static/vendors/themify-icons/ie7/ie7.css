@@ -37,10 +37,10 @@
 .ti-signal {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe60c;');
 }
-.ti-shopping-cart {
+.ti-blogping-cart {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe60d;');
 }
-.ti-shopping-cart-full {
+.ti-blogping-cart-full {
 	*zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe60e;');
 }
 .ti-settings {

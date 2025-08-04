@@ -1,6 +1,9 @@
+# Django Imports
 from django.contrib import admin
+
+# Third Party
 from .models import PaymentModel
-# Register your models here.
+
 @admin.register(PaymentModel)
 class PaymentModelAdmin(admin.ModelAdmin):
     list_display=("user_subscriptiontype", "status", "amount", "response_code", "authority_id")

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
-{% load shop_tags %}
+{% load blog_tags %}
 
 {% block title %}{% endblock %}
 {% block extra_css %}{% endblock %}
@@ -31,7 +31,7 @@
                       <div class="product-card-body text-center">
                             <form action="{% url 'payment:request-payment' %}" method="post">
                                 {% csrf_token %}
-                            <a class="product-card-title" ref="{% url 'shop:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">15 روزه</a>
+                            <a class="product-card-title" ref="{% url 'blog:blog-grid' %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">15 روزه</a>
                             <br>
                             <input type="text" style="border: none;" name="amount" value="130000" id="">
                             <input type="text" style="border: none;" name="subs_type" value="3"  hidden>

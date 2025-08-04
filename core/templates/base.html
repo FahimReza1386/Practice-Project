@@ -49,7 +49,7 @@
             {% if request.user.is_authenticated is not True %}
             <li class="nav-item {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}"><a class="nav-link" href="{% url 'accounts:login' %}" >ورود</a></li> 
             {% endif %}
-            <li class="nav-item {% if request.resolver_match.view_name == 'shop:blog-grid' or request.resolver_match.view_name == 'shop:blog-detail' %} active {% endif %}"><a class="nav-link" href="{% url 'shop:blog-grid' %}">محصولات</a></li> 
+            <li class="nav-item {% if request.resolver_match.view_name == 'blog:blog-grid' or request.resolver_match.view_name == 'blog:blog-detail' %} active {% endif %}"><a class="nav-link" href="{% url 'blog:blog-grid' %}">محصولات</a></li> 
       
             <li class="nav-item {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}"><a class="nav-link" href="{% url 'website:contact' %}">ارتباط با ما</a></li>
             <li class="nav-item mr-5 {% if request.resolver_match.view_name == 'website:subscriptions' %} active {% endif %}"><a class="nav-link" href="{% url 'website:subscriptions' %}">اشتراک ها</a>
@@ -65,7 +65,9 @@
             </ul>
         </div> 
         </div>
+
     </nav>
+
     </div>
 </header>
 <!--================Header Menu Area =================-->
@@ -169,7 +171,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     function AddToWishList(blog_id) {
         $.ajax({
             type:"POST",
-            url:"{% url 'shop:add-wishlist' %}",
+            url:"{% url 'blog:add-wishlist' %}",
             data:{
                 csrfmiddlewaretoken: "{{ csrf_token }}",
                 blog_id:blog_id

@@ -1,0 +1,108 @@
+/* ---------------- category----------------- */
+
+
+
+.cat-navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 350px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* هر آیتم منو */
+.cat-nav-item {
+  position: relative;
+}
+
+/* لینک اصلی منو */
+.cat-nav-link {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: #222;
+  width: 90%;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+  white-space: nowrap;
+}
+
+/* افکت هاور روی لینک اصلی */
+.cat-nav-link:hover {
+  background-color: #0077ff;
+  color: #fff;
+  border-color: #005fcc;
+  box-shadow: 0 6px 15px rgba(0,123,255,0.4);
+  cursor: pointer;
+}
+
+/* زیرمنوها مخفی و موقع هاور والد نمایش داده میشن */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 100%; /* باز شدن به سمت چپ در RTL */
+  min-width: 220px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  padding: 12px 0;
+  z-index: 2000;
+  border: 1px solid #e1e4e8;
+}
+
+/* نمایش زیرمنو روی هاور */
+.cat-nav-item:hover > .dropdown {
+  display: block;
+}
+
+/* آیتم‌های داخل زیرمنو */
+.dropdown .cat-nav-item {
+  position: relative;
+}
+
+/* لینک‌های داخل زیرمنو */
+.dropdown .cat-nav-link {
+  display: block;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* هاور روی لینک‌های زیرمنو */
+.dropdown .cat-nav-link:hover {
+  background-color: #0077ff;
+  color: white;
+  cursor: pointer;
+}
+
+/* فاصله بین آیتم‌های زیرمنو */
+.dropdown .cat-nav-item + .cat-nav-item {
+  margin-top: 6px;
+}
+
+.category{
+  font-size: 20px;
+  font-family: "Vazir", sans-serif;
+  color: black;
+  float: right;
+  text-shadow: 3px 3px 1px silver;
+}

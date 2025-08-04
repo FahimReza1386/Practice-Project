@@ -1,12 +1,15 @@
+# Django Imports
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+import random
+
+# Third Party
 from .models import User
 from .forms import LoginForm, RegisterForm
-import random
-# Create your views here.
 
 class LoginView(auth_views.LoginView):
     template_name = "accounts/login.html"

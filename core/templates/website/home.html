@@ -1,186 +1,47 @@
-    {% extends 'base.html' %}
-    {% load static %}
-    {% load shop_tags %}
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
 
 
-    {% block title %}خانه{% endblock %}
-    {% block extra_css %}
-    <style>
-      .category-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-        padding: 2rem 0;
-        list-style: none;
-      }
 
-      .category-buttons li {
-        flex: 1 1 200px;
-        max-width: 250px;
-      }
-
-      .category-buttons a {
-        display: block;
-        background-color: #343a40;
-        color: #fff;
-        text-align: center;
-        padding: 0.8rem 1.2rem;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-
-      .category-buttons a:hover {
-        background-color: #495057;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-      }
-
-      @media (max-width: 768px) {
-        .category-buttons li {
-          flex: 1 1 100%;
-        }
-      }
-    </style>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-      }
-      ul.tree {
-        list-style: none;
-        padding-left: 20px;
-      }
-      ul.tree ul {
-        padding-left: 20px;
-        border-left: 1px dotted #ccc;
-        margin-left: 10px;
-      }
-      .tree li {
-        position: relative;
-        margin: 5px 0;
-        cursor: pointer;
-      }
-      .tree li::before {
-        content: "";
-        position: absolute;
-        top: 12px;
-        left: -12px;
-        width: 10px;
-        height: 1px;
-        background: #ccc;
-      }
-      .toggle-icon {
-        margin-right: 6px;
-        user-select: none;
-      }
-      .collapsed > ul {
-        display: none;
-      }
-    </style>
-
-    {% endblock %}
+{% block title %}خانه{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gpt_style.css' %}">
+{% endblock %}
 
 
-    {% block content %}
-
-          
-      <main class="site-main">
-        <!--================Hero Banner start =================-->  
-        <section class="mb-30px">
-          <div class="container">
-            <div class="hero-banner">
-              <div class="hero-banner__content">
-                <h3>سلام به فهیم وب خوش آمدید</h3>
-                <h1>مرجع تخصصی آموزش برنامه نویسی</h1>
-                <h4>تیر ۱۴۰۴</h4>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!--================Hero Banner end =================-->  
-
-        <!--================ Blog slider start =================-->  
-        <section>
-          <div class="container">
-            <div class="owl-carousel owl-theme blog-slider">
-              {% show_premium_blog %}
-            </div>
-
-          </div>
-        </section>
-
-        <section>
-          <div class="container">
-            <div class="row">
-                <h1 dir="rtl" class="text-center">دسته بندی ها :</h1>
-              
-              <ul class="category-buttons">
-                {% for cat in categories %}
-                
-
-            <ul class="tree" id="categoryTree">
-              <li>
-                <span class="toggle-icon">▶</span> Electronics
-                <ul>
-                  <li>
-                    <span class="toggle-icon">▶</span> Computers
-                    <ul>
-                      <li>Laptops</li>
-                      <li>Desktops</li>
-                    </ul>
-                  </li>
-                  <li>Phones</li>
-                  <li>
-                    <span class="toggle-icon">▶</span> Cameras
-                    <ul>
-                      <li>Digital</li>
-                      <li>Analog</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <span class="toggle-icon">▶</span> Furniture
-                <ul>
-                  <li>Tables</li>
-                  <li>Chairs</li>
-                </ul>
-              </li>
-              <li>Clothing</li>
-            </ul>
-
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </section>
-        
-      </main>
+{% block content %}
 
 
-    {% endblock %}
-    {% block extra_js %}
+<main class="site-main">
+  <!--================Hero Banner start =================-->
+  <section class="mb-30px">
+    <div class="container">
+      <div class="hero-banner">
+        <div class="hero-banner__content">
+          <h3>سلام به فهیم وب خوش آمدید</h3>
+          <h1>مرجع تخصصی آموزش برنامه نویسی</h1>
+          <h4>تیر ۱۴۰۴</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================Hero Banner end =================-->
 
-    <script>
-      document.querySelectorAll('.tree li').forEach(li => {
-        const toggleIcon = li.querySelector('.toggle-icon');
-        if (toggleIcon) {
-          toggleIcon.addEventListener('click', e => {
-            e.stopPropagation();
-            li.classList.toggle('collapsed');
-            // change arrow icon
-            if (li.classList.contains('collapsed')) {
-              toggleIcon.textContent = '▶';
-            } else {
-              toggleIcon.textContent = '▼';
-            }
-          });
-        }
-      });
-    </script>
-    {% endblock %}
+  <!--================ Blog slider start =================-->
+  <section>
+    <div class="container">
+      <div class="owl-carousel owl-theme blog-slider">
+        {% show_premium_blog %}
+      </div>
 
+    </div>
+  </section>
+            {% include 'website/navbar.html' %}
+
+</main>
+
+
+{% endblock %}
+{% block extra_js %}
+{% endblock %}

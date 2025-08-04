@@ -1,6 +1,10 @@
+# Django Imports
 from django import forms
+
+# Third Party
+
+from blog.models import BlogModel
 from .models import ReviewModel
-from shop.models import BlogModel, BlogStatusTypeModel
 
 class CreateReviewForm(forms.ModelForm):
     class Meta:
@@ -17,7 +21,7 @@ class CreateReviewForm(forms.ModelForm):
         blog= cleaned_data.get("blog")
 
         try:
-            BlogModel.objects.get(id=blog.id, status=BlogStatusTypeModel.publish.value)
+            BlogModel.objects.get(id=blog.id, status=BlogModel.BlogStatusTypeModel.publish.value)
         except BlogModel.DoesNotExist:
             return forms.ValidationError("پست انتخاب شده پیدا نشد .")
 
