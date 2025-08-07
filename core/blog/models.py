@@ -36,6 +36,16 @@ class BlogModel(AbstractBaseDateModel):
         default=BlogStatusTypeModel.publish.value,
         verbose_name=_("وضعیت")
     )
+    price= models.DecimalField(
+        max_digits=10,
+        decimal_places=0,
+        default=0,
+        verbose_name=_("مبلغ")
+    )
+    discount_percent= models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        verbose_name=_("تخفیف")
+    )
     image= models.ImageField(
         upload_to="blogs/", 
         default="blogs/image.jpg",
@@ -50,6 +60,14 @@ class BlogModel(AbstractBaseDateModel):
 
     def __str__(self):
         return f"{self.title}{self.pk}"
+    
+    def is_discounted(self):
+        return self.discount_percent != 0
+    
+    def get_price_after_sale(self):
+        amout_price = self.price * Decimal(self.discount_percent/100)
+        price= self.price - amout_price
+        return round(price)
 
 class BlogImageModel(AbstractBaseDateModel):
     blog = models.ForeignKey(

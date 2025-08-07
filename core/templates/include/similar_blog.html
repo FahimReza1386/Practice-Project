@@ -4,13 +4,13 @@
 
         {% if blog.type == 1 %}
    <!-- پست های مرتبط -->
-        <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px">
+        <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px;">
             <h2 class="section-title">پست های مرتبط</h2>
 
             <div class="products-grid">
                 
                 <div class="product-card">
-                    <img src="{{blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img">
+                    <img src="{{ blog.image.url }}" alt="محصول مرتبط 1" class="product-card-img">
                     <div class="product-card-body text-center">
                         <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
                         {% if blog.is_discounted %}
@@ -27,7 +27,7 @@
 
         </div>
         {% else %}
-        <div class="related-products" style="margin-bottom: 20rem;">
+        <div class="related-products" style="margin-bottom: 20rem;height: 30rem;">
             <h2 class="section-title">پست های مرتبط</h2>
 
             <div class="products-grid">
@@ -41,7 +41,7 @@
                             <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
                             <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
                         {% else %} 
-                           <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
                         {% endif %}
                         <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
                     </div>

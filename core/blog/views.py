@@ -13,6 +13,7 @@ from accounts.models import UserSubscriptionModel, UserSubscriptionTypeModel
 from review.models import ReviewModel
 from jalali_date import datetime2jalali, date2jalali
 from blog.models import BlogModel, BlogImageModel, WishListModel, BlogCategoryModel
+from blog.filters import BlogFilter
 
 
 class BlogGridView(ListView):
@@ -22,27 +23,11 @@ class BlogGridView(ListView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context["categories"] = BlogCategoryModel.objects.all()
+        context["filter"] = BlogFilter(self.request.GET, queryset=BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value))
         return context
 
     def get_queryset(self):
         queryset =BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value)
-        if search_q := self.request.GET.get("q"):
-            queryset = queryset.filter(title__icontains=search_q)
-
-        if min_price := self.request.GET.get("min_price"):
-            queryset = queryset.filter(price__gte=min_price)
-
-        if max_price := self.request.GET.get("max_price"):
-            queryset = queryset.filter(price__lte=max_price)
-
-        if category_id := self.request.GET.get("category_id"):
-            queryset = queryset.filter(category__id=category_id)
-        if order_by := self.request.GET.get("order_by"):
-            try:
-                queryset = queryset.order_by(order_by)
-            except FieldError:
-                messages.error(self.request , ("خطا در وارد کردن فیلد"))
-
         return queryset
 
 
@@ -103,6 +88,11 @@ class CategoriesView(ListView):
         queryset = self.model.objects.filter(category=self.kwargs["pk"])
         return queryset
     
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context["filter"] = BlogFilter(self.request.GET, queryset=BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value))
+        return context
+
 
 class WishListBlogPageView(ListView):
     model=WishListModel
@@ -112,3 +102,8 @@ class WishListBlogPageView(ListView):
     def get_queryset(self):
         queryset= self.model.objects.filter(user=self.request.user)
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context["filter"] = BlogFilter(self.request.GET, queryset=BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value))
+        return context

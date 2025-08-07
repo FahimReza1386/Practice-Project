@@ -21,8 +21,10 @@ class Command(BaseCommand):
             type=faker.random_int(min=0, max=2)
             status= faker.random_int(min=0, max=2)
             selected_category=random.choice(categories)
+            price= faker.random_int(min=0,max=100000000)
+            discount_percent= faker.random_int(min=0, max=100)
 
-            new_blog= BlogModel.objects.create(title=title, description=description, type=type, status=status, category=selected_category)
+            new_blog= BlogModel.objects.create(title=title, description=description, type=type, status=status,  price=price, discount_percent=discount_percent, category=selected_category)
             image_url = f"https://picsum.photos/200/200?random={random.randint(1, 1000)}"
             response= requests.get(image_url)
 

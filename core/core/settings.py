@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "mptt",
     "phonenumber_field",
     "jalali_date",
+    "django_filters",
 ]
 
 MIDDLEWARE = [

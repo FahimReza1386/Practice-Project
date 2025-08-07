@@ -3,21 +3,14 @@
 {% for blog in premium_blog %}
 
      <!-- محصولات مرتبط -->
-     <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px">
-        <h2 class="section-title text-center text-success">محصولات ویژه </h2> 
-        <i class="bi bi-star-fill text-success text-center" style="font-size: 20px;text-align: center;float: right;margin: 0px 10rem 10px;"></i>
+     <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px;height: 30rem;overflow: hidden;">
+        <h2 class="section-title text-center text-success">محصولات ویژه</h2>     <span>{{ blog.discount_percent }}% تخفیف</span>
             <div class="products-grid"> 
                 <div class="product-card">
-                    <img src="{{blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img" style="border-radius: 10px;">
+                    <img src="{{blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img" style="border-radius: 10px;height: 300px;">
                     <div class="product-card-body text-center">
-                        <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
-                        {% if blog.is_discounted %}
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
-                        {% else %} 
+                        <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>                       
                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
-                        {% endif %}
                         <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;" dir="rtl">ادامه ...</a>
                     </div>
                 </div>
