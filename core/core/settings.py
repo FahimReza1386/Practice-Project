@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "dashboard",
     "payment",
     "utils",
+    "subscriptions",
 
     # Pakage Installed  
     "ckeditor",
