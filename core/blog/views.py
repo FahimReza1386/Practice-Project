@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 
 # Third Party
-from accounts.models import UserSubscriptionModel, UserSubscriptionTypeModel
+from subscriptions.models import Subs_Buy, Subscriptions
 from review.models import ReviewModel
 from jalali_date import datetime2jalali, date2jalali
 from blog.models import BlogModel, BlogImageModel, WishListModel, BlogCategoryModel
@@ -40,9 +40,9 @@ class BlogDetailView(DetailView):
         context=super().get_context_data(**kwargs)
         context["extra_img"] = BlogImageModel.objects.filter(blog=self.kwargs["pk"])
         if self.request.user.is_authenticated:
-            user_subscription= UserSubscriptionModel.objects.filter(user=self.request.user).exists()
+            user_subscription= Subs_Buy.objects.filter(user=self.request.user).exists()
             if user_subscription is True:
-                subscription = UserSubscriptionModel.objects.get(user=self.request.user)
+                subscription = Subs_Buy.objects.get(user=self.request.user)
                 context["ramming_days"] = subscription.get_remaining_days()
             else:
                 context["ramming_days"] = "بدون اشتراک"
@@ -54,11 +54,11 @@ class BlogDetailView(DetailView):
         
         if blog_obj.type == BlogModel.BlogTypeModel.premium.value:
             try:
-                subscription = UserSubscriptionModel.objects.get(user=request.user)
+                subscription = Subs_Buy.objects.get(user=request.user)
                 if not subscription.is_valid():
                     messages.warning(request, "مشتری گرامی برای خواندن پست های ویژه باید اشتراک تهیه کنید.")
                     return redirect("blog:blog-grid")
-            except UserSubscriptionModel.DoesNotExist:
+            except Subs_Buy.DoesNotExist:
                 messages.warning(request, "مشتری گرامی برای خواندن پست های ویژه باید اشتراک تهیه کنید.")
                 return redirect("blog:blog-grid")
 

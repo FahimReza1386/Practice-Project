@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 # third party
 from utils.models import AbstractBaseDateModel
-from accounts.models import UserSubscriptionTypeModel
+from subscriptions.models import Subscriptions
 
 User= get_user_model()
 
@@ -20,9 +20,9 @@ class PaymentModel(AbstractBaseDateModel):
     authority_id= models.CharField(
         max_length=300
     )
-    user_subscriptiontype=models.IntegerField(
-        choices=UserSubscriptionTypeModel.choices, 
-        default=UserSubscriptionTypeModel.no_subscription.value,
+    user_subscriptiontype=models.ForeignKey(
+        Subscriptions,
+        on_delete=models.PROTECT,
         verbose_name=_("اشتراک")
     )
     amount= models.DecimalField(

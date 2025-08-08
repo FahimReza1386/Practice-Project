@@ -11,7 +11,7 @@ from datetime import timedelta
 
 # Third Party
 from blog.models import BlogCategoryModel
-from accounts.models import User, UserSubscriptionTypeModel, UserSubscriptionModel
+from accounts.models import User
 
 
 class HomeView(TemplateView):

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 # Third Party
-from .models import User, Profile, UserSubscriptionModel
+from .models import User, Profile
 
 class CustomUserAdmin(UserAdmin):
     model=User
@@ -31,17 +31,12 @@ class CustomUserAdmin(UserAdmin):
             "fields" : (
                 "last_login",    
             ),
-        }),
-        ("Subscription Info", {
-            "fields" : (
-                "subscription",     
-            ),
-        }),
+        })
     )
     add_fieldsets = (
         (None, {
             "classes" : ("wide",),
-            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type", "subscription")
+            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type")
         }),
     )
 
@@ -51,10 +46,5 @@ class CustomProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "first_name", "last_name", "phone_number")
     searching_fields= ("user", "phone_number", "first_name", "last_name")
 
-class CustomSubsCriptionAdmin(admin.ModelAdmin):
-    model=UserSubscriptionModel
-    list_display = ("user", "subs_type", "start_date", "end_date")
-
 admin.site.register(Profile, CustomProfileAdmin)
-admin.site.register(UserSubscriptionModel, CustomSubsCriptionAdmin)
 admin.site.register(User, CustomUserAdmin)

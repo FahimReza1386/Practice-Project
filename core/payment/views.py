@@ -11,7 +11,7 @@ from datetime import timedelta
 # Third Party
 
 from .models import PaymentModel
-from accounts.models import UserSubscriptionModel
+from subscriptions.models import Subs_Buy
 from .zarinpal_client import ZarinPalSandBox
 
 
@@ -22,7 +22,7 @@ class StartPaymentView(View):
         amount= request.POST.get("amount")
         subs_type= request.POST.get("subs_type")
         user = request.user
-        user_subscription= UserSubscriptionModel.objects.filter(user=user).exists()
+        user_subscription= Subs_Buy.objects.filter(user=user).exists()
         if user_subscription is not True:
             zarinpal= ZarinPalSandBox()
             response= zarinpal.payment_request(float(amount))
@@ -48,7 +48,7 @@ class PaymentVerifyView(View):
             payment_obj.response_code= data["code"]
             payment_obj.status= PaymentModel.PaymentStatusModel.success.value
             payment_obj.save()
-            user_subs= UserSubscriptionModel.objects.create(user=self.request.user, subs_type=payment_obj.user_subscriptiontype, start_date=timezone.now(), is_active=True)
+            user_subs= Subs_Buy.objects.create(user=self.request.user, subs_type=payment_obj.user_subscriptiontype, start_date=timezone.now(), is_active=True)
             user_subs.save()
             messages.success(request, "مشتری گرامی پرداخت شما با موفقیت انجام شد و شما دسترسی های لازم رو دارد.")
             return redirect(reverse_lazy("dashboard:home"))

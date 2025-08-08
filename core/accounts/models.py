@@ -15,63 +15,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 
+
 class UserType(models.IntegerChoices):
     customer = 1,("Customer")
     admin = 2,("Admin")
     superuser = 3,("SuperUser")
-
-class UserSubscriptionTypeModel(models.IntegerChoices):
-    no_subscription=1,("No_Subscription")
-    days_10= 2,("days_10"),
-    days_15= 3,("days_15"),
-    days_30= 4,("days_30"),
-    days_60= 5,("days_60"),
-
-class UserSubscriptionModel(AbstractBaseDateModel):
-    user =models.ForeignKey(
-        "User", 
-        on_delete=models.CASCADE
-    )
-    subs_type= models.IntegerField(
-        choices=UserSubscriptionTypeModel.choices, 
-        default=UserSubscriptionTypeModel.no_subscription.value
-    )
-    start_date= models.DateTimeField(
-        auto_now_add=True
-    )
-    end_date= models.DateTimeField(
-        null=True, 
-        blank=True
-    )
-    is_active= models.BooleanField(
-        default=False
-    )
-
-    
-    def is_valid(self):
-        return self.is_active and self.end_date > timezone.now()
-    
-    def get_remaining_days(self):
-        if self.is_valid():
-            rammining_date= self.end_date - timezone.now()
-            return rammining_date.days
-        return timedelta(0)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            if self.subs_type == UserSubscriptionTypeModel.days_10.value:
-                self.end_date = timezone.now() + timedelta(days=10)
-            elif self.subs_type == UserSubscriptionTypeModel.days_15.value:
-                self.end_date = timezone.now() + timedelta(days=15)
-            elif self.subs_type == UserSubscriptionTypeModel.days_30.value:
-                self.end_date = timezone.now() + timedelta(days=30)
-            elif self.subs_type == UserSubscriptionTypeModel.days_60.value:
-                self.end_date = timezone.now() + timedelta(days=60)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.user.first_name}-{self.is_active}"
-
 
 class UserManager(BaseUserManager):
 
@@ -127,11 +75,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         choices=UserType.choices, 
         default=UserType.customer.value,
         verbose_name=_("نوع")
-    )
-    subscription= models.IntegerField(
-        choices=UserSubscriptionTypeModel.choices, 
-        default=UserSubscriptionTypeModel.no_subscription.value,
-        verbose_name=_("اشتراک")
     )
     created_date = models.DateTimeField(
         auto_now_add=True
