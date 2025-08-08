@@ -92,7 +92,8 @@ class BlogCategoryModel(MPTTModel):
     parent= TreeForeignKey(
         "self", 
         on_delete=models.CASCADE, 
-        null=True, blank=True, 
+        null=True, 
+        blank=True, 
         related_name="children"
     )
 

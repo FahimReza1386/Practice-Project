@@ -38,7 +38,7 @@
         gap: 30px;
         background: white;
         border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         padding: 30px;
         margin-bottom: 30px;
     }
@@ -212,7 +212,7 @@
     .product-tabs {
         background: white;
         border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         overflow: hidden;
     }
 
@@ -288,7 +288,8 @@
         border-collapse: collapse;
     }
 
-    .specs-table th, .specs-table td {
+    .specs-table th,
+    .specs-table td {
         padding: 12px 15px;
         text-align: right;
         border-bottom: 1px solid var(--border-color);
@@ -390,22 +391,10 @@
         transition: all 0.2s ease;
     }
 
-    .star:hover, .star.active {
+    .star:hover,
+    .star.active {
         color: var(--warning-color);
         transform: scale(1.2);
-    }
-
-    /* پرسش و پاسخ */
-    .qa-item {
-        padding: 20px 0;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .qa-form {
-        background: #f8f9fa;
-        padding: 25px;
-        border-radius: 8px;
-        margin-top: 30px;
     }
 
     /* رنگ‌ها */
@@ -423,298 +412,451 @@
         .product-header {
             flex-direction: column;
         }
-        
+
         .main-image {
             height: 300px;
         }
-        
+
         .product-actions {
             flex-direction: column;
         }
-        
+
         .tab-header {
             overflow-x: auto;
             white-space: nowrap;
         }
     }
 </style>
+<style>
+    .review {
+        border: 1px solid #ddd;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: #fafafa;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        position: relative;
+    }
+
+    .review.reply {
+        margin-right: 40px;
+        background: #f0f7ff;
+        border-color: #3498db;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .review-author {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .review-date {
+        font-size: 0.85rem;
+        color: #777;
+    }
+
+    .review-rating {
+        color: #f5a623;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .review-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        color: #444;
+    }
+
+    .reply-btn {
+        background: none;
+        border: none;
+        color: #3498db;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    .reply-btn:hover {
+        color: #1d6fa5;
+    }
+
+    .reply-form textarea {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        resize: vertical;
+        font-family: inherit;
+        margin-top: 8px;
+    }
+
+    .reply-form button {
+        margin-top: 8px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 7px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .reply-form button:hover {
+        background-color: #1d6fa5;
+    }
+
+    .review-form {
+        margin-top: 30px;
+    }
+
+    .stars-rating .star {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #ccc;
+        transition: color 0.3s ease;
+    }
+
+    .stars-rating .star:hover,
+    .stars-rating .star.selected {
+        color: #f5a623;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="container" dir="rtl">
-        <!-- هدر محصول -->
-        <div class="product-header">
-            <div class="product-gallery">
-                <img id="mainImage" src="{{ object.image.url }}" alt="محصول اصلی" class="main-image">
-                <div class="thumbnail-container">
-                    {% for image in extra_img %}
-                        {% if image.blog.id == object.id %}
-                            <img src="{{ image.file.url }}" alt="نمونه 1" class="thumbnail active" onclick="changeImage(this)">
-                       {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="product-summary">
-                
-                <div class="product-meta">
-                    <span>
-                        <i class="fas fa-store"></i>
-                        فروشگاه اینترنتی سبز
-                    </span>
-                    <span>
-                        <i class="fas fa-barcode"></i>
-                        کد محصول: PRD-{{ object.id }}
-                    </span>
-                    <span>
-                        <i class="fas fa-box-open"></i>
-                        موجود در انبار
-                    </span>
-                </div>
-                
-                <div class="rating-badge">
-                    <span class="rating-stars">★★★★★</span>
-                    4.8 از 5 (47 نظر)
-                </div>
-
-                <h1 class="product-title m-3" style="float: right;">{{ object.title }}</h1>
-                
-                <div class="product-price">
-                    {% if object.is_discounted %}
-                    <span class="price-original">{{ object.price|intcomma }} تومان</span>
-                    {{ object.get_price_after_sale|intcomma  }} تومان
-                    <span class="price-discount">{{ object.discount_percent }}% تخفیف</span>
-                    {% else %}
-                    <span class="price-original">{{ object.price|intcomma }} تومان</span>
-                    {% endif %}
-                </div>
-                
-                <div class="product-features">
-                    <div class="feature-item">
-                        <i class="fas fa-check feature-icon"></i>
-                        <span>رنگ زیبا و با دوام</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check feature-icon"></i>
-                        <span>جنس مرغوب و با کیفیت</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check feature-icon"></i>
-                        <span>ارسال رایگان برای خریدهای بالای ۲۰۰ هزار تومان</span>
-                    </div>
-                </div>
-                
-                <div class="product-actions">
-                    {% if request.user.is_authenticated %}
-                    {% is_in_wishlist blog_id=object.pk as is_wishlist %}
-                    {% if is_wishlist is True %}
-                        <i class="bi bi-bookmark-check-fill text-primary"></i>
-                        <button class="btn btn-secondary"  onclick="AddToWishList('{{ object.id }}')">
-                            حذف از علاقه‌مندی‌ها
-                        </button>
-                    {% else %}
-                        <i class="bi bi-bookmark text-muted"  ></i>
-                        <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
-                            افزودن به علاقه‌مندی‌ها
-                        </button>
-                    {% endif %}
-                    {% else %}
-                        <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted"  onclick="AddToWishList('{{ object.id }}')"></i>
-                        <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
-                            افزودن به علاقه‌مندی‌ها
-                        </button>
-                    </a>
-                        {% endif %}
-                  
-                </div>
+<div class="container" dir="rtl">
+    <!-- هدر محصول -->
+    <div class="product-header">
+        <div class="product-gallery">
+            <img id="mainImage" src="{{ object.image.url }}" alt="محصول اصلی" class="main-image">
+            <div class="thumbnail-container">
+                {% for image in extra_img %}
+                {% if image.blog.id == object.id %}
+                <img src="{{ image.file.url }}" alt="نمونه 1" class="thumbnail active" onclick="changeImage(this)">
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
-        
-        <!-- تب‌های جزئیات محصول -->
-        <div class="product-tabs">
-            <div class="tab-header">
-                <div class="tab-btn active" data-tab="description">توضیحات محصول</div>
-                <div class="tab-btn" data-tab="specs">مشخصات فنی</div>
-                <div class="tab-btn" data-tab="reviews">نظرات ({{ reviews.count }})</div>
-                <div class="tab-btn" data-tab="qa">پرسش و پاسخ</div>
+        <div class="product-summary">
+
+            <div class="product-meta">
+                <span>
+                    <i class="fas fa-store"></i>
+                    فروشگاه اینترنتی سبز
+                </span>
+                <span>
+                    <i class="fas fa-barcode"></i>
+                    کد محصول: PRD-{{ object.id }}
+                </span>
+                <span>
+                    <i class="fas fa-box-open"></i>
+                    موجود در انبار
+                </span>
             </div>
-            
-            <div class="tab-content">
-                <!-- تب توضیحات محصول -->
-                <div class="tab-pane active" id="description">
-                    <div class="description-content">
-                        <h4>دسته بندی‌های محصول:</h4>
-                        <a href="{% url 'blog:blog-category' pk=object.category.pk %}">{{ object.category }}</a>
-                        
-                        
-                        <h4>جزئیات محصول:</h4>
-                        {{ object.description|safe }}
-                    </div>
+
+            <div class="rating-badge">
+                <span class="rating-stars">★★★★★</span>
+                4.8 از 5 (47 نظر)
+            </div>
+
+            <h1 class="product-title m-3" style="float: right;">{{ object.title }}</h1>
+
+            <div class="product-price">
+                {% if object.is_discounted %}
+                <span class="price-original">{{ object.price|intcomma }} تومان</span>
+                {{ object.get_price_after_sale|intcomma }} تومان
+                <span class="price-discount">{{ object.discount_percent }}% تخفیف</span>
+                {% else %}
+                <span class="price-original">{{ object.price|intcomma }} تومان</span>
+                {% endif %}
+            </div>
+
+            <div class="product-features">
+                <div class="feature-item">
+                    <i class="fas fa-check feature-icon"></i>
+                    <span>رنگ زیبا و با دوام</span>
                 </div>
-                
-                <!-- تب مشخصات فنی -->
-                <div class="tab-pane" id="specs">
-                    <table class="specs-table">
-                        <tr>
-                            <th>مدل</th>
-                            <td>Id-{{ object.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>مرجع سازنده</th>
-                            <td>فهیم وب</td>
-                        </tr>
-                    </table>
+                <div class="feature-item">
+                    <i class="fas fa-check feature-icon"></i>
+                    <span>جنس مرغوب و با کیفیت</span>
                 </div>
-                
-                <!-- تب نظرات -->
-                <div class="tab-pane" id="reviews">
-                    <div class="reviews-section">
-                        {% for review in reviews %}
-                        <div class="review">
-                            <div class="review-header">
-                                <span class="review-author">{{ review.user.user_profile.get_fullname }}</span>
-                                <span class="review-date">ثبت نظر : {% show_jalali_date review_id=review.id %}</span>
-                                <form action="{% url 'review:review-delete' pk=review.pk %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-icon">  <i class="bi bi-trash" style="font-size: 20px;color: red;"></i>
-                                    </button>
-                                    
-                                </form>
-                            </div>
-                        <div class="review-rating">{% for _ in ""|center:review.rate %}★{% endfor %}
-                            </div>
-                            <p class="review-text">
-                                {{ review.description|safe }}
-                            </p>
-                        </div>
-                        {% endfor %}
-                        
-                        <button class="btn btn-secondary" style="margin-top: 20px;">
-                            مشاهده همه نظرات ({{ reviews.count }})
-                        </button>
-                    </div>
-                    <!-- فرم نظر دهی -->
-                    <div class="review-form">
-                        <h3>ثبت نظر جدید</h3>
-                        <form id="reviewForm" action="{% url 'review:review-create' %}" method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control is-valid" id="validationValidInput1" name="blog"
-                                     value="{{ object.id }}" hidden>
-                                  </div>
-                                <label class="form-label">امتیاز شما *</label>
-                                <div class="stars-rating">
-                                    <span class="star" data-rating="5">★</span>
-                                    <span class="star" data-rating="4">★</span>
-                                    <span class="star" data-rating="3">★</span>
-                                    <span class="star" data-rating="2">★</span>
-                                    <span class="star" data-rating="1">★</span>
-                                </div>
-                                <input type="hidden" id="rating" name="rate" value="0">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="review" class="form-label">نظر شما *</label>
-                                <textarea id="review" class="form-control form-textarea" name="description" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary">ثبت نظر</button>
-                        </form>
-                    </div>
+                <div class="feature-item">
+                    <i class="fas fa-check feature-icon"></i>
+                    <span>ارسال رایگان برای خریدهای بالای ۲۰۰ هزار تومان</span>
                 </div>
-                
-                <!-- تب پرسش و پاسخ -->
-                <div class="tab-pane" id="qa">
-                    <h3>پرسش و پاسخ درباره محصول</h3>
-                    <p>در این بخش می‌توانید پرسش‌های خود را درباره این محصول مطرح کنید یا به پرسش‌های دیگران پاسخ دهید.</p>
-                    
-                    <div class="qa-list">
-                        
-                        <div class="qa-item">
-                            <div class="qa-question">رنگ این محصول ثابت است یا ممکن است تغییر کند؟</div>
-                            <div class="qa-meta">پرسیده شده توسط: زهرا حسینی در ۱۴۰۲/۰۲/۲۵</div>
-                            <div class="qa-answer">
-                                <div class="answer-label">پاسخ فروشگاه:</div>
-                                <div>رنگ این محصول کاملاً ثابت بوده و در برابر شستشو و نور خورشید مقاوم است.</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="qa-form">
-                        <h4>پرسش خود را مطرح کنید</h4>
-                        <form>
-                            <div class="form-group">
-                                <label class="form-label">پرسش شما *</label>
-                                <textarea class="form-control form-textarea" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">ثبت پرسش</button>
-                        </form>
-                    </div>
-                </div>
+            </div>
+
+            <div class="product-actions">
+                {% if request.user.is_authenticated %}
+                {% is_in_wishlist blog_id=object.pk as is_wishlist %}
+                {% if is_wishlist is True %}
+                <i class="bi bi-bookmark-check-fill text-primary"></i>
+                <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
+                    حذف از علاقه‌مندی‌ها
+                </button>
+                {% else %}
+                <i class="bi bi-bookmark text-muted"></i>
+                <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
+                    افزودن به علاقه‌مندی‌ها
+                </button>
+                {% endif %}
+                {% else %}
+                <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted"
+                        onclick="AddToWishList('{{ object.id }}')"></i>
+                    <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
+                        افزودن به علاقه‌مندی‌ها
+                    </button>
+                </a>
+                {% endif %}
+
             </div>
         </div>
     </div>
+
+    <!-- تب‌های جزئیات محصول -->
+    <div class="product-tabs">
+        <div class="tab-header">
+            <div class="tab-btn active" data-tab="description">توضیحات محصول</div>
+            <div class="tab-btn" data-tab="specs">مشخصات فنی</div>
+            <div class="tab-btn" data-tab="reviews">نظرات ({{ reviews.count }})</div>
+        </div>
+
+        <div class="tab-content">
+            <!-- تب توضیحات محصول -->
+            <div class="tab-pane active" id="description">
+                <div class="description-content">
+                    <h4>دسته بندی‌های محصول:</h4>
+                    <a href="{% url 'blog:blog-category' pk=object.category.pk %}">{{ object.category }}</a>
+
+                    <h4>جزئیات محصول:</h4>
+                    {{ object.description|safe }}
+                </div>
+            </div>
+
+            <!-- تب مشخصات فنی -->
+            <div class="tab-pane" id="specs">
+                <table class="specs-table">
+                    <tr>
+                        <th>مدل</th>
+                        <td>Id-{{ object.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>مرجع سازنده</th>
+                        <td>فهیم وب</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- تب نظرات -->
+            <div class="tab-pane" id="reviews">
+                <div class="reviews-section">
+
+                    {% for review in reviews %}
+                    <!-- نمایش هر نظر -->
+                    <div class="review {% if review.parent %}reply{% endif %}">
+                        <div class="review-header">
+                            <img src="{{ review.user.user_profile.image.url }}" alt="profile" class="profile-img"
+                                style="width:40px; height:40px; border-radius:50%; object-fit:cover; margin-left:10px;">
+                            <span class="review-author">{{ review.user.user_profile.get_fullname }}</span>
+                            <span class="review-date">ثبت نظر : {% show_jalali_date review_id=review.id %}</span>
+                            <form action="{% url 'review:review-delete' pk=review.pk %}" method="post"
+                                style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-icon"
+                                    style="background:none; border:none; padding:0; margin-left:10px;">
+                                    <i class="bi bi-trash" style="font-size: 20px;color: red;"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="review-rating">
+                            {% for _ in ""|center:review.rate %}★{% endfor %}
+                        </div>
+
+                        <p class="review-text">{{ review.description|safe }}</p>
+
+                        {% if not review.parent %}
+                        <!-- دکمه ریپلای -->
+                        <button class="reply-btn" data-review-id="{{ review.id }}">پاسخ دادن</button>
+
+                        <!-- فرم ریپلای -->
+                        <form class="reply-form" id="reply-form-{{ review.id }}" action="{% url 'review:review-reply' %}"
+                            method="post" style="display:none;">
+                            {% csrf_token %}
+                            <input type="hidden" name="blog" value="{{ object.id }}">
+                            <input type="hidden" name="review_reply" value="{{ review.id }}">
+
+                            <div class="form-group">
+                                <label class="form-label">امتیاز شما *</label>
+                                <!-- در فرم ریپلای -->
+                                <div class="stars-rating" data-review-id="{{ review.id }}">
+                                    <span class="star" data-rating="5" data-review-id="{{ review.id }}">★</span>
+                                    <span class="star" data-rating="4" data-review-id="{{ review.id }}">★</span>
+                                    <span class="star" data-rating="3" data-review-id="{{ review.id }}">★</span>
+                                    <span class="star" data-rating="2" data-review-id="{{ review.id }}">★</span>
+                                    <span class="star" data-rating="1" data-review-id="{{ review.id }}">★</span>
+                                </div>
+                                <input type="hidden" id="rating-reply-{{ review.id }}" name="rate" value="0">
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="reply-text-{{ review.id }}" class="form-label">پاسخ شما *</label>
+                                <textarea id="reply-text-{{ review.id }}" name="description" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">ارسال پاسخ</button>
+                        </form>
+                        {% endif %}
+
+                        <!-- نمایش ریپلای‌ها -->
+                        {% for reply in review.children.all %}
+                        {% if reply.status == 2 %}
+                        <div class="review reply">
+                            <div class="review-header">
+                                <img src="{{ reply.user.user_profile.image.url }}" alt="profile" class="profile-img"
+                                    style="width:30px; height:30px; border-radius:50%; object-fit:cover; margin-left:10px;">
+                                <span class="review-author">{{ reply.user.user_profile.get_fullname }}</span>
+                                <span class="review-date">پاسخ : {% show_jalali_date review_id=reply.id %}</span>
+                                <form action="{% url 'review:review-delete' pk=reply.pk %}" method="post"
+                                    style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-icon"
+                                        style="background:none; border:none; padding:0; margin-left:10px;">
+                                        <i class="bi bi-trash" style="font-size: 18px;color: red;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="review-rating">{% for _ in ""|center:reply.rate %}★{% endfor %}</div>
+                            <p class="review-text">{{ reply.description|safe }}</p>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                    </div>
+                    {% endfor %}
+
+                    <button class="btn btn-secondary" style="margin-top: 20px;">
+                        مشاهده همه نظرات ({{ reviews.count }})
+                    </button>
+                </div>
+
+                <!-- فرم ارسال نظر اصلی -->
+                <div class="review-form">
+                    <h3>ثبت نظر جدید</h3>
+                    <form id="reviewForm" action="{% url 'review:review-create' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="blog" value="{{ object.id }}">
+
+                        <div class="form-group">
+                            <label class="form-label">امتیاز شما *</label>
+                            <div class="stars-rating" data-review-id="create">
+                                <span class="star" data-rating="5" data-review-id="create">★</span>
+                                <span class="star" data-rating="4" data-review-id="create">★</span>
+                                <span class="star" data-rating="3" data-review-id="create">★</span>
+                                <span class="star" data-rating="2" data-review-id="create">★</span>
+                                <span class="star" data-rating="1" data-review-id="create">★</span>
+                            </div>
+                            <input type="hidden" id="rating-create" name="rate" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="review" class="form-label">نظر شما *</label>
+                            <textarea id="review" class="form-control form-textarea" name="description" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">ثبت نظر</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
     <section>
         <div class="container">
-          <div class="owl-carousel owl-theme blog-slider">
-            {% show_similar_blog blog=object %}
+            <div class="owl-carousel owl-theme blog-slider">
+                {% show_similar_blog blog=object %}
             </div>
         </div>
-      </section>
-    
-{% endblock %}
+    </section>
 
-{% block extra_js %}
-<script>
-    // تغییر تصویر اصلی با کلیک بر روی تصاویر کوچک
-    function changeImage(element) {
-        const mainImage = document.getElementById('mainImage');
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        element.classList.add('active');
-        
-        mainImage.src = element.src;
-        mainImage.alt = element.alt;
-    }
-    
-    // سیستم امتیازدهی با ستاره‌ها
-    const stars = document.querySelectorAll('.star');
-    const ratingInput = document.getElementById('rating');
-    
-    stars.forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = this.getAttribute('data-rating');
-            ratingInput.value = rating;
-            
-            stars.forEach(s => {
-                if (s.getAttribute('data-rating') <= rating) {
-                    s.classList.add('active');
+    {% endblock %}
+
+    {% block extra_js %}
+    <script>
+        // ریپلای باز/بستن
+        document.querySelectorAll('.reply-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const reviewId = button.getAttribute('data-review-id');
+                const form = document.getElementById(`reply-form-${reviewId}`);
+
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                    button.textContent = 'لغو پاسخ';
                 } else {
-                    s.classList.remove('active');
+                    form.style.display = 'none';
+                    button.textContent = 'پاسخ دادن';
                 }
             });
         });
-    });
-    
-    const reviewForm = document.getElementById('reviewForm');
-    
 
-    // تغییر تب‌ها
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanes.forEach(p => p.classList.remove('active'));
-            
-            this.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+    </script>
+    <script>
+        document.querySelectorAll('.stars-rating .star').forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.getAttribute('data-rating'));
+                const reviewId = star.getAttribute('data-review-id');
+                const input = document.querySelector(`#rating-reply-${reviewId}`) || document.querySelector(`#rating-create`);
+
+                // تمام ستاره‌های مربوط به این فرم
+                const relatedStars = document.querySelectorAll(`.stars-rating[data-review-id="${reviewId}"] .star`);
+
+                // پاک کردن حالت انتخاب‌شده از همه ستاره‌ها
+                relatedStars.forEach(s => s.classList.remove('selected'));
+
+                // انتخاب ستاره‌ها تا مقدار کلیک‌شده
+                relatedStars.forEach(s => {
+                    const sRating = parseInt(s.getAttribute('data-rating'));
+                    if (sRating <= rating) {
+                        s.classList.add('selected');
+                    }
+                });
+
+                // تنظیم مقدار فیلد پنهان (input hidden)
+                if (input) {
+                    input.value = rating;
+                }
+            });
         });
-    });
-</script>
-<!-- -->
-{% endblock %}
+
+
+        // تغییر تب‌ها
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const tabId = this.getAttribute('data-tab');
+
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+    {% endblock %}

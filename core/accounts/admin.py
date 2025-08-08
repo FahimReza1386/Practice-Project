@@ -41,7 +41,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             "classes" : ("wide",),
-            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type", "subscription", "subscription_exp")
+            "fields" : ("phone_number", "password1", "password2", "is_staff", "is_active", "is_verified", "type", "subscription")
         }),
     )
 

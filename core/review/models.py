@@ -8,11 +8,12 @@ from django.utils.translation import gettext_lazy as _
 # Third Party
 from utils.models import AbstractBaseDateModel
 from ckeditor_uploader.fields import RichTextUploadingField
+from mptt.models import MPTTModel, TreeForeignKey
 from blog.models import BlogModel
 
 User = get_user_model()
 
-class ReviewModel(AbstractBaseDateModel):
+class ReviewModel(AbstractBaseDateModel, MPTTModel):
     class ReviewStatusModel(models.IntegerChoices):
         pending= 1, ("در انتظار تایید")
         accepted= 2, ("تایید شده")
@@ -33,7 +34,7 @@ class ReviewModel(AbstractBaseDateModel):
         verbose_name=_("جزئیات")
     )
     rate= models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(5)],
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
         default=1,
         verbose_name=_("ستاره")
     )
@@ -42,6 +43,15 @@ class ReviewModel(AbstractBaseDateModel):
         default=ReviewStatusModel.pending.value,
         verbose_name=_("وضعیت")
     )
+    parent= TreeForeignKey('self', 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True,
+        related_name="children"
+    )
+
+    class MPTTMeta:
+        order_insertion_by= ["user"]
 
     def __str__(self):  
         return f"{self.user.first_name}-{self.blog.title}"

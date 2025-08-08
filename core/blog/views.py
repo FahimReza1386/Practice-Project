@@ -46,7 +46,7 @@ class BlogDetailView(DetailView):
                 context["ramming_days"] = subscription.get_remaining_days()
             else:
                 context["ramming_days"] = "بدون اشتراک"
-            context["reviews"]= ReviewModel.objects.filter(status=ReviewModel.ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"]).order_by("-created_date")
+            context["reviews"]= ReviewModel.objects.filter(status=ReviewModel.ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"], parent=None).order_by("-created_date")
         return context
     
     def dispatch(self, request, *args, **kwargs):
