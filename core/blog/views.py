@@ -37,33 +37,34 @@ class BlogDetailView(DetailView):
     template_name="blog/blog-detail.html"
 
     def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["extra_img"] = BlogImageModel.objects.filter(blog=self.kwargs["pk"])
-        if self.request.user.is_authenticated:
-            user_subscription= Subs_Buy.objects.filter(user=self.request.user).exists()
-            if user_subscription is True:
-                subscription = Subs_Buy.objects.get(user=self.request.user)
-                context["ramming_days"] = subscription.get_remaining_days()
-            else:
-                context["ramming_days"] = "بدون اشتراک"
-            context["reviews"]= ReviewModel.objects.filter(status=ReviewModel.ReviewStatusModel.accepted.value, blog__id=self.kwargs["pk"], parent=None).order_by("-created_date")
-        return context
     
+        context["reviews"] = ReviewModel.objects.filter(
+            status=ReviewModel.ReviewStatusModel.accepted.value,
+            blog__id=self.kwargs["pk"],
+            parent=None
+        ).order_by("-created_date")
+    
+        return context
+        
     def dispatch(self, request, *args, **kwargs):
-        blog_obj = BlogModel.objects.get(id=kwargs["pk"])
+        if not request.user.is_authenticated:
+            messages.warning(request, "برای دسترسی به این بخش باید وارد شوید.")
+            return redirect("blog:blog-grid")
+        
+        try:
+            blog_obj = BlogModel.objects.get(id=kwargs["pk"])
+        except BlogModel.DoesNotExist:
+            messages.warning(request, "پست مورد نظر یافت نشد.")
+            return redirect("blog:blog-grid")
         
         if blog_obj.type == BlogModel.BlogTypeModel.premium.value:
-            try:
-                subscription = Subs_Buy.objects.get(user=request.user)
-                if not subscription.is_valid():
-                    messages.warning(request, "مشتری گرامی برای خواندن پست های ویژه باید اشتراک تهیه کنید.")
-                    return redirect("blog:blog-grid")
-            except Subs_Buy.DoesNotExist:
+            if not Subs_Buy.objects.filter(user=request.user, is_active=True).exists():
                 messages.warning(request, "مشتری گرامی برای خواندن پست های ویژه باید اشتراک تهیه کنید.")
                 return redirect("blog:blog-grid")
-
+        
         return super().dispatch(request, *args, **kwargs)
-
 
 class AddWishListView(LoginRequiredMixin, CreateView):
     def post(self, request, *args, **kwargs):

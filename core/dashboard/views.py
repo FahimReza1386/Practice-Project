@@ -19,16 +19,25 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
     template_name="dashboard/home.html"    
 
     def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            user_subscription= Subs_Buy.objects.filter(user=self.request.user).exists()
-            if user_subscription is True:
-                subscription = Subs_Buy.objects.get(user=self.request.user)
-                context["ramming_days"] = subscription.get_remaining_days()
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        
+        if user.is_authenticated:
+            # Get active subscription if exists
+            active_subscription = Subs_Buy.objects.filter(
+                user=user,
+                is_active=True
+            ).first()
+            
+            if active_subscription:
+                context["remaining_days"] = active_subscription.get_remaining_days()
             else:
-                context["ramming_days"] = "بدون اشتراک"
-            jalali_join = datetime2jalali(self.request.user.created_date).strftime('%y/%m/%d')
-            context["joined"]=jalali_join
+                context["remaining_days"] = "بدون اشتراک"
+            
+            # Convert join date to Jalali
+            jalali_join = datetime2jalali(user.created_date).strftime('%y/%m/%d')
+            context["joined"] = jalali_join
+        
         return context
 
 

@@ -11,30 +11,42 @@ from datetime import timedelta
 # Third Party
 
 from .models import PaymentModel
-from subscriptions.models import Subs_Buy
+from subscriptions.models import Subs_Buy, Subscriptions
 from .zarinpal_client import ZarinPalSandBox
-
-
-
+ 
 class StartPaymentView(View):
-
     def post(self, request, *args, **kwargs):
-        amount= request.POST.get("amount")
-        subs_type= request.POST.get("subs_type")
+        amount = request.POST.get("amount")
+        subs_id = request.POST.get("subs_id")
         user = request.user
-        user_subscription= Subs_Buy.objects.filter(user=user).exists()
-        if user_subscription is not True:
-            zarinpal= ZarinPalSandBox()
-            response= zarinpal.payment_request(float(amount))
-            data= response["data"]
-            authority= data["authority"]
-            PaymentModel.objects.create(authority_id=authority, amount=amount, user_subscriptiontype=subs_type)
-            payment_url = zarinpal.generate_payment_url(authority=authority)
-            return HttpResponseRedirect(payment_url)
-        else:
+        subscriptions = Subscriptions.objects.get(id=subs_id)
+        
+        active_subscription = Subs_Buy.objects.filter(user=user, is_active=True).exists()
+        
+        if active_subscription:
             messages.error(request, "مشتری گرامی شما اشتراک فعال دارید در صورت تمام شدن میتوانید مجدد خرید کنید..")
             return redirect(reverse_lazy("dashboard:home"))
-    
+        
+        zarinpal = ZarinPalSandBox()
+        response = zarinpal.payment_request(float(amount))
+        
+        if not response.get("data") or "authority" not in response["data"]:
+            messages.error(request, "خطا در ایجاد درخواست پرداخت")
+            return redirect(reverse_lazy("dashboard:home"))
+            
+        data = response["data"]
+        authority = data["authority"]
+        
+        PaymentModel.objects.create(
+            authority_id=authority,
+            amount=amount,
+            user_subscriptiontype=subscriptions
+        )
+        
+        payment_url = zarinpal.generate_payment_url(authority=authority)
+        return HttpResponseRedirect(payment_url)
+
+
 class PaymentVerifyView(View):
     def get(self, request, *args, **kwargs):
         authority_id= request.GET.get("Authority")
@@ -48,7 +60,7 @@ class PaymentVerifyView(View):
             payment_obj.response_code= data["code"]
             payment_obj.status= PaymentModel.PaymentStatusModel.success.value
             payment_obj.save()
-            user_subs= Subs_Buy.objects.create(user=self.request.user, subs_type=payment_obj.user_subscriptiontype, start_date=timezone.now(), is_active=True)
+            user_subs= Subs_Buy.objects.create(user=request.user, subscription=payment_obj.user_subscriptiontype, start_date=timezone.now(), end_date=timezone.now() + timedelta(days=payment_obj.user_subscriptiontype.days), is_active=True)
             user_subs.save()
             messages.success(request, "مشتری گرامی پرداخت شما با موفقیت انجام شد و شما دسترسی های لازم رو دارد.")
             return redirect(reverse_lazy("dashboard:home"))

@@ -2,8 +2,10 @@ import django_filters
 from django import forms
 from .models import BlogModel, BlogCategoryModel
 from django.db.models import Q
+from subscriptions.models import Subscriptions
 
 class BlogFilter(django_filters.FilterSet):
+
     price = django_filters.NumberFilter()
     price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
@@ -49,3 +51,22 @@ class BlogFilter(django_filters.FilterSet):
         if value:
             return queryset.filter(discount_percent__gt=0)
         return queryset
+    
+
+
+
+class SubscriptionsFilter(django_filters.FilterSet):
+    price = django_filters.NumberFilter()
+    price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
+    price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
+
+    class Meta:
+        model=Subscriptions
+        fields=["name", "price", "days"]
+        
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.form.fields['name'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'جستجو ..'})
+            self.form.fields['days'].widget.attrs.update({'class': 'form-control p-1'})
+            self.form.fields['price__lt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'تا ۰ تومان'})
+            self.form.fields['price__gt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'از ۰ تومان'})

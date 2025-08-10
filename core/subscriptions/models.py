@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
+from decimal import Decimal
 
 # ThirdParty Modules
 from utils.models import AbstractBaseDateModel
@@ -80,3 +81,11 @@ class Subscriptions(AbstractBaseDateModel):
 
     def __str__(self):
         return f"{self.name}-{self.price}"
+    
+    def is_discounted(self):
+        return self.discount_percent != 0
+    
+    def get_price_after_sale(self):
+        amout_price = self.price * Decimal(self.discount_percent/100)
+        price= self.price - amout_price
+        return round(price)

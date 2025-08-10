@@ -6,4 +6,6 @@ from . import views
 
 
 app_name="subscriptions"
-urlpatterns=[]
+urlpatterns=[
+    path("list/", views.SubscriptionsListView.as_view(), name="subs-list"),
+]
