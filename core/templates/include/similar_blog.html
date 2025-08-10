@@ -14,11 +14,11 @@
                     <div class="product-card-body text-center">
                         <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
                         {% if blog.is_discounted %}
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
+                            <div class="product-card-price price-formatted" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
+                            <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
                             <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
                         {% else %} 
-                           <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
+                           <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
                         {% endif %}
                         <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
                     </div>
@@ -37,9 +37,9 @@
                     <div class="product-card-body text-center">
                         <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
                         {% if blog.is_discounted %}
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
+                            <div class="product-card-price  price-formatted" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
+                            <div class="product-card-price  price-formatted" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
+                            <div class="product-card-price " style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
                         {% else %} 
                             <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
                         {% endif %}

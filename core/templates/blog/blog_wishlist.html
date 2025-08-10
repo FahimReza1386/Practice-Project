@@ -12,9 +12,9 @@
         <!-- Products Grid -->
         <div class="row col-12 col-lg-9 ps-lg-4">
             {% for object in object_list %}
-            {% if object.blog.type == 1 %}
+            {% if object.type == 1 %}
                 <style>
-                    #item{{ object.blog.pk }}{
+                    #item{{ object.pk }}{
                         border: 3px solid green;
                     };
                     
@@ -23,37 +23,37 @@
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="product-item-wrapper">
                     <div class="product-actions">
-                        {% if object.blog.type == 1 %}
+                        {% if object.type == 1 %}
                             {% if request.user.subscription != 1 %}
-                                 <a class="product-item" href="{% url 'blog:blog-detail' pk=object.blog.pk %}" id="item{{ object.blog.pk }}">
+                                 <a class="product-item" href="{% url 'blog:blog-detail' pk=object.pk %}" id="item{{ object.pk }}">
                             {% else %}
-                                    <a class="product-item" href="#" id="item{{ object.blog.pk }}", onclick="AlertGetSubscription()">
+                                    <a class="product-item" href="#" id="item{{ object.pk }}", onclick="AlertGetSubscription()">
                             {% endif %}
                         {% else %}
-                        <a class="product-item" href="{% url 'blog:blog-detail' pk=object.blog.pk %}" id="item{{ object.blog.pk }}">
+                        <a class="product-item" href="{% url 'blog:blog-detail' pk=object.pk %}" id="item{{ object.pk }}">
 
                         {% endif %}
                             <div class="product-image-container">
-                                <img src="{{ object.blog.image.url }}" class="img-fluid product-thumbnail" alt="{{ object.blog.name }}">
+                                <img src="{{ object.image.url }}" class="img-fluid product-thumbnail" alt="{{ object.name }}">
                             </div>
-                            <h3 class="product-title text-center">{{ object.blog.title }}</h3>
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ object.blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ object.blog.get_price_after_sale|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ object.blog.discount_percent }}% تخفیف</div>
+                            <h3 class="product-title text-center">{{ object.title }}</h3>
+                            <div class="product-card-price price-formatted" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ object.price|intcomma }} تومان</div>
+                            <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ object.get_price_after_sale|intcomma }} تومان</div>
+                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ object.discount_percent }}% تخفیف</div>
                             
                         </a>
-                        {% if object.blog.type == 1 %}
+                        {% if object.type == 1 %}
                         <i class="bi bi-star-fill text-success ms-2"></i>
                         {% endif %}
                         {% if request.user.is_authenticated %}
-                        {% is_in_wishlist blog_id=object.blog.pk as is_wishlist %}
+                        {% is_in_wishlist blog_id=object.pk as is_wishlist %}
                         {% if is_wishlist is True %}
-                            <i class="bi bi-bookmark-check-fill text-primary" style="cursor: pointer;" onclick="AddToWishList('{{ object.blog.id }}')"></i>
+                            <i class="bi bi-bookmark-check-fill text-primary" style="cursor: pointer;" onclick="AddToWishList('{{ object.id }}')"></i>
                         {% else %}
-                            <i class="bi bi-bookmark text-muted" style="cursor: pointer;" onclick="AddToWishList('{{ object.blog.id }}')"></i>
+                            <i class="bi bi-bookmark text-muted" style="cursor: pointer;" onclick="AddToWishList('{{ object.id }}')"></i>
                         {% endif %}
                         {% else %}
-                            <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted" style="cursor: pointer;"  onclick="AddToWishList('{{ object.blog.id }}')"></i></a>
+                            <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted" style="cursor: pointer;"  onclick="AddToWishList('{{ object.id }}')"></i></a>
                         {% endif %}
                     
                     </div>
@@ -63,7 +63,7 @@
             {% endfor %}
         </div>
             <!-- Filter Sidebar -->
-            {% include 'include/filter.html' %}
+            {% include 'include/blog-filter.html' %}
         </div>
 
 

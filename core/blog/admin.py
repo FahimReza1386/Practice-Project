@@ -1,6 +1,7 @@
 # Django Imports
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
+from django.utils.translation import gettext_lazy as _
 
 # Third Party
 from .models import BlogModel, BlogImageModel, BlogCategoryModel, WishListModel

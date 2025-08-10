@@ -53,5 +53,9 @@ class ReviewModel(AbstractBaseDateModel, MPTTModel):
     class MPTTMeta:
         order_insertion_by= ["user"]
 
+    class Meta:
+        verbose_name=_("نظرات")
+        verbose_name_plural=_("نظرات")
+
     def __str__(self):  
         return f"{self.user.first_name}-{self.blog.title}"

@@ -44,3 +44,7 @@ class PaymentModel(AbstractBaseDateModel):
         null=True, 
         blank=True
     )
+
+    class Meta:
+        verbose_name= _("پرداخت")
+        verbose_name_plural= _("پرداخت")

@@ -571,11 +571,11 @@
 
             <div class="product-price">
                 {% if object.is_discounted %}
-                <span class="price-original">{{ object.price|intcomma }} تومان</span>
-                {{ object.get_price_after_sale|intcomma }} تومان
+                <span class="price-original price-formatted">{{ object.price|intcomma }} تومان</span>
+                <span class="price-formatted">{{ object.get_price_after_sale|intcomma }} تومان</span>
                 <span class="price-discount">{{ object.discount_percent }}% تخفیف</span>
                 {% else %}
-                <span class="price-original">{{ object.price|intcomma }} تومان</span>
+                <span class="price-original price-formatted">{{ object.price|intcomma }} تومان</span>
                 {% endif %}
             </div>
 

@@ -186,6 +186,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     }
 </script>
+<script>
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    document.querySelectorAll('.price-formatted').forEach(element => {
+        const priceText = element.textContent || element.innerText;
+        const number = parseFloat(priceText.replace(/,/g, ''));
+        if (!isNaN(number)) {
+            element.textContent = formatNumberWithCommas(number);
+        }
+    });
+</script>
 {% block extra_js %}{% endblock %}
 {% include 'messages.html' %}
 </body>

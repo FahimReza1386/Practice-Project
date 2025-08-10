@@ -32,6 +32,9 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS" , cast=Csv(),default="*")
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Admin Installed .
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,8 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'UTC'
 
@@ -151,7 +153,9 @@ STATICFILES_DIRS= [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# settings.py
+PHONENUMBER_DEFAULT_REGION = 'IR'
+PHONENUMBER_DEFAULT_FORMAT = 'E164' # or 'INTERNATIONAL', 'E164', 'RFC3966'
 
 # Authentication Setting
 LOGIN_REDIRECT_URL = "/"

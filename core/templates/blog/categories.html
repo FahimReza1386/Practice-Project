@@ -44,9 +44,9 @@
                             <h3 class="product-title text-center">{{ object.title }}</h3>
                             <div class="product-price-container" style="float: right;">
                                 {% if object.discount_percent %}
-                                <del class="text-muted">{{ object.price|intcomma }} تومان</del>
+                                <del class="text-muted price-formatted">{{ object.price|intcomma }} تومان</del>
                                 {% endif %}
-                                <strong class="product-price">{{ object.get_price_after_sale|intcomma }} تومان</strong>
+                                <strong class="product-price price-formatted">{{ object.get_price_after_sale|intcomma }} تومان</strong>
                             </div>
                         </a>
                         {% if object.type == 1 %}
@@ -70,7 +70,7 @@
             {% endfor %}
         </div>
             <!-- Filter Sidebar -->
-            {% include 'include/filter.html' %}
+            {% include 'include/blog-filter.html' %}
         </div>
 
 

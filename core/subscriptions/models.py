@@ -34,6 +34,12 @@ class Subs_Buy(AbstractBaseDateModel):
         verbose_name=_("فعال")
     )
 
+
+
+    class Meta:
+        verbose_name=_("اشتراک خریداری شده")
+        verbose_name_plural=_("اشتراک خریداری شده")
+
     
     def is_valid(self):
         return self.is_active and self.end_date > timezone.now()
@@ -78,6 +84,10 @@ class Subscriptions(AbstractBaseDateModel):
         default=SubscriptionType.publish.value,
         verbose_name=_("وضعیت نمایش")
     )
+
+    class Meta:
+        verbose_name=_("اشتراک")
+        verbose_name_plural=_("اشتراک")
 
     def __str__(self):
         return f"{self.name}-{self.price}"

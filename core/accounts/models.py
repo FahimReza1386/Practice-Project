@@ -53,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = PhoneNumberField(
         unique=True, 
         blank=False,
+        region="IR",
         verbose_name=_("شماره تلفن")
     )
     first_name = models.CharField(
@@ -87,8 +88,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS =[]
     objects = UserManager()
 
+    class Meta:
+        verbose_name=_("حساب کاربری")
+        verbose_name_plural=_("حساب کاربری")
+
     def __str__(self):
         return f"{self.first_name}-{self.phone_number}"
+    
     
 
 
@@ -100,7 +106,7 @@ class Profile(AbstractBaseDateModel):
 
     user = models.OneToOneField(
         "User", 
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
         related_name="user_profile",
         verbose_name=_("کاربر")
     )
@@ -127,6 +133,10 @@ class Profile(AbstractBaseDateModel):
         verbose_name=_("تصویر")
     )
 
+    class Meta:
+        verbose_name=_("پروفایل")
+        verbose_name_plural=_("پروفایل")
+        
     def get_fullname(self):
         return f"{self.first_name} {self.last_name}"
     

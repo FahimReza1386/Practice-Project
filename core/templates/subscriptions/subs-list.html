@@ -44,7 +44,7 @@
                                         <div class="product-badge text-center p-2">
                                             {{ object.name }}
                                             <hr>
-                                            <h4>{{ object.price|intcomma }} تومان</h4>
+                                            <h4 class="price-formatted">{{ object.price|intcomma }} تومان</h4>
                                             {% if object.is_discounted %}
                                             <span class="badge">%{{ object.discount_percent }} تخفیف</span>
                                             <br>
@@ -69,7 +69,7 @@
             </div>
             {% endfor %}
         </div>
-        {% include 'include/filter.html' %}
+        {% include 'include/subs-filter.html' %}
     </div>
 
 

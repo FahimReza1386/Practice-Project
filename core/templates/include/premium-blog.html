@@ -10,7 +10,7 @@
                     <img src="{{blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img" style="border-radius: 10px;height: 300px;">
                     <div class="product-card-body text-center">
                         <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>                       
-                           <div class="product-card-price" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
+                           <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
                         <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;" dir="rtl">ادامه ...</a>
                     </div>
                 </div>

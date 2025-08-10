@@ -87,24 +87,35 @@ class CategoriesView(ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.filter(category=self.kwargs["pk"])
+
         return queryset
     
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
-        context["filter"] = BlogFilter(self.request.GET, queryset=BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value))
+        queryset = self.get_queryset()
+        filtered_queryset = BlogFilter(self.request.GET, queryset=queryset)
+        context['object_list'] = filtered_queryset.qs
+        context['filter'] = filtered_queryset
         return context
 
 
 class WishListBlogPageView(ListView):
-    model=WishListModel
+    model=BlogModel
     template_name="blog/blog_wishlist.html"
     paginate_by=9
     
     def get_queryset(self):
-        queryset= self.model.objects.filter(user=self.request.user)
+        blog_ids = WishListModel.objects.filter(user=self.request.user).values_list('blog_id', flat=True)
+        queryset = self.model.objects.filter(
+            id__in=blog_ids,
+            status=BlogModel.BlogStatusTypeModel.publish.value
+        )
         return queryset
-    
+   
     def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        context["filter"] = BlogFilter(self.request.GET, queryset=BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value))
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+        filtered_queryset = BlogFilter(self.request.GET, queryset=queryset)
+        context['object_list'] = filtered_queryset.qs
+        context['filter'] = filtered_queryset
         return context

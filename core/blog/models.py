@@ -58,6 +58,11 @@ class BlogModel(AbstractBaseDateModel):
         verbose_name=_("دسته بندی")
     )
 
+
+    class Meta:
+        verbose_name=_("پست ها")
+        verbose_name_plural=_("پست ها")
+
     def __str__(self):
         return f"{self.title}{self.pk}"
     
@@ -81,6 +86,12 @@ class BlogImageModel(AbstractBaseDateModel):
     )
 
 
+
+    class Meta:
+        verbose_name=_("عکس پست ها")
+        verbose_name_plural = _("عکس پست ها")
+
+
     def __str__(self):
         return f"{self.blog.title}"
     
@@ -100,6 +111,10 @@ class BlogCategoryModel(MPTTModel):
     class MPTTMeta:
         order_insertion_by= ["name"]
 
+    class Meta:
+        verbose_name=_("دسته بندی ها")
+        verbose_name_plural=_("دسته بندی ها")
+
     def __str__(self):
         return f"{self.pk}-{self.name}"
     
@@ -118,6 +133,8 @@ class WishListModel(AbstractBaseDateModel):
 
     class Meta:
         unique_together = ('user', 'blog')
+        verbose_name = _("علاقه مندی ها")
+        verbose_name_plural = _("علاقه مندی ها")
 
     def __str__(self):
         return f"{self.blog.title}-{self.pk}"
