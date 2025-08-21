@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 import random
 
-# Third Party
+# Locale Imports
 from .models import User
 from .forms import LoginForm, RegisterForm
 

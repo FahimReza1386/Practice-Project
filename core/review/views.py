@@ -8,7 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
     
 
-# Third Party
+# Locale Imports
 
 from review.models import ReviewModel
 from .forms import CreateReviewForm, ReplyReviewForm

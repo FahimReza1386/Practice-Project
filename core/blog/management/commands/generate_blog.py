@@ -7,7 +7,7 @@ from PIL import Image
 import requests
 import random
 
-# Third Party
+# Locale Imports
 from blog.models import BlogModel, BlogImageModel, BlogCategoryModel
 
 

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 
-# Third Party
+# Locale Imports
 
 from .models import PaymentModel
 from subscriptions.models import Subs_Buy, Subscriptions

@@ -1,54 +1,58 @@
 {% load static %}
 {% load humanize %}
+{% load blog_tags %}
 {% for blog in similar_blog %}
 
-        {% if blog.type == 1 %}
-   <!-- پست های مرتبط -->
-        <div class="related-products" style="margin-bottom: 20rem;border: 3px solid green; padding: 10px;">
-            <h2 class="section-title">پست های مرتبط</h2>
+<div class="product-card mb-2 p-2" id="item{{ blog.pk }}">
+    {% if blog.type == 1 %}
+    <div class="badge">پست ویژه</div>
+    {% else %}
+    <div class="badge">پست مرتبط</div>
+    {% endif %}
+    <style>
+        #item{{ blog.pk }}{
+            border: 2px solid #1bd61b;
+        };
+</style>
+    <div class="product-image">
+        <img src="{{ blog.image.url }}" alt="هدفون بلوتوثی">
 
-            <div class="products-grid">
-                
-                <div class="product-card">
-                    <img src="{{ blog.image.url }}" alt="محصول مرتبط 1" class="product-card-img">
-                    <div class="product-card-body text-center">
-                        <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
-                        {% if blog.is_discounted %}
-                            <div class="product-card-price price-formatted" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
-                        {% else %} 
-                           <div class="product-card-price price-formatted" style="font-size: 15px;text-align: center;">{{ blog.price|intcomma }} تومان</div>
-                        {% endif %}
-                        <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
-                    </div>
-                </div>
+    </div>
+    <span class="discount">{{ blog.discount_percent }}% تخفیف</span>
+
+    <div class="product-content">
+        <h3 class="product-title text-center">{{ blog.title }}</h3>
+        <div class="product-price">
+
+            <div style="margin: 0 auto; " class="text-center">
+                <span class="original-price price-formatted">{{ blog.price }} قبل از تخفیف</span>
+
+                <span class="current-price price-formatted">{{ blog.get_price_after_sale }}</span>
+                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">تومان</p>
+
             </div>
-
         </div>
-        {% else %}
-        <div class="related-products" style="margin-bottom: 20rem;height: 30rem;">
-            <h2 class="section-title">پست های مرتبط</h2>
-
-            <div class="products-grid">
-                
-                <div class="product-card">
-                    <img src="{{ blog.image.url}}" alt="محصول مرتبط 1" class="product-card-img">
-                    <div class="product-card-body text-center">
-                        <a class="product-card-title" href="{% url 'blog:blog-detail' pk=blog.id %}" style="font-size: 20px;text-align: center;font-weight: bold; text-decoration: none;color: black;">{{ blog.title }}</a>
-                        {% if blog.is_discounted %}
-                            <div class="product-card-price  price-formatted" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                            <div class="product-card-price  price-formatted" style="font-size: 15px;text-align: center;">{{ blog.get_price_after_sale|intcomma }} تومان</div>
-                            <div class="product-card-price " style="font-size: 10px;text-align: center;color: black;">{{ blog.discount_percent }}% تخفیف</div>
-                        {% else %} 
-                            <div class="product-card-price" style="font-size: 10px;text-align: center;text-decoration: line-through;">{{ blog.price|intcomma }} تومان</div>
-                        {% endif %}
-                        <a href="{% url 'blog:blog-detail' pk=blog.id %}" style="float: left; margin: 20px;">ادامه ...</a>
-                    </div>
-                </div>
-            </div>
-
+        <button class="product-btn"><a href="{% url 'blog:blog-detail' pk=blog.pk%}"
+                style="text-decoration: none;color: white;">مشاهده محصول</a></button>
+        <div class="product-meta">
+            <span><i class="fas fa-shipping-fast"></i> ارسال رایگان</span>
+            {% if blog.type == 1 %}
+            <i class="bi bi-star-fill text-success ms-2"></i>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            {% is_in_wishlist blog_id=blog.pk as is_wishlist %}
+            {% if is_wishlist is True %}
+            <i class="bi bi-bookmark-check-fill text-primary" style="cursor: pointer;"
+                onclick="AddToWishList('{{ blog.id }}')"></i>
+            {% else %}
+            <i class="bi bi-bookmark text-muted" style="cursor: pointer;" onclick="AddToWishList('{{ blog.id }}')"></i>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted" style="cursor: pointer;"
+                    onclick="AddToWishList('{{ blog.id }}')"></i></a>
+            {% endif %}
         </div>
-        {% endif %}
+    </div>
+</div>
 
-    {% endfor %}
+{% endfor %}

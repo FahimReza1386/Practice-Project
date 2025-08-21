@@ -5,7 +5,7 @@ from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
-# Third Party
+# Locale Imports
 
 from accounts.models import User
 

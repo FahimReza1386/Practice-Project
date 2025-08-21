@@ -1,17 +1,16 @@
 # Django Imports
 
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 
 # Third Party
-from utils.models import AbstractBaseDateModel
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.models import MPTTModel, TreeForeignKey
-from blog.models import BlogModel
 
-User = get_user_model()
+# Locale Imports
+from utils.models import AbstractBaseDateModel
+from blog.models import BlogModel
 
 class ReviewModel(AbstractBaseDateModel, MPTTModel):
     class ReviewStatusModel(models.IntegerChoices):
@@ -20,7 +19,7 @@ class ReviewModel(AbstractBaseDateModel, MPTTModel):
         rejected= 3, ("لغو شده")
 
     user= models.ForeignKey(
-        User,
+        "accounts.User",
         on_delete=models.CASCADE,
         verbose_name=_("کاربر")
     )

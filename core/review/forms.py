@@ -1,7 +1,7 @@
 # Django Imports
 from django import forms
 
-# Third Party
+# Locale Imports
 
 from blog.models import BlogModel
 from .models import ReviewModel

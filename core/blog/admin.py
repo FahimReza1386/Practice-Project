@@ -3,7 +3,7 @@ from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 from django.utils.translation import gettext_lazy as _
 
-# Third Party
+# Locale Imports
 from .models import BlogModel, BlogImageModel, BlogCategoryModel, WishListModel
 
 @admin.register(BlogModel)

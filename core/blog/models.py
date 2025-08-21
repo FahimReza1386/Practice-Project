@@ -5,8 +5,11 @@ from django.contrib.auth import get_user_model
 from decimal import Decimal 
 from django.utils.translation import gettext_lazy as _
 
-# Third Party
+# Locale Imports
 from utils.models import AbstractBaseDateModel
+
+# Third Party 
+
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
 

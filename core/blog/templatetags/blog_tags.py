@@ -3,7 +3,7 @@
 from django import template
 from jalali_date import datetime2jalali
 
-# Third Party
+# Locale Imports
 
 from blog.models import BlogModel, WishListModel
 from review.models import ReviewModel

@@ -9,9 +9,8 @@ from django.http import HttpResponse
 from datetime import timedelta
 
 
-# Third Party
+# Locale Imports Party
 from blog.models import BlogCategoryModel
-from accounts.models import User
 
 
 class HomeView(TemplateView):

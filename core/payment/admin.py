@@ -1,7 +1,7 @@
 # Django Imports
 from django.contrib import admin
 
-# Third Party
+# Locale Imports
 from .models import PaymentModel
 
 @admin.register(PaymentModel)

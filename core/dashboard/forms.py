@@ -2,7 +2,7 @@
 
 from django import forms
 
-# Third Party
+# Locale Imports
 
 from accounts.models import Profile
 

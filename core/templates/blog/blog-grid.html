@@ -8,49 +8,46 @@
 
 {% block content %}
 <div class="untree_co-section product-section before-footer-section">
-    <div class="container d-flex flex-column flex-lg-row">
+    <div class="container d-flex flex-column flex-lg-row" style="max-width: 1456px;">
         <!-- Products Grid -->
         <div class="row col-12 col-lg-9 ps-lg-4">
             {% for object in filter.qs %}
             {% if object.type == 1 %}
                 <style>
                     #item{{ object.pk }}{
-                        border: 3px solid green;
+                        border: 2px solid #1bd61b;
                     };
                     
                 </style>
             {% endif %}
             <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="product-item-wrapper">
-                    <div class="product-actions">
-                        {% if object.type == 1 %}
-                            {% if request.user.subscription != 1 %}
-                                 <a class="product-item" href="{% url 'blog:blog-detail' pk=object.pk %}" id="item{{ object.pk}}">
-                            {% else %}
-                                    <a class="product-item" href="#" id="item{{ object.pk}}", onclick="AlertGetSubscription()">
-                            {% endif %}
-                        {% else %}
-                        <a class="product-item" href="{% url 'blog:blog-detail' pk=object.pk %}" id="item{{ object.pk}}">
+                <div class="product-card mb-2 p-2" id="item{{ object.pk }}">
+                    {% if object.type == 1 %}
+                    <div class="badge">پست ویژه</div>
+                    {% else %}
+                    <div class="badge">پست مرتبط</div>
+                    {% endif %}
+                    <div class="product-image">
+                        <img src="{{ object.image.url }}" alt="هدفون بلوتوثی">
 
-                        {% endif %}
-                            <div class="product-image-container">
-                                <img src="{{ object.image.url }}" class="img-fluid product-thumbnail" alt="{{ object.name }}">
-                                <div class="product-badge">
-                                    {% if object.discount_percent %}
-                                    <span class="badge">%{{ object.discount_percent }} تخفیف</span>
-                                    {% else %}
-                                    <span class="badge">بدون تخفیف</span>
-                                    {% endif %}
-                                </div>
+                    </div>
+                    <span class="discount m-2">{{ object.discount_percent }}% تخفیف</span>
+
+                    <div class="product-content">
+                        <h3 class="product-title text-center">{{ object.title }}</h3>
+                        <div class="product-price">
+                            
+                            <div style="margin: 0 auto; " class="text-center">
+                                <span class="original-price price-formatted">{{ object.price }} قبل از تخفیف</span>
+                                
+                                <span class="current-price price-formatted">{{ object.get_price_after_sale }}</span>
+                                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">تومان</p>
+                                
                             </div>
-                            <h3 class="product-title text-center">{{ object.title }}</h3>
-                            <div class="product-price-container" style="float: right;">
-                                {% if object.discount_percent %}
-                                <del class="text-muted price-formatted">{{ object.price|intcomma }} تومان</del>
-                                {% endif %}
-                                <strong class="product-price price-formatted">{{ object.get_price_after_sale|intcomma }} تومان</strong>
-                            </div>
-                        </a>
+                        </div>
+                            <button class="product-btn"><a href="{% url 'blog:blog-detail' pk=object.pk%}" style="text-decoration: none;color: white;">مشاهده محصول</a></button>
+                    <div class="product-meta">
+                            <span><i class="fas fa-shipping-fast"></i> ارسال رایگان</span>
                         {% if object.type == 1 %}
                         <i class="bi bi-star-fill text-success ms-2"></i>
                         {% endif %}
@@ -64,10 +61,9 @@
                         {% else %}
                             <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted" style="cursor: pointer;"  onclick="AddToWishList('{{ object.id }}')"></i></a>
                         {% endif %}
-                    
+                        </div>
                     </div>
                 </div>
-
             </div>
             {% endfor %}
         </div>

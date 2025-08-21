@@ -1,13 +1,10 @@
 # Django Imports
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-# third party
+# Locale Imports
 from utils.models import AbstractBaseDateModel
 from subscriptions.models import Subscriptions
-
-User= get_user_model()
 
 class PaymentModel(AbstractBaseDateModel):
    

@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 
 # Third Party
 from faker import Faker
+
+# Locale Imports
 from blog.models import BlogCategoryModel
 
 User= get_user_model()

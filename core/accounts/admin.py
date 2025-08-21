@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-# Third Party
+# Locale Imports
 from .models import User, Profile
 
 class CustomUserAdmin(UserAdmin):

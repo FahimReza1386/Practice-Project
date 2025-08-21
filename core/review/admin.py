@@ -1,7 +1,7 @@
 # Django Imports
 from django.contrib import admin
 
-# Third Paty
+# Locale Imports
 from .models import ReviewModel
 
 @admin.register(ReviewModel)
