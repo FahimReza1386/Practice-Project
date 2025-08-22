@@ -10,6 +10,7 @@ django-jalali-date==2.0.0
 django-js-asset==3.1.2
 django-mptt==0.17.0
 django-phonenumber-field==8.1.0
+djangorestframework==3.16.1
 Faker==37.4.2
 idna==3.10
 idpay==0.0.1

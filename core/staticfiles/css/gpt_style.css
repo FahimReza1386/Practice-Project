@@ -1,0 +1,279 @@
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4cc9f0;
+    --dark-color: #1a1a2e;
+    --light-color: #f8f9fa;
+    --success-color: #4bb543;
+    --danger-color: #ff3333;
+}
+
+.product-section {
+    background-color: #f5f7ff;
+    padding: 3rem 0;
+}
+
+.filter-navbar {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.filter-navbar h5 {
+    color: var(--dark-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.filter-navbar h5::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--accent-color);
+}
+
+.product-item {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    height: 100%;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-item:hover .product-thumbnail {
+    transform: scale(1.05);
+}
+
+.product-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 1rem 0;
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.product-price {
+    display: block;
+    padding: 0 1rem 1rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.icon-cross {
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-top: -25px;
+}
+
+.icon-cross .btn {
+    background: var(--primary-color) !important;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+}
+
+.icon-cross .btn:hover {
+    background: var(--secondary-color) !important;
+    transform: scale(1.1);
+}
+
+.pagination {
+    margin-top: 3rem;
+}
+
+.page-link {
+    color: var(--primary-color);
+    border: none;
+    margin: 0 5px;
+    border-radius: 8px !important;
+}
+
+.page-item.active .page-link {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.page-link:hover {
+    color: var(--secondary-color);
+    background: rgba(67, 97, 238, 0.1);
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
+}
+
+.btn-hover {
+    transition: all 0.3s ease;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.btn-hover:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+}
+
+@media (max-width: 768px) {
+    .filter-navbar {
+        margin-bottom: 2rem;
+        position: static;
+    }
+    
+    .product-thumbnail {
+        height: 150px;
+    }
+}
+
+/* ---------------- category----------------- */
+
+
+
+.cat-navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 350px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* هر آیتم منو */
+.cat-nav-item {
+  position: relative;
+}
+
+/* لینک اصلی منو */
+.cat-nav-link {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  color: #222;
+  width: 90%;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+  white-space: nowrap;
+}
+
+/* افکت هاور روی لینک اصلی */
+.cat-nav-link:hover {
+  background-color: #0077ff;
+  color: #fff;
+  border-color: #005fcc;
+  box-shadow: 0 6px 15px rgba(0,123,255,0.4);
+  cursor: pointer;
+}
+
+/* زیرمنوها مخفی و موقع هاور والد نمایش داده میشن */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 100%; /* باز شدن به سمت چپ در RTL */
+  min-width: 220px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  padding: 12px 0;
+  z-index: 2000;
+  border: 1px solid #e1e4e8;
+}
+
+/* نمایش زیرمنو روی هاور */
+.cat-nav-item:hover > .dropdown {
+  display: block;
+}
+
+/* آیتم‌های داخل زیرمنو */
+.dropdown .cat-nav-item {
+  position: relative;
+}
+
+/* لینک‌های داخل زیرمنو */
+.dropdown .cat-nav-link {
+  display: block;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* هاور روی لینک‌های زیرمنو */
+.dropdown .cat-nav-link:hover {
+  background-color: #0077ff;
+  color: white;
+  cursor: pointer;
+}
+
+/* فاصله بین آیتم‌های زیرمنو */
+.dropdown .cat-nav-item + .cat-nav-item {
+  margin-top: 6px;
+}
+
+.category{
+  font-size: 20px;
+  font-family: "Vazir", sans-serif;
+  color: black;
+  float: right;
+  text-shadow: 3px 3px 1px silver;
+}

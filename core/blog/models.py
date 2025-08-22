@@ -13,8 +13,6 @@ from utils.models import AbstractBaseDateModel
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
 
-User=get_user_model()
-
 class BlogModel(AbstractBaseDateModel):
 
     class BlogStatusTypeModel(models.IntegerChoices):
@@ -29,10 +27,13 @@ class BlogModel(AbstractBaseDateModel):
         max_length=200,
         verbose_name=_("نام")
     )
-    description=RichTextUploadingField()
+    description=RichTextUploadingField(
+        verbose_name=_("توضیحات"),
+    )
     type= models.IntegerField(
         choices=BlogTypeModel.choices,
-        default=BlogTypeModel.normal.value
+        default=BlogTypeModel.normal.value,
+        verbose_name=_("نوع")
     )
     status= models.IntegerField(
         choices=BlogStatusTypeModel.choices, 
@@ -129,7 +130,7 @@ class WishListModel(AbstractBaseDateModel):
         verbose_name=_("بلاگ")
     )
     user=models.ForeignKey(
-        User, 
+        "accounts.User", 
         on_delete=models.CASCADE,
         verbose_name= _("کاربر")
     )

@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "jalali_date",
     "django_filters",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -123,10 +124,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_FILTER_BACKENDS': (
+            'django_filters.rest_framework.DjangoFilterBackend',
+    )
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'fa-ir'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 

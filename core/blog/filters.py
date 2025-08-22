@@ -6,7 +6,6 @@ from subscriptions.models import Subscriptions
 
 class BlogFilter(django_filters.FilterSet):
 
-    price = django_filters.NumberFilter()
     price__gt = django_filters.NumberFilter(field_name="price", lookup_expr="gt")
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
 
@@ -24,12 +23,12 @@ class BlogFilter(django_filters.FilterSet):
     is_sale = django_filters.MultipleChoiceFilter(
         choices=IS_SALE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
-        method='filter_is_sale'
+        method='filter_is_sale',
     )
 
     class Meta:
         model= BlogModel
-        fields= ["title", "price__lt", "price__gt", "category", "type", "image", "is_sale"]
+        fields= ["title", "category", "type", "image", "is_sale"]
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
