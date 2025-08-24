@@ -1,6 +1,7 @@
 # django imports
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 # locale imports
 from .serializers import ListBlogApi
 from .paginations import BlogPagination
@@ -22,6 +23,7 @@ class ListBlogRestView(ListCreateAPIView):
 
 class RetrieveBlogRestView(RetrieveUpdateDestroyAPIView):
     serializer_class=ListBlogApi
+    permission_classes=[IsAuthenticated, IsAdminUser]
     
     def get_queryset(self):
         queryset= BlogModel.objects.filter(status=BlogModel.BlogStatusTypeModel.publish.value).order_by("-created_date")

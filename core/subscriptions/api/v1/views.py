@@ -1,6 +1,6 @@
 # Third Party Imports
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django_filters.rest_framework import DjangoFilterBackend
 
 # Locale Imports
@@ -10,7 +10,6 @@ from blog.filters import SubscriptionsFilter
 
 
 class ApiListSubscriptionView(ListCreateAPIView):
-    permission_classes=[IsAuthenticated,]
     serializer_class = ApiListSubscriptionsSerializer
     filter_backends=[DjangoFilterBackend,]
     filterset_class=SubscriptionsFilter
@@ -21,7 +20,7 @@ class ApiListSubscriptionView(ListCreateAPIView):
     
 
 class ApiDetailSubscriptionView(RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes=[IsAuthenticated, IsAdminUser]
     serializer_class = ApiListSubscriptionsSerializer
     
     def get_queryset(self):
