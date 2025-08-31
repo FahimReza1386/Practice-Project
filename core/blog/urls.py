@@ -9,5 +9,4 @@ urlpatterns = [
     path("category/<int:pk>/", views.CategoriesView.as_view(), name="blog-category"),
     path("wishlist/blog/", views.WishListBlogPageView.as_view(), name="blog-wishlist"),
     path("api/v1/", include("blog.api.v1.urls")),
-
 ]
