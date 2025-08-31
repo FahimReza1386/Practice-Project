@@ -1,5 +1,5 @@
 {% extends 'dashboard/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 
 
@@ -10,9 +10,9 @@
 {% endblock %}
 {% block content %}
 
-<h1>داشبورد :</h1>
-  <p>تعداد روز های مانده از اشتراک : <span style="color: red; font-weight: bold;">{{ remaining_days }}</span></p>
-  <p>تاریخ عضویت : {{ joined }}</p>
+<h1>{% trans 'داشبورد' %} :</h1>
+  <p>{% trans 'تعداد روز های مانده از اشتراک ' %}: <span style="color: red; font-weight: bold;">{{ remaining_days }}</span></p>
+  <p>{% trans 'تاریخ عضویت ' %}: {{ joined }}</p>
   
 {% endblock %}
   {% block extra_js %}

@@ -1,7 +1,12 @@
+# Django Imports
+
 import django_filters
 from django import forms
-from .models import BlogModel, BlogCategoryModel
 from django.db.models import Q
+from django.utils.translation import gettext_lazy as _
+
+# Locale Imports
+from .models import BlogModel, BlogCategoryModel
 from subscriptions.models import Subscriptions
 
 class BlogFilter(django_filters.FilterSet):
@@ -10,10 +15,10 @@ class BlogFilter(django_filters.FilterSet):
     price__lt = django_filters.NumberFilter(field_name="price", lookup_expr="lt")
 
     IMAGE_CHOICES = [
-        ('A', 'عکس دار'),
+        ('A', _('عکس دار')),
     ]
     IS_SALE_CHOICES = [
-        ('A', 'تخفیف دار'),
+        ('A', _('تخفیف دار')),
     ]
     image = django_filters.MultipleChoiceFilter(
         choices=IMAGE_CHOICES,
@@ -32,11 +37,11 @@ class BlogFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.form.fields['title'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'جستجو ..'})
+            self.form.fields['title'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('جستجو ..')})
             self.form.fields['category'].widget.attrs.update({'class': 'form-control p-1'})
             self.form.fields['type'].widget.attrs.update({'class': 'form-control p-1'})
-            self.form.fields['price__lt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'تا ۰ تومان'})
-            self.form.fields['price__gt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'از ۰ تومان'})
+            self.form.fields['price__lt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('تا ۰ تومان')})
+            self.form.fields['price__gt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('از ۰ تومان')})
 
     def filter_image(self, queryset, name, value):
         if value:
@@ -65,7 +70,7 @@ class SubscriptionsFilter(django_filters.FilterSet):
         
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.form.fields['name'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'جستجو ..'})
+            self.form.fields['name'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('جستجو ..')})
             self.form.fields['days'].widget.attrs.update({'class': 'form-control p-1'})
-            self.form.fields['price__lt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'تا ۰ تومان'})
-            self.form.fields['price__gt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': 'از ۰ تومان'})
+            self.form.fields['price__lt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('تا ۰ تومان')})
+            self.form.fields['price__gt'].widget.attrs.update({'class': 'form-control p-1', 'placeholder': _('از ۰ تومان')})

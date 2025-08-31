@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!-- Navbar -->
  <div class="navbar-expand-lg navbar-light" style="width: 100%;">
     <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
@@ -20,39 +20,39 @@
           </div>
 
           <!-- Nav -->
-          <span class="text-cap">حساب</span>
+          <span class="text-cap">{% trans 'حساب' %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'website:home' %}">
-                <i class="bi-person-badge nav-icon"></i>خانه
+                <i class="bi-person-badge nav-icon"></i>{% trans 'خانه' %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:home' %}">
-                <i class="bi-person-badge nav-icon"></i>داشبورد
+                <i class="bi-person-badge nav-icon"></i>{% trans 'داشبورد' %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:security-edit' %}">
-                <i class="bi-shield-shaded nav-icon"></i> امنیت
+                <i class="bi-shield-shaded nav-icon"></i> {% trans 'امنیت' %}
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:profile-edit' %}">
-                <i class="bi-sliders nav-icon"></i> تنظیمات پروفایل
+                <i class="bi-sliders nav-icon"></i> {% trans 'تنظیمات پروفایل' %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'subscriptions:subs-list' %}">
-                <i class="bi bi-bag-plus nav-icon"></i> خرید اشتراک
+                <i class="bi bi-bag-plus nav-icon"></i> {% trans 'خرید اشتراک' %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'blog:blog-wishlist' %}">
-                <i class="bi bi-heart nav-icon"></i> علاقه مندی ها
+                <i class="bi bi-heart nav-icon"></i> {% trans 'علاقه مندی ها' %}
               </a>
             </li>
           </ul>
@@ -65,7 +65,7 @@
                 <form action="{% url 'accounts:logout' %}" method="post">
                   {% csrf_token %}
                 <button class="btn btn-icon nav-link" style="background-color: transparent;border: none;font-size: 20px;font-family: 'Vazir', sans-serif;float: left;" type="submit">
-                  <i class="bi-box-arrow-right nav-icon"></i> خروج
+                  <i class="bi-box-arrow-right nav-icon"></i> {% trans 'خروج' %}
                 </button>
               </form>
               </li>

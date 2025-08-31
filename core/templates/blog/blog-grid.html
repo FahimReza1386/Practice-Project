@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load humanize %}
-{% load blog_tags %}
+{% load static humanize blog_tags i18n %}
 
 {% block extra_css %}
 {% endblock %}
@@ -23,31 +21,31 @@
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="product-card mb-2 p-2" id="item{{ object.pk }}">
                     {% if object.type == 1 %}
-                    <div class="badge">پست ویژه</div>
+                    <div class="badge">{% trans 'پست ویژه' %}</div>
                     {% else %}
-                    <div class="badge">پست مرتبط</div>
+                    <div class="badge">{% trans 'پست مرتبط' %}</div>
                     {% endif %}
                     <div class="product-image">
                         <img src="{{ object.image.url }}" alt="هدفون بلوتوثی">
 
                     </div>
-                    <span class="discount m-2">{{ object.discount_percent }}% تخفیف</span>
+                    <span class="discount m-2">{{ object.discount_percent }}% {% trans 'تخفیف' %}</span>
 
                     <div class="product-content">
                         <h3 class="product-title text-center">{{ object.title }}</h3>
                         <div class="product-price">
                             
                             <div style="margin: 0 auto; " class="text-center">
-                                <span class="original-price price-formatted">{{ object.price }} قبل از تخفیف</span>
+                                <span class="original-price price-formatted">{{ object.price }} {% trans 'قبل از تخفیف' %}</span>
                                 
                                 <span class="current-price price-formatted">{{ object.get_price_after_sale }}</span>
-                                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">تومان</p>
+                                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">{% trans 'تومان' %}</p>
                                 
                             </div>
                         </div>
-                            <button class="product-btn"><a href="{% url 'blog:blog-detail' pk=object.pk%}" style="text-decoration: none;color: white;">مشاهده محصول</a></button>
+                            <button class="product-btn"><a href="{% url 'blog:blog-detail' pk=object.pk%}" style="text-decoration: none;color: white;">{% trans 'مشاهده محصول' %}</a></button>
                     <div class="product-meta">
-                            <span><i class="fas fa-shipping-fast"></i> ارسال رایگان</span>
+                            <span><i class="fas fa-shipping-fast"></i>{% trans ' ارسال رایگان' %}</span>
                         {% if object.type == 1 %}
                         <i class="bi bi-star-fill text-success ms-2"></i>
                         {% endif %}
@@ -115,7 +113,7 @@
 {% block extra_js %}
 <script>
         function AlertGetSubscription() {
-        alert("مشتری گرامی برای دیدن پست های ویژه باید اشتراک تهیه کنید ..")
+        alert({% trans 'مشتری گرامی برای دیدن پست های ویژه باید اشتراک تهیه کنید ..' %})
     }
 </script>
 {% endblock %}

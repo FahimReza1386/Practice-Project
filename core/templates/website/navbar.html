@@ -1,8 +1,8 @@
-{% load mptt_tags %}
+{% load mptt_tags i18n %}
 
 <section class="category-section">
   <div class="container">
-    <h1 class="category">دسته‌بندی‌ها:</h1>
+    <h1 class="category">: {% trans 'دسته‌بندی‌ها' %}</h1>
     <nav class="cat-navbar">
       {% recursetree genres %}
       <div class="cat-nav-item">

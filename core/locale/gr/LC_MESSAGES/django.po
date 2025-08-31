@@ -1,0 +1,233 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-26 19:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/apps.py:8 accounts/models.py:98 accounts/models.py:99
+msgid "حساب کاربری"
+msgstr "Benutzerkonto"
+
+#: accounts/forms.py:16
+msgid "حساب کاربری فعال نیست .."
+msgstr "Das Konto ist nicht aktiv."
+
+#: accounts/models.py:31
+msgid "شماره تلفن الزامی است ."
+msgstr "Das Konto ist nicht aktiv."
+
+#: accounts/models.py:48
+msgid "گذینه پرسنل باید بله باشه ."
+msgstr "Die Personaloption sollte Ja lauten."
+
+#: accounts/models.py:50
+msgid "گذینه کاربر ارشد باید بله باشه ."
+msgstr "Die Superuser-Option sollte Ja lauten."
+
+#: accounts/models.py:59 accounts/models.py:129
+msgid "شماره تلفن"
+msgstr "Telefonnummer"
+
+#: accounts/models.py:63 accounts/models.py:121 subscriptions/models.py:65
+msgid "نام"
+msgstr "Substantiv"
+
+#: accounts/models.py:67 subscriptions/models.py:34
+msgid "فعال"
+msgstr "Aktiv"
+
+#: accounts/models.py:71
+msgid "کاربر ارشد"
+msgstr "Älterer Benutzer"
+
+#: accounts/models.py:75
+msgid "تایید شده"
+msgstr "Genehmigt"
+
+#: accounts/models.py:79
+msgid "پرسنل"
+msgstr "Personal"
+
+#: accounts/models.py:84 blog/models.py:36
+msgid "نوع"
+msgstr "Typ"
+
+#: accounts/models.py:117 blog/models.py:135 review/models.py:24
+#: subscriptions/models.py:16
+msgid "کاربر"
+msgstr "Benutzer"
+
+#: accounts/models.py:125
+msgid "نام خانوادگی"
+msgstr "Nachname"
+
+#: accounts/models.py:134
+msgid "جنسیت"
+msgstr "Geschlecht"
+
+#: accounts/models.py:139 blog/models.py:56 blog/models.py:89
+msgid "تصویر"
+msgstr "Bild"
+
+#: accounts/models.py:143 accounts/models.py:144
+msgid "پروفایل"
+msgstr "Profil"
+
+#: blog/apps.py:8
+msgid "پست"
+msgstr "Post"
+
+#: blog/models.py:19 subscriptions/models.py:60
+msgid "نمایش"
+msgstr "Zeigen"
+
+#: blog/models.py:20 subscriptions/models.py:61
+msgid "عدم نمایش"
+msgstr "Keine Anzeige"
+
+#: blog/models.py:23
+msgid "ویژه"
+msgstr "Besonders"
+
+#: blog/models.py:24
+msgid "عادی"
+msgstr "Normal"
+
+#: blog/models.py:28
+msgid "اسم"
+msgstr "Substantiv"
+
+#: blog/models.py:31
+msgid "توضیحات"
+msgstr "Details"
+
+#: blog/models.py:41 payment/models.py:34 review/models.py:43
+#: subscriptions/models.py:85
+msgid "وضعیت"
+msgstr "Status"
+
+#: blog/models.py:47 subscriptions/models.py:71
+msgid "مبلغ"
+msgstr "Menge"
+
+#: blog/models.py:51 subscriptions/models.py:76
+msgid "درصد تخفیف"
+msgstr "Rabattprozentsatz"
+
+#: blog/models.py:62
+msgid "دسته بندی"
+msgstr "Schlechte Gruppe"
+
+#: blog/models.py:67 blog/models.py:68
+msgid "پست ها"
+msgstr "Beiträge"
+
+#: blog/models.py:85 blog/models.py:130 review/models.py:29
+msgid "بلاگ"
+msgstr "Der Blog"
+
+#: blog/models.py:95 blog/models.py:96
+msgid "عکس پست ها"
+msgstr "Fotobeiträge"
+
+#: blog/models.py:119 blog/models.py:120
+msgid "دسته بندی ها"
+msgstr "Kategorien"
+
+#: blog/models.py:140 blog/models.py:141
+msgid "علاقه مندی ها"
+msgstr "Interesse"
+
+#: dashboard/apps.py:9
+#, fuzzy
+#| msgid "کاربر"
+msgid "پنل کاربری"
+msgstr "Benutzer"
+
+#: payment/apps.py:8 payment/models.py:46 payment/models.py:47
+msgid "پرداخت"
+msgstr "Betrag K"
+
+#: payment/models.py:23 subscriptions/apps.py:8 subscriptions/models.py:21
+#: subscriptions/models.py:89 subscriptions/models.py:90
+msgid "اشتراک"
+msgstr "Abonnement"
+
+#: payment/models.py:29
+msgid "مبلغ کل"
+msgstr "Gesamtbetrag"
+
+#: review/apps.py:8 review/models.py:56 review/models.py:57
+msgid "نظرات"
+msgstr "Kommentare"
+
+#: review/models.py:33
+msgid "جزئیات"
+msgstr "Details"
+
+#: review/models.py:38
+msgid "ستاره"
+msgstr "Stern"
+
+#: subscriptions/models.py:25
+msgid "زمان شروع"
+msgstr "Startzeit"
+
+#: subscriptions/models.py:30
+msgid "زمان پایان"
+msgstr "Endzeit"
+
+#: subscriptions/models.py:40 subscriptions/models.py:41
+msgid "اشتراک خریداری شده"
+msgstr "Abonnement erworben"
+
+#: subscriptions/models.py:80
+msgid "روز"
+msgstr "Tag"
+
+#: templates/website/navbar.html:5
+#, fuzzy
+#| msgid "دسته بندی ها"
+msgid "دسته‌بندی‌ها"
+msgstr "Kategorien"
+
+#: utils/apps.py:8 utils/models.py:19 utils/models.py:20
+msgid "زمان"
+msgstr "Zeit"
+
+#: utils/models.py:9
+msgid "زمان ایجاد شده"
+msgstr "Erstellungszeit"
+
+#: utils/models.py:13
+msgid "زمان بروزرسانی"
+msgstr "Letztes Update"
+
+#: website/apps.py:8
+msgid "وبسایت"
+msgstr "Webseite"
+
+#~ msgid "پنل ک"
+#~ msgstr "Benutzerpanel"
+
+#~ msgid "نام اشتراک"
+#~ msgstr "Name"
+
+#~ msgid "مبلغ اشتراک"
+#~ msgstr "Menge"
+
+#~ msgid "وضعیت نمایش"
+#~ msgstr "Status"

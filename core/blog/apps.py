@@ -1,8 +1,11 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-
 class blogConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'blog'
     verbose_name=_("پست")
+
+    def ready(self):
+        # import translations در اینجا انجام شود
+        from . import translation

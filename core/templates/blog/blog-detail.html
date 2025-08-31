@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load humanize %}
-{% load blog_tags %}
+{% load static humanize blog_tags i18n %}
 
 {% block title %}
-صفحه محصول 
+{% trans 'صفحه محصول ' %}
 {% endblock %}
 
 {% block extra_css %}
@@ -536,7 +534,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" dir="rtl">
+<div class="container" dir="{% trans 'rtl' %}">
     <!-- هدر محصول -->
     <div class="product-header">
         <div class="product-gallery">
@@ -554,15 +552,15 @@
             <div class="product-meta">
                 <span>
                     <i class="fas fa-store"></i>
-                    فروشگاه اینترنتی سبز
+                    {% trans 'فروشگاه اینترنتی سبز' %}
                 </span>
                 <span>
                     <i class="fas fa-barcode"></i>
-                    کد محصول: PRD-{{ object.id }}
+                    {% trans 'کد محصول' %}: PRD-{{ object.id }}
                 </span>
                 <span>
                     <i class="fas fa-box-open"></i>
-                    موجود در انبار
+                    {% trans 'موجود در انبار' %}
                 </span>
             </div>
 
@@ -575,26 +573,26 @@
 
             <div class="product-price">
                 {% if object.is_discounted %}
-                <span class="price-original price-formatted">{{ object.price|intcomma }} تومان</span>
-                <span class="price-formatted">{{ object.get_price_after_sale|intcomma }} تومان</span>
+                <span class="price-original price-formatted">{{ object.price|intcomma }} {% trans 'تومان' %}</span>
+                <span class="price-formatted">{{ object.get_price_after_sale|intcomma }} {% trans 'تومان' %}</span>
                 <span class="price-discount">{{ object.discount_percent }}% تخفیف</span>
                 {% else %}
-                <span class="price-original price-formatted">{{ object.price|intcomma }} تومان</span>
+                <span class="price-original price-formatted">{{ object.price|intcomma }} {% trans 'تومان' %}</span>
                 {% endif %}
             </div>
 
             <div class="product-features">
                 <div class="feature-item">
                     <i class="fas fa-check feature-icon"></i>
-                    <span>رنگ زیبا و با دوام</span>
+                    <span>{% trans 'رنگ زیبا و با دوام' %}</span>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-check feature-icon"></i>
-                    <span>جنس مرغوب و با کیفیت</span>
+                    <span>{% trans 'جنس مرغوب و با کیفیت' %}</span>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-check feature-icon"></i>
-                    <span>ارسال رایگان برای خریدهای بالای ۲۰۰ هزار تومان</span>
+                    <span>{% trans 'ارسال رایگان برای خریدهای بالای ۲۰۰ هزار تومان' %}</span>
                 </div>
             </div>
 
@@ -604,19 +602,19 @@
                 {% if is_wishlist is True %}
                 <i class="bi bi-bookmark-check-fill text-primary"></i>
                 <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
-                    حذف از علاقه‌مندی‌ها
+                    {% trans 'حذف از علاقه‌مندی‌ها' %}
                 </button>
                 {% else %}
                 <i class="bi bi-bookmark text-muted"></i>
                 <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
-                    افزودن به علاقه‌مندی‌ها
+                    {% trans 'افزودن به علاقه‌مندی‌ها' %}
                 </button>
                 {% endif %}
                 {% else %}
                 <a href="{% url 'accounts:login' %}"><i class="bi bi-bookmark text-muted"
                         onclick="AddToWishList('{{ object.id }}')"></i>
                     <button class="btn btn-secondary" onclick="AddToWishList('{{ object.id }}')">
-                        افزودن به علاقه‌مندی‌ها
+                        {% trans 'افزودن به علاقه‌مندی‌ها' %}
                     </button>
                 </a>
                 {% endif %}
@@ -628,19 +626,19 @@
     <!-- تب‌های جزئیات محصول -->
     <div class="product-tabs">
         <div class="tab-header">
-            <div class="tab-btn active" data-tab="description">توضیحات محصول</div>
-            <div class="tab-btn" data-tab="specs">مشخصات فنی</div>
-            <div class="tab-btn" data-tab="reviews">نظرات ({{ reviews.count }})</div>
+            <div class="tab-btn active" data-tab="description">{% trans 'توضیحات محصول' %}</div>
+            <div class="tab-btn" data-tab="specs">{% trans 'مشخصات فنی' %}</div>
+            <div class="tab-btn" data-tab="reviews">{% trans 'نظرات' %} ({{ reviews.count }})</div>
         </div>
 
         <div class="tab-content">
             <!-- تب توضیحات محصول -->
             <div class="tab-pane active" id="description">
                 <div class="description-content">
-                    <h4>دسته بندی‌های محصول:</h4>
+                    <h4>{% trans 'دسته بندی‌های محصول' %} :</h4>
                     <a href="{% url 'blog:blog-category' pk=object.category.pk %}">{{ object.category }}</a>
 
-                    <h4>جزئیات محصول:</h4>
+                    <h4>{% trans 'جزئیات محصول' %}:</h4>
                     {{ object.description|safe }}
                 </div>
             </div>
@@ -649,12 +647,12 @@
             <div class="tab-pane" id="specs">
                 <table class="specs-table">
                     <tr>
-                        <th>مدل</th>
+                        <th>{% trans 'مدل' %}</th>
                         <td>Id-{{ object.id }}</td>
                     </tr>
                     <tr>
-                        <th>مرجع سازنده</th>
-                        <td>فهیم وب</td>
+                        <th>{% trans 'مرجع سازنده' %}</th>
+                        <td>{% trans 'فهیم وب' %}</td>
                     </tr>
                 </table>
             </div>
@@ -670,7 +668,7 @@
                             <img src="{{ review.user.user_profile.image.url }}" alt="profile" class="profile-img"
                                 style="width:40px; height:40px; border-radius:50%; object-fit:cover; margin-left:10px;">
                             <span class="review-author">{{ review.user.user_profile.get_fullname }}</span>
-                            <span class="review-date">ثبت نظر : {% show_jalali_date review_id=review.id %}</span>
+                            <span class="review-date">{% trans 'ثبت نظر' %}: {% show_jalali_date review_id=review.id %}</span>
                             <form action="{% url 'review:review-delete' pk=review.pk %}" method="post"
                                 style="display:inline;">
                                 {% csrf_token %}
@@ -689,7 +687,7 @@
 
                         {% if not review.parent %}
                         <!-- دکمه ریپلای -->
-                        <button class="reply-btn" data-review-id="{{ review.id }}">پاسخ دادن</button>
+                        <button class="reply-btn" data-review-id="{{ review.id }}">{% trans 'پاسخ دادن' %}</button>
 
                         <!-- فرم ریپلای -->
                         <form class="reply-form" id="reply-form-{{ review.id }}" action="{% url 'review:review-reply' %}"
@@ -699,7 +697,7 @@
                             <input type="hidden" name="review_reply" value="{{ review.id }}">
 
                             <div class="form-group">
-                                <label class="form-label">امتیاز شما *</label>
+                                <label class="form-label">{% trans 'امتیاز شما ' %}*</label>
                                 <!-- در فرم ریپلای -->
                                 <div class="stars-rating" data-review-id="{{ review.id }}">
                                     <span class="star" data-rating="5" data-review-id="{{ review.id }}">★</span>
@@ -714,11 +712,11 @@
 
 
                             <div class="form-group">
-                                <label for="reply-text-{{ review.id }}" class="form-label">پاسخ شما *</label>
+                                <label for="reply-text-{{ review.id }}" class="form-label">{% trans 'پاسخ شما ' %}*</label>
                                 <textarea id="reply-text-{{ review.id }}" name="description" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">ارسال پاسخ</button>
+                            <button type="submit" class="btn btn-primary">{% trans 'ارسال پاسخ' %}</button>
                         </form>
                         {% endif %}
 
@@ -730,7 +728,7 @@
                                 <img src="{{ reply.user.user_profile.image.url }}" alt="profile" class="profile-img"
                                     style="width:30px; height:30px; border-radius:50%; object-fit:cover; margin-left:10px;">
                                 <span class="review-author">{{ reply.user.user_profile.get_fullname }}</span>
-                                <span class="review-date">پاسخ : {% show_jalali_date review_id=reply.id %}</span>
+                                <span class="review-date">{% trans 'پاسخ' %} : {% show_jalali_date review_id=reply.id %}</span>
                                 <form action="{% url 'review:review-delete' pk=reply.pk %}" method="post"
                                     style="display:inline;">
                                     {% csrf_token %}
@@ -750,19 +748,19 @@
                     {% endfor %}
 
                     <button class="btn btn-secondary" style="margin-top: 20px;">
-                        مشاهده همه نظرات ({{ reviews.count }})
+                        {% trans 'مشاهده همه نظرات ' %}({{ reviews.count }})
                     </button>
                 </div>
 
                 <!-- فرم ارسال نظر اصلی -->
                 <div class="review-form">
-                    <h3>ثبت نظر جدید</h3>
+                    <h3>{% trans 'ثبت نظر جدید' %}</h3>
                     <form id="reviewForm" action="{% url 'review:review-create' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="blog" value="{{ object.id }}">
 
                         <div class="form-group">
-                            <label class="form-label">امتیاز شما *</label>
+                            <label class="form-label">{% trans 'امتیاز شما ' %}*</label>
                             <div class="stars-rating" data-review-id="create">
                                 <span class="star" data-rating="5" data-review-id="create">★</span>
                                 <span class="star" data-rating="4" data-review-id="create">★</span>
@@ -774,11 +772,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="review" class="form-label">نظر شما *</label>
+                            <label for="review" class="form-label">{% trans 'نظر شما ' %}*</label>
                             <textarea id="review" class="form-control form-textarea" name="description" required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">ثبت نظر</button>
+                        <button type="submit" class="btn btn-primary">{% trans 'ثبت نظر' %}</button>
                     </form>
                 </div>
 

@@ -25,7 +25,7 @@ class BlogModel(AbstractBaseDateModel):
 
     title= models.CharField(
         max_length=200,
-        verbose_name=_("نام")
+        verbose_name=_("اسم")
     )
     description=RichTextUploadingField(
         verbose_name=_("توضیحات"),
@@ -48,7 +48,7 @@ class BlogModel(AbstractBaseDateModel):
     )
     discount_percent= models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        verbose_name=_("تخفیف")
+        verbose_name=_("درصد تخفیف")
     )
     image= models.ImageField(
         upload_to="blogs/", 

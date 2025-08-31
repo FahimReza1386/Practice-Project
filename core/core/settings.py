@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config, Csv
 
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS" , cast=Csv(),default="*")
 
 INSTALLED_APPS = [
     # Django Admin Installed .
+    'modeltranslation',
     'admin_interface',
     'colorfield',
     'django.contrib.admin',
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -148,6 +150,18 @@ SPECTACULAR_SETTINGS = {
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'fa'
+
+LANGUAGES = [
+    ('fa', 'فارسی'),
+    ('en', 'English'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'fa'
+
 
 TIME_ZONE = 'UTC'
 

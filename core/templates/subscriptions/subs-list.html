@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load humanize %}
-{% load blog_tags %}
+{% load static humanize blog_tags i18n %}
 
 {% block extra_css %}
 {% endblock %}
@@ -44,12 +42,12 @@
                                         <div class="product-badge text-center p-2">
                                             {{ object.name }}
                                             <hr>
-                                            <h4 class="price-formatted">{{ object.price|intcomma }} تومان</h4>
+                                            <h4 class="price-formatted">{{ object.price|intcomma }} {% trans 'تومان' %}</h4>
                                             {% if object.is_discounted %}
-                                            <span class="badge">%{{ object.discount_percent }} تخفیف</span>
+                                            <span class="badge">%{{ object.discount_percent }} {% trans 'تخفیف' %}</span>
                                             <br>
-                                            <span class="badge">مبلغ : {{ object.get_price_after_sale|intcomma }}
-                                                تومان</span>
+                                            <span class="badge">{% trans 'مبلغ' %} : {{ object.get_price_after_sale|intcomma }}
+                                                {% trans 'تومان' %}</span>
                                             {% endif %}
 
                                         </div>
@@ -64,7 +62,7 @@
                     {% csrf_token %}
                     <input type="hidden" style="border: none;" name="amount" value="{{ object.price }}" id="">
                     <input type="hidden" style="border: none;" name="subs_id" value="{{ object.id }}" id="">
-                    <button class="btn" style="float: left; margin: 20px;" dir="rtl">درخواست خرید ..</a>
+                    <button class="btn" style="float: left; margin: 20px;" dir="rtl">{% trans 'درخواست خرید ..' %}</button>
                 </form>
             </div>
             {% endfor %}

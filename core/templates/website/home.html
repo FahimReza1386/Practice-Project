@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load blog_tags %}
+{% load static blog_tags i18n %}
 
 
 
-{% block title %}خانه{% endblock %}
+
+{% block title %}{% trans 'خانه' %}{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/gpt_style.css' %}">
 <style>
@@ -534,9 +534,7 @@
 </style>
 {% endblock %}
 
-
 {% block content %}
-
 
 <main class="site-main">
       {% include 'website/navbar.html' %}

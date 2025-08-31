@@ -1,0 +1,616 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-31 07:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/apps.py:8 accounts/models.py:98 accounts/models.py:99
+msgid "حساب کاربری"
+msgstr "accounts"
+
+#: accounts/forms.py:16
+msgid "حساب کاربری فعال نیست .."
+msgstr "accounts dose not active."
+
+#: accounts/models.py:31
+msgid "شماره تلفن الزامی است ."
+msgstr "Phone number is required."
+
+#: accounts/models.py:48
+msgid "گذینه پرسنل باید بله باشه ."
+msgstr "The personnel option must be known."
+
+#: accounts/models.py:50
+msgid "گذینه کاربر ارشد باید بله باشه ."
+msgstr "The Super User option should be Yes."
+
+#: accounts/models.py:59 accounts/models.py:129
+msgid "شماره تلفن"
+msgstr "phone_number"
+
+#: accounts/models.py:63 accounts/models.py:121 subscriptions/models.py:65
+msgid "نام"
+msgstr "first_name"
+
+#: accounts/models.py:67 subscriptions/models.py:34
+msgid "فعال"
+msgstr "active"
+
+#: accounts/models.py:71
+msgid "کاربر ارشد"
+msgstr "superuser"
+
+#: accounts/models.py:75
+msgid "تایید شده"
+msgstr "Approved"
+
+#: accounts/models.py:79
+msgid "پرسنل"
+msgstr "staff"
+
+#: accounts/models.py:84 blog/models.py:36
+msgid "نوع"
+msgstr "type"
+
+#: accounts/models.py:117 blog/models.py:135 review/models.py:24
+#: subscriptions/models.py:16
+msgid "کاربر"
+msgstr "user"
+
+#: accounts/models.py:125
+msgid "نام خانوادگی"
+msgstr "last_name"
+
+#: accounts/models.py:134 templates/dashboard/security/profile-edit.html:307
+msgid "جنسیت"
+msgstr "gender"
+
+#: accounts/models.py:139 blog/models.py:56 blog/models.py:89
+msgid "تصویر"
+msgstr "image"
+
+#: accounts/models.py:143 accounts/models.py:144
+msgid "پروفایل"
+msgstr "profile"
+
+#: blog/apps.py:7
+msgid "پست"
+msgstr "post"
+
+#: blog/filters.py:18
+#, fuzzy
+#| msgid "عکس پست ها"
+msgid "عکس دار"
+msgstr "Blogs Image"
+
+#: blog/filters.py:21
+#, fuzzy
+#| msgid "تخفیف"
+msgid "تخفیف دار"
+msgstr "discount"
+
+#: blog/filters.py:40 blog/filters.py:73
+msgid "جستجو .."
+msgstr "search.."
+
+#: blog/filters.py:43 blog/filters.py:75
+msgid "تا ۰ تومان"
+msgstr "Up to 0 Tomans"
+
+#: blog/filters.py:44 blog/filters.py:76
+msgid "از ۰ تومان"
+msgstr "From to 0 Tomans"
+
+#: blog/models.py:19 subscriptions/models.py:60
+msgid "نمایش"
+msgstr "publish"
+
+#: blog/models.py:20 subscriptions/models.py:61
+msgid "عدم نمایش"
+msgstr "draft"
+
+#: blog/models.py:23
+msgid "ویژه"
+msgstr "premium"
+
+#: blog/models.py:24
+msgid "عادی"
+msgstr "normal"
+
+#: blog/models.py:28
+msgid "اسم"
+msgstr "title"
+
+#: blog/models.py:31
+msgid "توضیحات"
+msgstr "description"
+
+#: blog/models.py:41 payment/models.py:34 review/models.py:43
+#: subscriptions/models.py:85
+msgid "وضعیت"
+msgstr "status"
+
+#: blog/models.py:47 subscriptions/models.py:71
+#: templates/subscriptions/subs-list.html:49
+msgid "مبلغ"
+msgstr "Toman"
+
+#: blog/models.py:51 subscriptions/models.py:76
+msgid "درصد تخفیف"
+msgstr "discount_Percent"
+
+#: blog/models.py:62
+msgid "دسته بندی"
+msgstr "category"
+
+#: blog/models.py:67 blog/models.py:68 templates/base.html:203
+msgid "پست ها"
+msgstr "Blogs"
+
+#: blog/models.py:85 blog/models.py:130 review/models.py:29
+msgid "بلاگ"
+msgstr "Post"
+
+#: blog/models.py:95 blog/models.py:96
+msgid "عکس پست ها"
+msgstr "Blogs Image"
+
+#: blog/models.py:119 blog/models.py:120
+msgid "دسته بندی ها"
+msgstr "categories"
+
+#: blog/models.py:140 blog/models.py:141 templates/dashboard/sidebar.html:55
+msgid "علاقه مندی ها"
+msgstr "favorites"
+
+#: dashboard/apps.py:9
+msgid "پنل کاربری"
+msgstr "dashboard"
+
+#: dashboard/views.py:40
+msgid "بدون اشتراک"
+msgstr "No subscription"
+
+#: payment/apps.py:8 payment/models.py:46 payment/models.py:47
+msgid "پرداخت"
+msgstr "payment"
+
+#: payment/models.py:23 subscriptions/apps.py:8 subscriptions/models.py:21
+#: subscriptions/models.py:89 subscriptions/models.py:90
+msgid "اشتراک"
+msgstr "subscriptions"
+
+#: payment/models.py:29
+msgid "مبلغ کل"
+msgstr "amount"
+
+#: review/apps.py:8 review/models.py:56 review/models.py:57
+#: templates/blog/blog-detail.html:631
+msgid "نظرات"
+msgstr "reviews"
+
+#: review/forms.py:16 review/forms.py:37
+msgid "فیلد توضیحات اجباری است"
+msgstr "The description field is mandatory."
+
+#: review/forms.py:27 review/forms.py:48
+msgid "پست انتخاب شده پیدا نشد ."
+msgstr "The selected post was not found."
+
+#: review/models.py:33
+msgid "جزئیات"
+msgstr "description"
+
+#: review/models.py:38
+msgid "ستاره"
+msgstr "star"
+
+#: subscriptions/models.py:25
+msgid "زمان شروع"
+msgstr "Start time"
+
+#: subscriptions/models.py:30
+msgid "زمان پایان"
+msgstr "end time"
+
+#: subscriptions/models.py:40 subscriptions/models.py:41
+msgid "اشتراک خریداری شده"
+msgstr "Subscription purchased"
+
+#: subscriptions/models.py:80
+msgid "روز"
+msgstr "days"
+
+#: templates/base.html:186 templates/blog/blog-detail.html:537
+#: templates/dashboard/base.html:4 templates/include/blog-filter.html:3
+#: templates/include/subs-filter.html:3
+msgid "rtl"
+msgstr "ltr"
+
+#: templates/base.html:190 templates/blog/blog-detail.html:655
+msgid "فهیم وب"
+msgstr "Fahim Web"
+
+#: templates/base.html:199 templates/dashboard/sidebar.html:29
+#: templates/website/contact.html:18 templates/website/home.html:7
+msgid "خانه"
+msgstr "Home"
+
+#: templates/base.html:201
+msgid "ورود"
+msgstr "login"
+
+#: templates/base.html:205 templates/website/contact.html:15
+#: templates/website/contact.html:19
+msgid "ارتباط با ما"
+msgstr "contact us"
+
+#: templates/base.html:206
+msgid "اشتراک ها"
+msgstr "subscriptions"
+
+#: templates/base.html:252
+msgid "درباره ما"
+msgstr "about us"
+
+#: templates/base.html:254
+msgid ""
+"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از "
+"طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که "
+"لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود "
+"ابزارهای کاربردی می باشد"
+msgstr ""
+"Lorem Ipsum is a fabricated text produced by the printing industry with the "
+"simplicity of incomprehensible text, using graphic designers, printers and "
+"text, but also newspapers and magazines in columns and rows, as necessary "
+"and for the current technological conditions required and various "
+"applications with the aim of improving the practical tools."
+
+#: templates/base.html:260
+msgid "اخبار جدید"
+msgstr "NewLetter"
+
+#: templates/base.html:261
+msgid "با جدیدترین‌های ما همراه باشید."
+msgstr "Stay tuned for our latest updates."
+
+#: templates/base.html:269
+msgid "ایمیل خود را وارد کنید ."
+msgstr "Enter the Email .."
+
+#: templates/base.html:289
+msgid "پست های اینستاگرام"
+msgstr "instagram feeds"
+
+#: templates/base.html:304
+msgid "مارا دنبال کنید"
+msgstr "follow us ."
+
+#: templates/base.html:305
+msgid "بیایید اجتماعی باشیم"
+msgstr "Let's be social."
+
+#: templates/blog/blog-detail.html:5
+msgid "صفحه محصول "
+msgstr "Post Page"
+
+#: templates/blog/blog-detail.html:555
+msgid "فروشگاه اینترنتی سبز"
+msgstr "Green Online Store"
+
+#: templates/blog/blog-detail.html:559
+msgid "کد محصول"
+msgstr "Post Code"
+
+#: templates/blog/blog-detail.html:563
+msgid "موجود در انبار"
+msgstr "In Stock"
+
+#: templates/blog/blog-detail.html:576 templates/blog/blog-detail.html:577
+#: templates/blog/blog-detail.html:580 templates/blog/blog-grid.html:42
+#: templates/include/premium-blog.html:23
+#: templates/include/similar_blog.html:29
+#: templates/subscriptions/subs-list.html:45
+#: templates/subscriptions/subs-list.html:50
+msgid "تومان"
+msgstr "Toman"
+
+#: templates/blog/blog-detail.html:587
+msgid "رنگ زیبا و با دوام"
+msgstr "Beautiful and durable color"
+
+#: templates/blog/blog-detail.html:591
+msgid "جنس مرغوب و با کیفیت"
+msgstr "High-quality material"
+
+#: templates/blog/blog-detail.html:595
+msgid "ارسال رایگان برای خریدهای بالای ۲۰۰ هزار تومان"
+msgstr "Free shipping for purchases over 200,000 Tomans"
+
+#: templates/blog/blog-detail.html:605
+msgid "حذف از علاقه‌مندی‌ها"
+msgstr "remove in favorites"
+
+#: templates/blog/blog-detail.html:610 templates/blog/blog-detail.html:617
+msgid "افزودن به علاقه‌مندی‌ها"
+msgstr "add to favorites"
+
+#: templates/blog/blog-detail.html:629
+msgid "توضیحات محصول"
+msgstr "post descriptions"
+
+#: templates/blog/blog-detail.html:630
+msgid "مشخصات فنی"
+msgstr "Technical specifications"
+
+#: templates/blog/blog-detail.html:638
+msgid "دسته بندی‌های محصول"
+msgstr "Blog categories"
+
+#: templates/blog/blog-detail.html:641
+msgid "جزئیات محصول"
+msgstr "description post"
+
+#: templates/blog/blog-detail.html:650
+msgid "مدل"
+msgstr "model"
+
+#: templates/blog/blog-detail.html:654
+msgid "مرجع سازنده"
+msgstr "Manufacturer reference"
+
+#: templates/blog/blog-detail.html:671 templates/blog/blog-detail.html:779
+msgid "ثبت نظر"
+msgstr "Post a comment"
+
+#: templates/blog/blog-detail.html:690
+msgid "پاسخ دادن"
+msgstr "replay"
+
+#: templates/blog/blog-detail.html:700 templates/blog/blog-detail.html:763
+msgid "امتیاز شما "
+msgstr "your "
+
+#: templates/blog/blog-detail.html:715
+msgid "پاسخ شما "
+msgstr "Your answer"
+
+#: templates/blog/blog-detail.html:719
+msgid "ارسال پاسخ"
+msgstr "Your answer"
+
+#: templates/blog/blog-detail.html:731
+msgid "پاسخ"
+msgstr "Answer"
+
+#: templates/blog/blog-detail.html:751
+msgid "مشاهده همه نظرات "
+msgstr "View all comments"
+
+#: templates/blog/blog-detail.html:757
+msgid "ثبت نظر جدید"
+msgstr "Post a new comment"
+
+#: templates/blog/blog-detail.html:775
+msgid "نظر شما "
+msgstr "Your opinion"
+
+#: templates/blog/blog-grid.html:24 templates/include/similar_blog.html:6
+msgid "پست ویژه"
+msgstr "Special post"
+
+#: templates/blog/blog-grid.html:26 templates/include/similar_blog.html:8
+msgid "پست مرتبط"
+msgstr "Related post"
+
+#: templates/blog/blog-grid.html:32 templates/include/premium-blog.html:14
+#: templates/include/similar_blog.html:19
+#: templates/subscriptions/subs-list.html:47
+msgid "تخفیف"
+msgstr "discount"
+
+#: templates/blog/blog-grid.html:39 templates/include/premium-blog.html:20
+#: templates/include/similar_blog.html:26
+msgid "قبل از تخفیف"
+msgstr "Before discount"
+
+#: templates/blog/blog-grid.html:46 templates/include/premium-blog.html:27
+#: templates/include/similar_blog.html:34
+msgid "مشاهده محصول"
+msgstr "View blog"
+
+#: templates/blog/blog-grid.html:48
+msgid " ارسال رایگان"
+msgstr "Free shipping"
+
+#: templates/blog/blog-grid.html:116
+msgid "مشتری گرامی برای دیدن پست های ویژه باید اشتراک تهیه کنید .."
+msgstr "Dear customer, you must subscribe to see special posts."
+
+#: templates/dashboard/home.html:13 templates/dashboard/sidebar.html:34
+msgid "داشبورد"
+msgstr "dashboard"
+
+#: templates/dashboard/home.html:14
+msgid "تعداد روز های مانده از اشتراک "
+msgstr "Number of days left on subscription"
+
+#: templates/dashboard/home.html:15
+msgid "تاریخ عضویت "
+msgstr "Membership date"
+
+#: templates/dashboard/security/profile-edit.html:214
+msgid "ویرایش تصویر"
+msgstr "edit prprofile pictureodi"
+
+#: templates/dashboard/security/profile-edit.html:221
+msgid "عکس پروفایل "
+msgstr "profile picture"
+
+#: templates/dashboard/security/profile-edit.html:235
+msgid "آپلود عکس"
+msgstr "image upload"
+
+#: templates/dashboard/security/profile-edit.html:246
+#: templates/dashboard/security/security-edit.html:274
+msgid "بروزرسانی"
+msgstr "update"
+
+#: templates/dashboard/security/profile-edit.html:258
+msgid "اطلاعات پایه"
+msgstr "base information"
+
+#: templates/dashboard/security/profile-edit.html:269
+msgid "نام و نام خانوادگی "
+msgstr "full name"
+
+#: templates/dashboard/security/profile-edit.html:292
+msgid "تلفن"
+msgstr "phone_number"
+
+#: templates/dashboard/security/profile-edit.html:317
+msgid "مرد"
+msgstr "male"
+
+#: templates/dashboard/security/profile-edit.html:328
+msgid "زن"
+msgstr "female"
+
+#: templates/dashboard/security/profile-edit.html:339
+msgid "دیگر"
+msgstr "other"
+
+#: templates/dashboard/security/profile-edit.html:349
+msgid "ذخیره تغییرات"
+msgstr "Save changes"
+
+#: templates/dashboard/security/security-edit.html:218
+msgid "رمزعبور"
+msgstr "password"
+
+#: templates/dashboard/security/security-edit.html:228
+msgid "رمز عبور فعلی"
+msgstr "current password"
+
+#: templates/dashboard/security/security-edit.html:239
+msgid "رمز عبور جدید"
+msgstr "new password"
+
+#: templates/dashboard/security/security-edit.html:250
+msgid "رمز عبور جدید راتایید کنید"
+msgstr "Confirm new password."
+
+#: templates/dashboard/security/security-edit.html:261
+msgid "اطمینان حاصل کنید که این الزامات برآورده شده است"
+msgstr "Make sure these requirements are met."
+
+#: templates/dashboard/security/security-edit.html:264
+msgid "حداقل 8 کاراکتر - هر چه بیشتر باشد، بهتر است"
+msgstr "At least 8 characters - the more, the better"
+
+#: templates/dashboard/security/security-edit.html:265
+msgid "حداقل یک نویسه کوچک"
+msgstr "At least one lowercase character"
+
+#: templates/dashboard/security/security-edit.html:266
+msgid "حداقل یک کاراکتر بزرگ"
+msgstr "At least one uppercase character"
+
+#: templates/dashboard/security/security-edit.html:267
+msgid "حداقل یک عدد، نماد یا نویسه فضای خالی"
+msgstr "At least one number, symbol, or space character"
+
+#: templates/dashboard/sidebar.html:23
+msgid "حساب"
+msgstr "accounts"
+
+#: templates/dashboard/sidebar.html:39
+msgid "امنیت"
+msgstr "security"
+
+#: templates/dashboard/sidebar.html:45
+msgid "تنظیمات پروفایل"
+msgstr "Profile Settings"
+
+#: templates/dashboard/sidebar.html:50
+msgid "خرید اشتراک"
+msgstr "subscription buys"
+
+#: templates/dashboard/sidebar.html:68
+msgid "خروج"
+msgstr "logout"
+
+#: templates/include/blog-filter.html:6 templates/include/subs-filter.html:6
+msgid "جستجوی کالا"
+msgstr "Post search"
+
+#: templates/include/blog-filter.html:11 templates/include/subs-filter.html:11
+msgid "محدوده قیمت"
+msgstr "Price range"
+
+#: templates/include/blog-filter.html:18
+msgid "نوع پست"
+msgstr "post type"
+
+#: templates/include/blog-filter.html:27
+msgid "دسته‌بندی‌ ها"
+msgstr "categories"
+
+#: templates/include/blog-filter.html:32 templates/include/subs-filter.html:24
+msgid "اعمال فیلترها"
+msgstr "apply filter"
+
+#: templates/include/blog-filter.html:35 templates/include/subs-filter.html:27
+msgid "حذف فیلترها"
+msgstr "remove filter"
+
+#: templates/include/premium-blog.html:5
+msgid "پست های ویژه"
+msgstr "premium posts"
+
+#: templates/include/premium-blog.html:29
+#: templates/include/similar_blog.html:36
+msgid "ارسال رایگان"
+msgstr "Free shipping"
+
+#: templates/include/subs-filter.html:18
+msgid "تعداد روز"
+msgstr "Number of days"
+
+#: templates/subscriptions/subs-list.html:65
+msgid "درخواست خرید .."
+msgstr "Purchase request .."
+
+#: templates/website/navbar.html:5
+msgid "دسته‌بندی‌ها"
+msgstr "categories"
+
+#: utils/apps.py:8 utils/models.py:19 utils/models.py:20
+msgid "زمان"
+msgstr "date"
+
+#: utils/models.py:9
+msgid "زمان ایجاد شده"
+msgstr "created_date"
+
+#: utils/models.py:13
+msgid "زمان بروزرسانی"
+msgstr "updated_date"
+
+#: website/apps.py:8
+msgid "وبسایت"
+msgstr "website"

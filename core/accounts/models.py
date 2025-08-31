@@ -19,16 +19,16 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserType(models.IntegerChoices):
-    customer = 1,("Customer")
-    admin = 2,("Admin")
-    superuser = 3,("SuperUser")
+    customer = 1,("مشتری")
+    admin = 2,("ادمین")
+    superuser = 3,("کاربر ارشد")
 
 class UserManager(BaseUserManager):
 
 
     def create_user(self, phone_number, password, **extra_fields):
         if not phone_number:
-            raise ValueError(_("The Phone_number must be set."))
+            raise ValueError(_("شماره تلفن الزامی است ."))
 
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
@@ -45,9 +45,9 @@ class UserManager(BaseUserManager):
 
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError(_("is_staff must have is True"))
+            raise ValueError(_("گذینه پرسنل باید بله باشه ."))
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError(_("is_superuser must have is True"))
+            raise ValueError(_("گذینه کاربر ارشد باید بله باشه ."))
 
         return self.create_user(phone_number, password, **extra_fields)
         
@@ -63,16 +63,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("نام")
     )
     is_active = models.BooleanField(
-        default=True
+        default=True,
+        verbose_name=_("فعال")
     )
     is_superuser = models.BooleanField(
-        default=False
+        default=False,
+        verbose_name=_("کاربر ارشد")
     )
     is_verified = models.BooleanField(
-        default=True
+        default=True,
+        verbose_name=_("تایید شده")
     )
     is_staff = models.BooleanField(
-        default=True
+        default=True,
+        verbose_name=_("پرسنل")
     )
     type = models.IntegerField(
         choices=UserType.choices, 

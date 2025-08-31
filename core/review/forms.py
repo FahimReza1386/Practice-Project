@@ -1,5 +1,6 @@
 # Django Imports
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 # Locale Imports
 
@@ -12,7 +13,7 @@ class CreateReviewForm(forms.ModelForm):
         fields=("blog", "description", "rate")
         error_messages={
             'description' : {
-                'required' : "فیلد توضیحات اجباری است",
+                'required' : _("فیلد توضیحات اجباری است"),
             }
         }
 
@@ -23,7 +24,7 @@ class CreateReviewForm(forms.ModelForm):
         try:
             BlogModel.objects.get(id=blog.id, status=BlogModel.BlogStatusTypeModel.publish.value)
         except BlogModel.DoesNotExist:
-            return forms.ValidationError("پست انتخاب شده پیدا نشد .")
+            return forms.ValidationError(_("پست انتخاب شده پیدا نشد ."))
 
         return cleaned_data
 
@@ -33,7 +34,7 @@ class ReplyReviewForm(forms.ModelForm):
         fields=("blog", "description", "rate", "parent")
         error_messages={
             'description' : {
-                'required' : "فیلد توضیحات اجباری است",
+                'required' : _("فیلد توضیحات اجباری است"),
             }
         }
 
@@ -44,6 +45,6 @@ class ReplyReviewForm(forms.ModelForm):
         try:
             BlogModel.objects.get(id=blog.id, status=BlogModel.BlogStatusTypeModel.publish.value)
         except BlogModel.DoesNotExist:
-            return forms.ValidationError("پست انتخاب شده پیدا نشد .")
+            return forms.ValidationError(_("پست انتخاب شده پیدا نشد ."))
 
         return cleaned_data

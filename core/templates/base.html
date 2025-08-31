@@ -1,354 +1,457 @@
-{% load static %}
+{% load static i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{% static 'img/Fevicon.png' %}" type="image/png">
 
-<link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
-<link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
-<link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
-<link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
-<link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<link rel="stylesheet" href="{% static 'toastify/toastify.css' %}">
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/gpt_style.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-      .product-card {
-          width: 320px;
-          background: #fff;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
-          transition: all 0.4s ease;
-          position: relative;
-      }
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'toastify/toastify.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gpt_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .product-card {
+            width: 320px;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+            transition: all 0.4s ease;
+            position: relative;
+        }
 
-      .product-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-      }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
 
-      .badge {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-          background: #ff6b35;
-          color: white;
-          padding: 5px 12px;
-          border-radius: 20px;
-          font-size: 0.8rem;
-          font-weight: bold;
-          z-index: 10;
-          animation: pulse 2s infinite;
-      }
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
 
-      .product-image {
-          width: 100%;
-          height: 220px;
-          overflow: hidden;
-          position: relative;
-          background: #f5f5f5;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
+        .product-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-      .product-image img {
-          max-width: 80%;
-          max-height: 80%;
-          object-fit: contain;
-          transition: all 0.5s ease;
-      }
+        .product-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: all 0.5s ease;
+        }
 
-      .product-card:hover .product-image img {
-          transform: scale(1.08);
-      }
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
 
-      .product-content {
-          padding: 20px;
-      }
+        .product-content {
+            padding: 20px;
+        }
 
-      .product-title {
-          font-size: 1.2rem;
-          margin-bottom: 12px;
-          color: #333;
-          font-weight: 600;
-          height: 60px;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-      }
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #333;
+            font-weight: 600;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
 
-      .product-price {
-          display: flex;
-          align-items: center;
-          margin-bottom: 15px;
-          flex-wrap: wrap;
-      }
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
 
-      .current-price {
-        font-size: 15px;
-        font-weight: bold;
-        color: #ff6b35;
-        float: right;
-        margin: 1rem 0;
-      }
+        .current-price {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ff6b35;
+            float: right;
+            margin: 1rem 0;
+        }
 
-      .original-price {
-        font-size: 10px;
-        color: #888;
-        text-decoration: line-through;
-        float: right;
-      }
+        .original-price {
+            font-size: 10px;
+            color: #888;
+            text-decoration: line-through;
+            float: right;
+        }
 
-      .discount {
-          background: #ff6b35;
-          color: white;
-          padding: 3px 8px;
-          border-radius: 4px;
-          font-size: 0.8rem;
-          margin-right: auto;
-          margin-left: 10px;
-      }
+        .discount {
+            background: #ff6b35;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: auto;
+            margin-left: 10px;
+        }
 
-      .product-btn {
-          display: block;
-          width: 100%;
-          background: #333;
-          color: white;
-          border: none;
-          padding: 12px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-weight: 600;
-          text-align: center;
-      }
+        .product-btn {
+            display: block;
+            width: 100%;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-align: center;
+        }
 
-      .product-btn:hover {
-          background: #ff6b35;
-          transform: translateY(-2px);
-      }
+        .product-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-2px);
+        }
 
-      .product-meta {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 15px;
-          color: #777;
-          font-size: 0.85rem;
-      }
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: #777;
+            font-size: 0.85rem;
+        }
 
-      .rating {
-          color: #ffc107;
-      }
+        .rating {
+            color: #ffc107;
+        }
 
-      @keyframes pulse {
-          0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-          70% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
-      }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
 
-      /* انیمیشن بارگذاری */
-      @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 53, 0);
+            }
 
-      .product-card {
-          animation: fadeIn 0.7s ease-out;
-      }
-  </style>
-  
-<style>
-    @font-face {
-        font-family: "Vazir";
-        src: url(../staticfiles/font/vazir-font-v16.1.0/Vazir.eot);
-    }
-    h1,h2,h3,h4,h5,h6,p,a,label,button,body{
-        font-family: "Vazir", sans-serif !important;
-    }
-</style>
-{% block extra_css %}{% endblock %}
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+            }
+        }
+
+        /* انیمیشن بارگذاری */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeIn 0.7s ease-out;
+        }
+    </style>
+
+    <style>
+        @font-face {
+            font-family: "Vazir";
+            src: url(../staticfiles/font/vazir-font-v16.1.0/Vazir.eot);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a,
+        label,
+        button,
+        body {
+            font-family: "Vazir", sans-serif !important;
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
 </head>
+
 <body>
-<!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu"  dir="rtl">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container box_1620">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand logo_h" href="{% url 'website:home' %}" style="font-weight: bold;">فهیم وب</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-            <ul class="nav navbar-nav menu_nav justify-content-center">
-            <li class="nav-item {% if request.resolver_match.view_name == 'website:home' %} active {% endif %}"><a class="nav-link" href="{% url 'website:home' %}" >خانه</a></li> 
-            {% if request.user.is_authenticated is not True %}
-            <li class="nav-item {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}"><a class="nav-link" href="{% url 'accounts:login' %}" >ورود</a></li> 
-            {% endif %}
-            <li class="nav-item {% if request.resolver_match.view_name == 'blog:blog-grid' or request.resolver_match.view_name == 'blog:blog-detail' %} active {% endif %}"><a class="nav-link" href="{% url 'blog:blog-grid' %}">محصولات</a></li> 
-      
-            <li class="nav-item {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}"><a class="nav-link" href="{% url 'website:contact' %}">ارتباط با ما</a></li>
-            <li class="nav-item mr-5 {% if request.resolver_match.view_name == 'website:subscriptions' %} active {% endif %}"><a class="nav-link" href="{% url 'subscriptions:subs-list' %}">اشتراک ها</a>
-                <li style="margin: 15px 2rem"><a href="{% url 'dashboard:home' %}"><i class="bi bi-person" style="font-size: 25px;color: black !important;text-decoration: none;;"></i></a>
-                </li>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu" dir="{% trans 'rtl' %}">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="{% url 'website:home' %}" style="font-weight: bold;">{% trans 'فهیم وب' %}</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav justify-content-center">
+                            <li
+                                class="nav-item {% if request.resolver_match.view_name == 'website:home' %} active {% endif %}">
+                                <a class="nav-link" href="{% url 'website:home' %}">{% trans 'خانه' %}</a>
+                            </li>
+                            {% if request.user.is_authenticated is not True %}
+                            <li
+                                class="nav-item {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}">
+                                <a class="nav-link" href="{% url 'accounts:login' %}">{% trans 'ورود' %}</a>
+                            </li>
+                            {% endif %}
+                            <li
+                                class="nav-item {% if request.resolver_match.view_name == 'blog:blog-grid' or request.resolver_match.view_name == 'blog:blog-detail' %} active {% endif %}">
+                                <a class="nav-link" href="{% url 'blog:blog-grid' %}">{% trans 'پست ها' %}</a>
+                            </li>
 
-            </ul>
-            <ul class="nav navbar-nav navbar-right navbar-social" style="min-width: 130px">
-            <li><a href="#"><i class="ti-facebook"></i></a></li>
-            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-            <li><a href="#"><i class="ti-instagram ml-3"></i></a></li>
-            <li><a href="#"><i class="ti-skype"></i></a></li>
-            </ul>
-        </div> 
-        </div>
-
-    </nav>
-
-    </div>
-</header>
-<!--================Header Menu Area =================-->
-{% block content %}{% endblock %}
-<!--================ Start Footer Area =================-->
-<footer class="footer-area section-padding">
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-3  col-md-6 col-sm-6">
-        <div class="single-footer-widget">
-            <h6>About Us</h6>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-            magna aliqua.
-            </p>
-        </div>
-        </div>
-        <div class="col-lg-4  col-md-6 col-sm-6">
-        <div class="single-footer-widget">
-            <h6>Newsletter</h6>
-            <p>Stay update with our latest</p>
-            <div class="" id="mc_embed_signup">
-
-            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                method="get" class="form-inline">
-
-                <div class="d-flex flex-row">
-
-                <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
-                    required="" type="email">
+                            <li
+                                class="nav-item {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}">
+                                <a class="nav-link" href="{% url 'website:contact' %}">{% trans 'ارتباط با ما' %}</a>
+                            </li>
+                            <li
+                                class="nav-item mr-5 {% if request.resolver_match.view_name == 'website:subscriptions' %} active {% endif %}">
+                                <a class="nav-link" href="{% url 'subscriptions:subs-list' %}">{% trans 'اشتراک ها' %}</a>
+                            <li style="margin: 15px 2rem"><a href="{% url 'dashboard:home' %}"><i class="bi bi-person"
+                                        style="font-size: 25px;color: black !important;text-decoration: none;;"></i></a>
+                            </li>
 
 
-                <button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
-                <div style="position: absolute; left: -5000px;">
-                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                            <li style="margin: 1.5rem 0;">
+                                <select name="language" style="border: 1px solid green;border-radius: 15px;padding: 3px;"
+                                    onchange="ChangedLanguage(this.value)">
+                                    {% get_current_language as CURRENT_LANGUAGE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                    <option value="{{ language.code }}" {% if language.code == CURRENT_LANGUAGE %}selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right navbar-social" style="min-width: 130px">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram ml-3"></i></a></li>
+                            <li><a href="#"><i class="ti-skype"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- <div class="col-lg-4 col-md-4">
+            </nav>
+
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
+    {% block content %}{% endblock %}
+    <!--================ Start Footer Area =================-->
+    <footer class="footer-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'درباره ما' %}</h6>
+                        <p>
+                            {% trans 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+                            گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                            فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد' %}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'اخبار جدید' %}</h6>
+                        <p>{% trans 'با جدیدترین‌های ما همراه باشید.' %}</p>
+                        <div class="" id="mc_embed_signup">
+
+                            <form target="_blank" novalidate="true"
+                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                method="get" class="form-inline">
+
+                                <div class="d-flex flex-row">
+
+                                    <input class="form-control" name="EMAIL"
+                                        placeholder="{% trans 'ایمیل خود را وارد کنید .' %}"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+                                        required="" type="email">
+
+
+                                    <button class="click-btn btn btn-default"><span
+                                            class="lnr lnr-arrow-right"></span></button>
+                                    <div style="position: absolute; left: -5000px;">
+                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                                            type="text">
+                                    </div>
+
+                                    <!-- <div class="col-lg-4 col-md-4">
                         <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
                     </div>  -->
+                                </div>
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="info"></div>
-            </form>
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget mail-chimp">
+                        <h6 class="mb-20">{% trans 'پست های اینستاگرام' %}</h6>
+                        <ul class="instafeed d-flex flex-wrap">
+                            <li><img src="{% static 'img/instagram/i1.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i2.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i3.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i4.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i5.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i6.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i7.jpg' %}" alt=""></li>
+                            <li><img src="{% static 'img/instagram/i8.jpg' %}" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'مارا دنبال کنید' %}</h6>
+                        <p>{% trans 'بیایید اجتماعی باشیم' %}</p>
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-behance"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+                <p class="footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
+                    made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                        target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
             </div>
         </div>
-        </div>
-        <div class="col-lg-3  col-md-6 col-sm-6">
-        <div class="single-footer-widget mail-chimp">
-            <h6 class="mb-20">Instragram Feed</h6>
-            <ul class="instafeed d-flex flex-wrap">
-            <li><img src="{% static 'img/instagram/i1.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i2.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i3.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i4.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i5.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i6.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i7.jpg' %}" alt=""></li>
-            <li><img src="{% static 'img/instagram/i8.jpg' %}" alt=""></li>
-            </ul>
-        </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="single-footer-widget">
-            <h6>Follow Us</h6>
-            <p>Let us be social</p>
-            <div class="footer-social d-flex align-items-center">
-            <a href="#">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#">
-                <i class="fab fa-dribbble"></i>
-            </a>
-            <a href="#">
-                <i class="fab fa-behance"></i>
-            </a>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-        <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-    </div>
-    </div>
-</footer>
-<!--================ End Footer Area =================-->
+    </footer>
+    <!--================ End Footer Area =================-->
 
-<script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
-<script src="{% static 'js/mail-script.js' %}"></script>
-<script src="{% static 'toastify/toastify.js' %}"></script>
-<script src="{% static 'toastify/toastify-es.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-<script>
-    function AddToWishList(blog_id) {
-        $.ajax({
-            type:"POST",
-            url:"{% url 'blog:add-wishlist' %}",
-            data:{
-                csrfmiddlewaretoken: "{{ csrf_token }}",
-                blog_id:blog_id
-            },
-            success: function(response){
-                window.location.reload()
-            },
-            error:function(err, xhr, errmsg){
-                console.log(err)
+    <script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <script src="{% static 'toastify/toastify.js' %}"></script>
+    <script src="{% static 'toastify/toastify-es.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function AddToWishList(blog_id) {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'blog:add-wishlist' %}",
+                data: {
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    blog_id: blog_id
+                },
+                success: function (response) {
+                    window.location.reload()
+                },
+                error: function (err, xhr, errmsg) {
+                    console.log(err)
+                }
+            });
+        }
+    </script>
+    <script>
+        function ChangedLanguage(language_code) {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'set_language' %}",
+                data: {
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    language: language_code,
+                    next: "{{ request.get_full_path }}"  // اضافه کردن next برای بازگشت به صفحه فعلی
+                },
+                success: function (response) {
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error changing language:", error);
+                }
+            });
+        }
+    </script>
+    <script>
+        function formatNumberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        document.querySelectorAll('.price-formatted').forEach(element => {
+            const priceText = element.textContent || element.innerText;
+            const number = parseFloat(priceText.replace(/,/g, ''));
+            if (!isNaN(number)) {
+                element.textContent = formatNumberWithCommas(number);
             }
         });
-    }
-</script>
-<script>
-    function formatNumberWithCommas(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault(); // prevent immediate submission to show fade
 
-    document.querySelectorAll('.price-formatted').forEach(element => {
-        const priceText = element.textContent || element.innerText;
-        const number = parseFloat(priceText.replace(/,/g, ''));
-        if (!isNaN(number)) {
-            element.textContent = formatNumberWithCommas(number);
-        }
-    });
-</script>
-{% block extra_js %}{% endblock %}
-{% include 'messages.html' %}
+            const form = this;
+            form.classList.add('fade-out');
+
+            // wait for the fade out effect before submitting
+            setTimeout(() => {
+                form.submit();
+            }, 500);
+        });
+
+    </script>
+    {% block extra_js %}{% endblock %}
+    {% include 'messages.html' %}
 </body>
+
 </html>

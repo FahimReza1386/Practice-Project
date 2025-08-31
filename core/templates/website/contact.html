@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block title %}ارتباط با ما{% endblock %}
 {% block extra_css %}{% endblock %}
@@ -12,11 +12,11 @@
     <div class="container">
       <div class="hero-banner hero-banner--sm">
         <div class="hero-banner__content">
-          <h1>ارتباط با ما</h1>
+          <h1>{% trans 'ارتباط با ما' %}</h1>
           <nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+              <li class="breadcrumb-item"><a href="#">{% trans 'خانه' %}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{% trans 'ارتباط با ما' %}</li>
             </ol>
           </nav>
         </div>

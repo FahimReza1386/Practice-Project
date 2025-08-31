@@ -1,29 +1,30 @@
-    <!-- Filter Sidebar -->
-            <div id="navbarVerticalNavMenu" class="filter-navbar col-12 col-lg-3 text-right" dir="rtl" >
+{% load i18n %}
+<!-- Filter Sidebar -->
+            <div id="navbarVerticalNavMenu" class="filter-navbar col-12 col-lg-3 text-right" dir="{% trans 'rtl' %}" >
                 <form action="." class="w-100" > 
                     <div class="border-bottom pb-4 mb-4">
-                        <h5 class="">جستجوی کالا</h5>
+                        <h5 class="">{% trans 'جستجوی کالا' %}</h5>
                         {{ filter.form.name }}
                     </div>
                     
                     <div class="border-bottom pb-4 mb-4">
-                     <h5>محدوده قیمت</h5>
+                     <h5>{% trans 'محدوده قیمت' %}</h5>
 
                          {{ filter.form.price__gt }}
                          <hr>
                          {{ filter.form.price__lt }}
                     </div>
                     <div class="border-bottom pb-4 mb-4">
-                        <h5>تعداد روز</h5>
+                        <h5>{% trans 'تعداد روز' %}</h5>
 
                          {{ filter.form.days }}
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-hover col-md-12">
-                            <i class="bi bi-funnel-fill me-2"></i>اعمال فیلترها
+                            <i class="bi bi-funnel-fill me-2"></i>{% trans 'اعمال فیلترها' %}
                         </button>
                         <a href="{% url 'blog:blog-grid' %}" class="btn btn-outline-secondary col-md-12 mt-2">
-                            <i class="bi bi-x-circle-fill me-2"></i>حذف فیلترها
+                            <i class="bi bi-x-circle-fill me-2"></i>{% trans 'حذف فیلترها' %}
                         </a>
                     </div>
                         

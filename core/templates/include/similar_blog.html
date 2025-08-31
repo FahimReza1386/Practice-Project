@@ -1,13 +1,11 @@
-{% load static %}
-{% load humanize %}
-{% load blog_tags %}
+{% load static humanize blog_tags i18n %}
 {% for blog in similar_blog %}
 
 <div class="product-card mb-2 p-2" id="item{{ blog.pk }}">
     {% if blog.type == 1 %}
-    <div class="badge">پست ویژه</div>
+    <div class="badge">{% trans 'پست ویژه' %}</div>
     {% else %}
-    <div class="badge">پست مرتبط</div>
+    <div class="badge">{% trans 'پست مرتبط' %}</div>
     {% endif %}
     <style>
         #item{{ blog.pk }}{
@@ -18,24 +16,24 @@
         <img src="{{ blog.image.url }}" alt="هدفون بلوتوثی">
 
     </div>
-    <span class="discount">{{ blog.discount_percent }}% تخفیف</span>
+    <span class="discount">{{ blog.discount_percent }}% {% trans 'تخفیف' %}</span>
 
     <div class="product-content">
         <h3 class="product-title text-center">{{ blog.title }}</h3>
         <div class="product-price">
 
             <div style="margin: 0 auto; " class="text-center">
-                <span class="original-price price-formatted">{{ blog.price }} قبل از تخفیف</span>
+                <span class="original-price price-formatted">{{ blog.price }} {% trans 'قبل از تخفیف' %}</span>
 
                 <span class="current-price price-formatted">{{ blog.get_price_after_sale }}</span>
-                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">تومان</p>
+                <p style="font-size: 15px;color: black;text-decoration: underline;float: right;margin: 1rem;">{% trans 'تومان' %}</p>
 
             </div>
         </div>
         <button class="product-btn"><a href="{% url 'blog:blog-detail' pk=blog.pk%}"
-                style="text-decoration: none;color: white;">مشاهده محصول</a></button>
+                style="text-decoration: none;color: white;">{% trans 'مشاهده محصول' %}</a></button>
         <div class="product-meta">
-            <span><i class="fas fa-shipping-fast"></i> ارسال رایگان</span>
+            <span><i class="fas fa-shipping-fast"></i>{% trans 'ارسال رایگان' %}</span>
             {% if blog.type == 1 %}
             <i class="bi bi-star-fill text-success ms-2"></i>
             {% endif %}

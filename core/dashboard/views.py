@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext_lazy as _
 
 # Locale Imports
 
@@ -36,7 +37,7 @@ class DashboardHomeView(LoginRequiredMixin, TemplateView):
             if active_subscription:
                 context["remaining_days"] = active_subscription.get_remaining_days()
             else:
-                context["remaining_days"] = "بدون اشتراک"
+                context["remaining_days"] = _("بدون اشتراک")
             
             # Convert join date to Jalali
             jalali_join = datetime2jalali(user.created_date).strftime('%y/%m/%d')
